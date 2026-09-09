@@ -129,11 +129,11 @@ export const CutTheCrapPage: React.FC<CutTheCrapPageProps> = ({ navigate }) => {
               </button>
             </div>
 
-            <div className="flex items-center gap-6 pt-4 text-xs text-[#8C8C8C]">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 pt-4 text-xs text-[#8C8C8C]">
               <span>★ Limited Founder's Hardcover ($49)</span>
-              <span>&bull;</span>
+              <span className="hidden sm:inline">&bull;</span>
               <span>Paperback ($24.99)</span>
-              <span>&bull;</span>
+              <span className="hidden sm:inline">&bull;</span>
               <span>Instant PDF ($14.99)</span>
             </div>
           </div>

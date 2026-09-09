@@ -17,9 +17,9 @@ export const RealisticBookCover: React.FC<RealisticBookCoverProps> = ({
   const isDigital = edition === 'digital';
 
   const sizeClasses = {
-    sm: 'w-[180px] h-[260px]',
-    md: 'w-[240px] h-[350px] sm:w-[280px] sm:h-[400px]',
-    lg: 'w-[280px] h-[410px] sm:w-[320px] sm:h-[470px]',
+    sm: 'w-[160px] h-[235px] sm:w-[180px] sm:h-[260px]',
+    md: 'w-[220px] h-[320px] sm:w-[280px] sm:h-[400px]',
+    lg: 'w-[240px] h-[350px] sm:w-[320px] sm:h-[470px]',
   };
 
   return (

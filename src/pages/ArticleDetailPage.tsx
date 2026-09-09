@@ -62,7 +62,7 @@ export const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
             {article.excerpt}
           </p>
 
-          <div className="pt-4 border-t border-[#2A2A2A] flex items-center justify-between text-xs text-[#A3A3A3]">
+          <div className="pt-4 border-t border-[#2A2A2A] flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between text-xs text-[#A3A3A3]">
             <span className="font-semibold uppercase tracking-wider text-[#C8B088]">
               By {article.author} &bull; Up Armor Publishing
             </span>

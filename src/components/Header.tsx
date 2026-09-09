@@ -263,7 +263,7 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, navigate, cartCoun
 
         {/* Mobile Navigation Drawer - Categorized and Uncluttered */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden fixed inset-x-0 top-[110px] bottom-0 bg-[#141414]/98 backdrop-blur-xl border-b border-[#2A2A2A] shadow-2xl px-6 py-6 flex flex-col justify-between overflow-y-auto z-50">
+          <div className="lg:hidden fixed inset-x-0 top-20 bottom-0 bg-[#141414]/98 backdrop-blur-xl border-b border-[#2A2A2A] shadow-2xl px-6 py-6 flex flex-col justify-between overflow-y-auto z-50">
             <div className="space-y-6">
               {/* Category 1: The Books */}
               <div>

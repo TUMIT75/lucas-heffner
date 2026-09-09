@@ -138,7 +138,7 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen bg-[#141414] text-[#F5F3EF] flex flex-col font-sans selection:bg-[#F85800] selection:text-[#141414]">
+    <div className="min-h-screen w-full overflow-x-hidden bg-[#141414] text-[#F5F3EF] flex flex-col font-sans selection:bg-[#F85800] selection:text-[#141414]">
       {/* Sticky Header with Staging Banner & Nav */}
       <Header currentRoute={currentRoute} navigate={navigate} cartCount={itemCount} />
 

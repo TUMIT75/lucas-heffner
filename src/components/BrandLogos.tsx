@@ -177,7 +177,7 @@ export const CutTheCrapHorizontalLogo: React.FC<{
     <img
       src="/assets/IMG_4131_transparent.png?v=6"
       alt="Cut The Crap"
-      className={`w-auto object-contain select-none transition-opacity ${heightClasses} ${className}`}
+      className={`w-auto max-w-full object-contain select-none transition-opacity ${heightClasses} ${className}`}
       referrerPolicy="no-referrer"
     />
   );
@@ -202,7 +202,7 @@ export const CutTheCrapStackedLogo: React.FC<{
     <img
       src="/assets/IMG_4130_trimmed.png?v=6"
       alt="Cut The Crap - Lucas Heffner"
-      className={`h-auto object-contain select-none ${widthClasses} ${className}`}
+      className={`h-auto max-w-full object-contain select-none ${widthClasses} ${className}`}
       referrerPolicy="no-referrer"
     />
   );

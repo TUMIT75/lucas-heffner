@@ -61,7 +61,7 @@ export const FlagshipCutTheCrapBanner: React.FC<BannerProps> = ({
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#D4AF37]/5 rounded-full blur-3xl pointer-events-none" />
 
       {/* Main Content Showcase */}
-      <div className="relative z-10 p-6 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+      <div className="relative z-10 p-4 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
         {/* Left Column: 3D Realistic Book Presentation */}
         <div className="lg:col-span-4 flex justify-center items-center">
           <div
@@ -240,7 +240,7 @@ export const FoundersEditionBanner: React.FC<
       <div className="absolute top-0 right-1/3 w-96 h-96 bg-[#D4AF37]/8 rounded-full blur-3xl pointer-events-none" />
 
       {/* Main Grid Showcase */}
-      <div className="relative z-10 p-6 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+      <div className="relative z-10 p-4 sm:p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
         {/* Left Column: 3D Realistic Founder's Hardcover */}
         <div className="lg:col-span-4 flex justify-center items-center">
           <div

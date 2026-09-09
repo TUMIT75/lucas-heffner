@@ -38,33 +38,34 @@ export const BrandAssetShowcaseModal: React.FC<BrandAssetShowcaseModalProps> = (
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/85 backdrop-blur-sm animate-in fade-in">
-      <div className="bg-[#141414] border-2 border-[#F85800] w-full max-w-5xl max-h-[90vh] flex flex-col rounded-sm shadow-2xl overflow-hidden text-[#F5F3EF]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-6 bg-black/85 backdrop-blur-sm animate-in fade-in">
+      <div className="bg-[#141414] border-2 border-[#F85800] w-full max-w-5xl max-h-[96vh] sm:max-h-[90vh] flex flex-col rounded-sm shadow-2xl overflow-hidden text-[#F5F3EF]">
         {/* Header */}
-        <div className="p-6 bg-[#1A1A1A] border-b border-[#2B2B2B] flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-sm bg-[#F85800] text-[#141414] flex items-center justify-center font-bold">
+        <div className="p-4 sm:p-6 bg-[#1A1A1A] border-b border-[#2B2B2B] flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="w-9 h-9 rounded-sm bg-[#F85800] text-[#141414] flex items-center justify-center font-bold shrink-0">
               <ImageIcon className="w-5 h-5" />
             </div>
-            <div>
-              <h3 className="font-display font-black text-xl text-[#F5F3EF]">
+            <div className="min-w-0">
+              <h3 className="font-display font-black text-lg sm:text-xl text-[#F5F3EF] truncate">
                 Cut the Crap &bull; Official Brand Assets
               </h3>
-              <p className="text-xs text-[#8C8C8C]">
+              <p className="text-xs text-[#8C8C8C] line-clamp-1 sm:line-clamp-none">
                 Official visual identity, 5 core brand images, logos, 4 pillar badges, and print-ready QR codes.
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-[#888] hover:text-white hover:bg-[#262626] rounded-sm transition-colors"
+            className="p-2 text-[#888] hover:text-white hover:bg-[#262626] rounded-sm transition-colors shrink-0"
+            aria-label="Close modal"
           >
             <X className="w-6 h-6" />
           </button>
         </div>
 
         {/* Tab Navigation */}
-        <div className="px-6 py-3 bg-[#111] border-b border-[#222] flex flex-wrap gap-2 text-xs">
+        <div className="px-4 sm:px-6 py-2.5 bg-[#111] border-b border-[#222] flex gap-2 text-xs overflow-x-auto scrollbar-none whitespace-nowrap">
           {[
             { id: 'all', label: 'All 5 Brand Assets' },
             { id: 'logos', label: 'Logos (Horizontal & Stacked)' },
@@ -75,7 +76,7 @@ export const BrandAssetShowcaseModal: React.FC<BrandAssetShowcaseModalProps> = (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as any)}
-              className={`px-3 py-1.5 font-bold uppercase tracking-wider text-[11px] transition-colors ${
+              className={`px-3 py-1.5 font-bold uppercase tracking-wider text-[11px] shrink-0 transition-colors ${
                 activeTab === tab.id
                   ? 'bg-[#F85800] text-[#141414]'
                   : 'bg-[#1C1C1C] text-[#888] hover:text-[#CCC]'
