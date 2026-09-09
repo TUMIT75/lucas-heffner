@@ -132,10 +132,10 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, navigate, cartCoun
           {/* Brand Wordmark */}
           <button
             onClick={() => handleNav('/')}
-            className="flex items-center gap-2 text-left focus:outline-none shrink-0"
-            aria-label="Lucas Heffner Home"
+            className="flex items-center text-left focus:outline-none shrink-0 py-1.5 transition-transform active:scale-[0.98] group"
+            aria-label="Lucas Heffner - Cut The Crap Home"
           >
-            <CutTheCrapHorizontalLogo size="sm" theme="dark" />
+            <CutTheCrapHorizontalLogo size="md" theme="dark" className="transition-opacity group-hover:opacity-90" />
           </button>
 
           {/* Streamlined Desktop Navigation Links (Visible on lg and up) */}

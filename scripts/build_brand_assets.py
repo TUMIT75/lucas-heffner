@@ -19,48 +19,52 @@ def run_cmd(cmd):
     subprocess.run(cmd, check=True)
 
 def generate_img_4131():
-    """Horizontal Wordmark CUT THE CRAP on black"""
+    """Horizontal Wordmark CUT THE CRAP with transparent background and exact trimming"""
     out_path = os.path.join(OUTPUT_DIR, "IMG_4131.png")
-    # Base canvas 1400x380 black
     cmd = [
         "convert",
-        "-size", "1400x380", "xc:#000000",
-        "-fill", "#FFFFFF",
+        "-size", "2600x500", "xc:none",
         "-font", "Liberation-Sans-Bold",
-        "-pointsize", "150",
+        "-fill", "#FFFFFF",
+        "-pointsize", "220",
         "-gravity", "West",
-        "-annotate", "+80+0", "CUT",
-        "-pointsize", "65",
-        "-annotate", "+450+0", "THE",
+        "-annotate", "+40+0", "CUT",
+        "-fill", "#D4AF37",
+        "-pointsize", "80",
+        "-gravity", "West",
+        "-annotate", "+580-5", "THE",
         "-fill", "#F85800",
-        "-pointsize", "150",
-        "-annotate", "+620+0", "CRAP",
-        # Add subtle distressed film grain
-        "(", "+clone", "+noise", "Uniform", "-alpha", "extract", "-threshold", "96%", "-alpha", "shape", "-fill", "black", ")",
-        "-compose", "dst-out", "-composite",
+        "-pointsize", "220",
+        "-gravity", "West",
+        "-annotate", "+780+0", "CRAP",
+        "-trim", "+repage",
+        "-bordercolor", "none",
+        "-border", "12x12",
         out_path
     ]
     run_cmd(cmd)
     print("Generated:", out_path)
 
 def generate_img_4130():
-    """Stacked Wordmark CUT / THE / CRAP"""
+    """Stacked Wordmark CUT / THE / CRAP with transparent background and exact trimming"""
     out_path = os.path.join(OUTPUT_DIR, "IMG_4130.png")
     cmd = [
         "convert",
-        "-size", "900x850", "xc:#000000",
-        "-fill", "#FFFFFF",
+        "-size", "1000x1000", "xc:none",
         "-font", "Liberation-Sans-Bold",
-        "-pointsize", "210",
+        "-fill", "#FFFFFF",
+        "-pointsize", "220",
         "-gravity", "North",
         "-annotate", "+0+40", "CUT",
+        "-fill", "#E3D5C0",
         "-pointsize", "95",
-        "-annotate", "+0+280", "THE",
+        "-annotate", "+0+290", "THE",
         "-fill", "#F85800",
-        "-pointsize", "220",
+        "-pointsize", "230",
         "-annotate", "+0+420", "CRAP",
-        "(", "+clone", "+noise", "Uniform", "-alpha", "extract", "-threshold", "96%", "-alpha", "shape", "-fill", "black", ")",
-        "-compose", "dst-out", "-composite",
+        "-trim", "+repage",
+        "-bordercolor", "none",
+        "-border", "16x16",
         out_path
     ]
     run_cmd(cmd)

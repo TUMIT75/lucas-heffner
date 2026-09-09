@@ -88,17 +88,20 @@ export const BrandAssetShowcaseModal: React.FC<BrandAssetShowcaseModalProps> = (
 
         {/* Scrollable Content Body */}
         <div className="p-6 overflow-y-auto space-y-10 flex-1 scrollbar-thin">
-          {/* 1. Flagship Landscape Banner (IMG_4132.png) */}
+          {/* 1. Flagship Landscape Banner Suite (IMG_4132.png) */}
           {(activeTab === 'all' || activeTab === 'banners') && (
-            <div className="space-y-3">
-              <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="space-y-3 bg-[#181818] p-6 border border-[#2B2B2B]">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#2B2B2B] pb-3">
                 <div>
                   <span className="text-[10px] font-mono text-[#F85800] uppercase font-bold tracking-wider">
                     CLIENT ASSET #1 &bull; /assets/IMG_4132.png
                   </span>
                   <h4 className="text-lg font-display font-bold text-[#F5F3EF]">
-                    Flagship Black Landscape Banner &amp; 3D Hardcover Mockup
+                    Flagship Black Identity Mark Suite
                   </h4>
+                  <p className="text-xs text-[#8C8C8C]">
+                    Original authentic master file with vertical emblem, horizontal stencil, and circular quality seal.
+                  </p>
                 </div>
                 <div className="flex items-center gap-2">
                   <a
@@ -108,104 +111,160 @@ export const BrandAssetShowcaseModal: React.FC<BrandAssetShowcaseModalProps> = (
                     className="px-3 py-1.5 bg-[#222] hover:bg-[#333] text-xs font-mono text-[#F85800] flex items-center gap-1.5 border border-[#333]"
                   >
                     <ExternalLink className="w-3.5 h-3.5" />
-                    <span>Open PNG</span>
+                    <span>View Full Size (1320x489)</span>
                   </a>
-                  <button
-                    onClick={() => handleCopy('https://lucasheffner.com/cutthecrap', 'banner-url')}
+                  <a
+                    href={CLIENT_BRAND_ASSETS.flagshipBanner}
+                    download="IMG_4132.png"
                     className="px-3 py-1.5 bg-[#222] hover:bg-[#333] text-xs font-mono text-[#C8B088] flex items-center gap-1.5 border border-[#333]"
                   >
-                    {copiedKey === 'banner-url' ? <Check className="w-3.5 h-3.5 text-green-400" /> : <Copy className="w-3.5 h-3.5" />}
-                    <span>Copy URL</span>
-                  </button>
+                    <Download className="w-3.5 h-3.5" />
+                    <span>Download</span>
+                  </a>
                 </div>
+              </div>
+              <div className="rounded overflow-hidden border border-[#333] bg-black">
+                <img
+                  src="/assets/IMG_4132.png?v=6"
+                  alt="Cut The Crap Brand Suite Dark - IMG_4132"
+                  className="w-full h-auto object-contain select-none block"
+                  referrerPolicy="no-referrer"
+                />
               </div>
               <FlagshipCutTheCrapBanner navigate={navigate} />
             </div>
           )}
 
-          {/* 2. Founder's Edition Leather Banner (IMG_4134.png) */}
-          {(activeTab === 'all' || activeTab === 'banners') && (
-            <div className="space-y-3">
-              <div className="flex flex-wrap items-center justify-between gap-2">
+          {/* 2. Founder's Edition Kraft Debossed Plaque (IMG_4133.png) */}
+          {(activeTab === 'all' || activeTab === 'banners' || activeTab === 'logos') && (
+            <div className="space-y-3 bg-[#181818] p-6 border border-[#2B2B2B]">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#2B2B2B] pb-3">
                 <div>
                   <span className="text-[10px] font-mono text-[#D4AF37] uppercase font-bold tracking-wider">
-                    CLIENT ASSET #2 &bull; /assets/IMG_4134.png
+                    CLIENT ASSET #2 &bull; /assets/IMG_4133.png
                   </span>
                   <h4 className="text-lg font-display font-bold text-[#F5F3EF]">
-                    Founder&apos;s Edition Leather Preorder Banner (Numbered &amp; Signed)
+                    Debossed Kraft &amp; Industrial Texture Banner
                   </h4>
+                  <p className="text-xs text-[#8C8C8C]">
+                    Authentic physical cardboard/kraft substrate with distressed debossed stencil branding.
+                  </p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <a
+                    href={CLIENT_BRAND_ASSETS.foundersPlaque}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3 py-1.5 bg-[#222] hover:bg-[#333] text-xs font-mono text-[#D4AF37] flex items-center gap-1.5 border border-[#7A5826]"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" />
+                    <span>View Full Size (2172x724)</span>
+                  </a>
+                  <a
+                    href={CLIENT_BRAND_ASSETS.foundersPlaque}
+                    download="IMG_4133.png"
+                    className="px-3 py-1.5 bg-[#222] hover:bg-[#333] text-xs font-mono text-[#D4AF37] flex items-center gap-1.5 border border-[#7A5826]"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    <span>Download</span>
+                  </a>
+                </div>
+              </div>
+              <div className="rounded overflow-hidden border border-[#4A3219]/60 shadow-xl bg-[#1C140D]">
+                <img
+                  src="/assets/IMG_4133.png?v=6"
+                  alt="Cut The Crap Kraft Banner - IMG_4133"
+                  className="w-full h-auto object-cover select-none block"
+                  referrerPolicy="no-referrer"
+                />
+              </div>
+              <FoundersEditionBanner navigate={navigate} />
+            </div>
+          )}
+
+          {/* 3. White Paper Identity Suite (IMG_4134.png) */}
+          {(activeTab === 'all' || activeTab === 'banners') && (
+            <div className="space-y-3 bg-[#181818] p-6 border border-[#2B2B2B]">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#2B2B2B] pb-3">
+                <div>
+                  <span className="text-[10px] font-mono text-[#FFF] uppercase font-bold tracking-wider">
+                    CLIENT ASSET #3 &bull; /assets/IMG_4134.png
+                  </span>
+                  <h4 className="text-lg font-display font-bold text-[#F5F3EF]">
+                    Light Paper Brand Identity Suite
+                  </h4>
+                  <p className="text-xs text-[#8C8C8C]">
+                    Clean high-contrast presentation on crisp white paper for editorial print and merchandise.
+                  </p>
                 </div>
                 <div className="flex items-center gap-2">
                   <a
                     href={CLIENT_BRAND_ASSETS.foundersBanner}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-3 py-1.5 bg-[#222] hover:bg-[#333] text-xs font-mono text-[#D4AF37] flex items-center gap-1.5 border border-[#7A5826]"
+                    className="px-3 py-1.5 bg-[#222] hover:bg-[#333] text-xs font-mono text-white flex items-center gap-1.5 border border-[#444]"
                   >
                     <ExternalLink className="w-3.5 h-3.5" />
-                    <span>Open PNG</span>
+                    <span>View Full Size (1320x489)</span>
                   </a>
-                  <span className="text-xs font-sans font-bold px-2 py-1 bg-[#7A5826]/30 text-[#D4AF37] border border-[#7A5826]">
-                    500 Collector Copies
-                  </span>
+                  <a
+                    href={CLIENT_BRAND_ASSETS.foundersBanner}
+                    download="IMG_4134.png"
+                    className="px-3 py-1.5 bg-[#222] hover:bg-[#333] text-xs font-mono text-[#DDD] flex items-center gap-1.5 border border-[#444]"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    <span>Download</span>
+                  </a>
                 </div>
               </div>
-              <FoundersEditionBanner navigate={navigate} />
-            </div>
-          )}
-
-          {/* 3. Founder's Edition Embossed Badge (IMG_4133.png) */}
-          {(activeTab === 'all' || activeTab === 'logos') && (
-            <div className="space-y-3">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <div>
-                  <span className="text-[10px] font-mono text-[#D4AF37] uppercase font-bold tracking-wider">
-                    CLIENT ASSET #3 &bull; /assets/IMG_4133.png
-                  </span>
-                  <h4 className="text-lg font-display font-bold text-[#F5F3EF]">
-                    Debossed Leather &amp; Metallic Gold Founder&apos;s Edition Plaque
-                  </h4>
-                </div>
-                <a
-                  href={CLIENT_BRAND_ASSETS.foundersPlaque}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-3 py-1.5 bg-[#222] hover:bg-[#333] text-xs font-mono text-[#D4AF37] flex items-center gap-1.5 border border-[#7A5826]"
-                >
-                  <ExternalLink className="w-3.5 h-3.5" />
-                  <span>Open PNG</span>
-                </a>
+              <div className="rounded overflow-hidden border border-[#333] bg-white p-2">
+                <img
+                  src="/assets/IMG_4134.png?v=6"
+                  alt="Cut The Crap White Paper Suite - IMG_4134"
+                  className="w-full h-auto object-contain select-none block"
+                  referrerPolicy="no-referrer"
+                />
               </div>
-              <FoundersPlaqueHeader />
             </div>
           )}
 
           {/* 4. Horizontal & Stacked Wordmarks (IMG_4131.png & IMG_4130.png) */}
           {(activeTab === 'all' || activeTab === 'logos') && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Horizontal Logo */}
-              <div className="space-y-3">
+              {/* Horizontal Logo (IMG_4131) */}
+              <div className="space-y-3 bg-[#181818] p-6 border border-[#2B2B2B]">
                 <div className="flex items-center justify-between">
                   <div>
                     <span className="text-[10px] font-mono text-[#F85800] uppercase font-bold tracking-wider">
                       CLIENT ASSET #4 &bull; /assets/IMG_4131.png
                     </span>
                     <h4 className="text-base font-display font-bold text-[#F5F3EF]">
-                      Horizontal Stencil Distressed Wordmark
+                      Horizontal Distressed Wordmark
                     </h4>
                   </div>
-                  <a
-                    href={CLIENT_BRAND_ASSETS.horizontalLogo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-1 text-[#8C8C8C] hover:text-white"
-                    title="Open IMG_4131.png"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
+                  <div className="flex items-center gap-2">
+                    <a
+                      href={CLIENT_BRAND_ASSETS.horizontalLogo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-1 text-[#8C8C8C] hover:text-white"
+                      title="Open IMG_4131.png"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                    <a
+                      href={CLIENT_BRAND_ASSETS.horizontalLogo}
+                      download="IMG_4131.png"
+                      className="p-1 text-[#8C8C8C] hover:text-white"
+                      title="Download"
+                    >
+                      <Download className="w-4 h-4" />
+                    </a>
+                  </div>
                 </div>
-                <div className="p-8 bg-black border border-[#2B2B2B] flex items-center justify-center min-h-[160px]">
+                <div className="p-6 bg-black border border-[#2B2B2B] rounded flex flex-col items-center justify-center min-h-[160px] space-y-4">
                   <CutTheCrapHorizontalLogo size="lg" />
+                  <span className="text-[10px] text-[#666] font-mono uppercase">Transparent Stencil Header Asset</span>
                 </div>
                 <button
                   onClick={() => handleCopy('<CutTheCrapHorizontalLogo size="lg" />', 'copy-hz')}
@@ -216,29 +275,40 @@ export const BrandAssetShowcaseModal: React.FC<BrandAssetShowcaseModalProps> = (
                 </button>
               </div>
 
-              {/* Stacked Logo */}
-              <div className="space-y-3">
+              {/* Stacked Logo (IMG_4130) */}
+              <div className="space-y-3 bg-[#181818] p-6 border border-[#2B2B2B]">
                 <div className="flex items-center justify-between">
                   <div>
                     <span className="text-[10px] font-mono text-[#F85800] uppercase font-bold tracking-wider">
                       CLIENT ASSET #5 &bull; /assets/IMG_4130.png
                     </span>
                     <h4 className="text-base font-display font-bold text-[#F5F3EF]">
-                      Stacked Stencil Distressed Wordmark
+                      Stacked Stencil Wordmark &amp; Subtitle
                     </h4>
                   </div>
-                  <a
-                    href={CLIENT_BRAND_ASSETS.stackedLogo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-1 text-[#8C8C8C] hover:text-white"
-                    title="Open IMG_4130.png"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
+                  <div className="flex items-center gap-2">
+                    <a
+                      href={CLIENT_BRAND_ASSETS.stackedLogo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="p-1 text-[#8C8C8C] hover:text-white"
+                      title="Open IMG_4130.png"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                    </a>
+                    <a
+                      href={CLIENT_BRAND_ASSETS.stackedLogo}
+                      download="IMG_4130.png"
+                      className="p-1 text-[#8C8C8C] hover:text-white"
+                      title="Download"
+                    >
+                      <Download className="w-4 h-4" />
+                    </a>
+                  </div>
                 </div>
-                <div className="p-8 bg-black border border-[#2B2B2B] flex items-center justify-center min-h-[160px]">
+                <div className="p-6 bg-black border border-[#2B2B2B] rounded flex flex-col items-center justify-center min-h-[160px] space-y-4">
                   <CutTheCrapStackedLogo size="md" />
+                  <span className="text-[10px] text-[#666] font-mono uppercase">Transparent Master Badge Asset</span>
                 </div>
                 <button
                   onClick={() => handleCopy('<CutTheCrapStackedLogo size="md" />', 'copy-st')}

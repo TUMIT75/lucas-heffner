@@ -99,10 +99,11 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
 
             {/* CUT THE CRAP Headline */}
             <div>
-              <h1 className="text-h1 text-[#F5F3EF] tracking-tight">
-                CUT THE <span className="text-[#F85800]">CRAP</span>
-              </h1>
-              <h2 className="text-h2 text-[#F5F3EF] mt-1">
+              <div className="mb-3">
+                <CutTheCrapHorizontalLogo size="lg" className="h-10 sm:h-12 md:h-14" />
+              </div>
+              <h1 className="sr-only">CUT THE CRAP</h1>
+              <h2 className="text-h2 text-[#F5F3EF]">
                 Lose the Fat. Keep the Freedom.
               </h2>
             </div>
@@ -417,6 +418,50 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
               </button>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Founder's Edition Collector Showcase (Signed & Hand-Numbered) */}
+      <section className="bg-[#0F0B07] py-20 lg:py-28 px-6 sm:px-8 border-b border-[#3D2914]">
+        <div className="max-w-[1280px] mx-auto space-y-10">
+          <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6 border-b border-[#4A3219]/60 pb-6">
+            <div className="space-y-2">
+              <span className="eyebrow-label text-[#D4AF37] flex items-center gap-2">
+                <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+                <span>LIMITED RUN OF 500 COPIES WORLDWIDE</span>
+              </span>
+              <h2 className="text-h2 text-[#F5F3EF]">
+                Founder&apos;s Edition Collector Hardcover
+              </h2>
+              <p className="text-sm text-[#C8B088] max-w-xl">
+                Debossed kraft casing, gold-foil stamping, signed and numbered by Lucas Heffner.
+              </p>
+            </div>
+            <button
+              onClick={() => {
+                navigate('/cutthecrap');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="px-5 py-2.5 bg-[#2A1D0B] hover:bg-[#3D2914] text-[#D4AF37] border border-[#8C6F42] text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-colors"
+            >
+              <span>View Edition Details</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+
+          <FoundersEditionBanner
+            navigate={navigate}
+            onSelectHardcover={() => {
+              addToCart({
+                id: 'founders-hardcover',
+                productTitle: 'CUT THE CRAP',
+                editionTitle: "Founder's Edition Hardcover (Signed & Numbered)",
+                price: 49.0,
+                format: 'Physical Hardcover',
+              });
+              navigate('/store');
+            }}
+          />
         </div>
       </section>
 
