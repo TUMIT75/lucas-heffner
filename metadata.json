@@ -1,0 +1,6 @@
+{
+  "name": "Lucas Heffner — Author & Up Armor Publishing",
+  "description": "Permanent author platform for Lucas Heffner and Up Armor Publishing, featuring Cut the Crap, resources, community, and store.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
