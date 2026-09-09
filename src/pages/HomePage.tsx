@@ -3,6 +3,8 @@ import { PageRoute } from '../types';
 import { CutTheCrapHorizontalLogo, CutTheCrapStackedLogo } from '../components/BrandLogos';
 import { RealisticBookCover } from '../components/RealisticBookCover';
 import { FoundersEditionCard } from '../components/FoundersEditionCard';
+import { FlagshipCutTheCrapBanner, FoundersEditionBanner } from '../components/OfficialBrandBanners';
+import { BrandAssetShowcaseModal } from '../components/BrandAssetShowcaseModal';
 import { ARTICLES_DATA } from '../data/siteData';
 import { IMAGE_ASSETS } from '../data/imageAssets';
 import { useCart } from '../context/CartContext';
@@ -18,6 +20,8 @@ import {
   Shield,
   Clock,
   ChevronRight,
+  Image as ImageIcon,
+  QrCode,
 } from 'lucide-react';
 
 interface HomePageProps {
@@ -27,6 +31,7 @@ interface HomePageProps {
 export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
   const { addToCart } = useCart();
   const [launchStatus, setLaunchStatus] = useState<'learn-more' | 'preorder' | 'order-now'>('preorder');
+  const [showBrandModal, setShowBrandModal] = useState(false);
 
   const getPrimaryCta = () => {
     switch (launchStatus) {
@@ -256,6 +261,26 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
               Buy PDF
             </button>
           </div>
+        </div>
+      </section>
+
+      {/* Official Cut The Crap Flagship Banner Presentation (IMG_4132) */}
+      <section className="bg-[#0B0B0B] py-12 lg:py-16 px-6 sm:px-8 border-b border-[#222]">
+        <div className="max-w-[1280px] mx-auto space-y-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#F85800] uppercase tracking-wider">
+              <span className="w-2 h-2 rounded-full bg-[#F85800]" />
+              <span>OFFICIAL BOOK RELEASE BANNER &bull; 4 PILLARS &bull; PERMANENT QR</span>
+            </div>
+            <button
+              onClick={() => setShowBrandModal(true)}
+              className="px-3.5 py-1.5 bg-[#1C1C1C] hover:bg-[#282828] text-xs font-sans font-bold text-[#C8B088] hover:text-[#F85800] border border-[#333] flex items-center gap-2 transition-colors"
+            >
+              <ImageIcon className="w-3.5 h-3.5 text-[#F85800]" />
+              <span>Inspect All 5 Brand Assets &amp; QR Codes</span>
+            </button>
+          </div>
+          <FlagshipCutTheCrapBanner navigate={navigate} />
         </div>
       </section>
 
@@ -515,6 +540,11 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
               </div>
             </div>
           </div>
+
+          {/* Official Founder's Edition Banner Display (IMG_4134) */}
+          <div className="pt-8 border-t border-[#222]">
+            <FoundersEditionBanner onSelectHardcover={() => handleQuickAdd('hardcover')} />
+          </div>
         </div>
       </section>
 
@@ -655,6 +685,13 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
           </div>
         </div>
       </section>
+
+      {/* Interactive Brand Assets & QR Codes Modal */}
+      <BrandAssetShowcaseModal
+        isOpen={showBrandModal}
+        onClose={() => setShowBrandModal(false)}
+        navigate={navigate}
+      />
     </div>
   );
 };

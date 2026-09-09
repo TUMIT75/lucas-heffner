@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { PageRoute } from '../types';
-import { CutTheCrapHorizontalLogo, CutTheCrapStackedLogo, StarWingsInsignia } from '../components/BrandLogos';
+import { CutTheCrapHorizontalLogo, CutTheCrapStackedLogo, StarWingsInsignia, FoundersEmbossedBadge } from '../components/BrandLogos';
 import { RealisticBookCover } from '../components/RealisticBookCover';
+import { FlagshipCutTheCrapBanner, FoundersEditionBanner } from '../components/OfficialBrandBanners';
+import { BrandAssetShowcaseModal } from '../components/BrandAssetShowcaseModal';
 import { IMAGE_ASSETS } from '../data/imageAssets';
 import { PillarRow } from '../components/PillarRow';
 import { FoundersEditionCard } from '../components/FoundersEditionCard';
@@ -19,6 +21,8 @@ import {
   Wrench,
   Users,
   Download,
+  Image as ImageIcon,
+  Sparkles,
 } from 'lucide-react';
 
 interface CutTheCrapPageProps {
@@ -28,6 +32,7 @@ interface CutTheCrapPageProps {
 export const CutTheCrapPage: React.FC<CutTheCrapPageProps> = ({ navigate }) => {
   const { addToCart } = useCart();
   const [selectedEdition, setSelectedEdition] = useState<'founders' | 'paperback' | 'ebook'>('founders');
+  const [showBrandModal, setShowBrandModal] = useState(false);
 
   const handleAddToCart = (id: string, title: string, edition: string, price: number, isDigital = false) => {
     addToCart({
@@ -149,6 +154,26 @@ export const CutTheCrapPage: React.FC<CutTheCrapPageProps> = ({ navigate }) => {
       <section className="bg-[#181818] py-12 px-6 sm:px-8 border-b border-[#262626]">
         <div className="max-w-[1280px] mx-auto">
           <PillarRow theme="dark" showSubtitles={false} />
+        </div>
+      </section>
+
+      {/* Official Cut The Crap Flagship Banner Section (IMG_4132) */}
+      <section className="bg-[#0D0D0D] py-14 px-6 sm:px-8 border-b border-[#222]">
+        <div className="max-w-[1280px] mx-auto space-y-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#F85800] uppercase tracking-wider">
+              <span className="w-2 h-2 rounded-full bg-[#F85800]" />
+              <span>UP ARMOR OFFICIAL LAUNCH BANNER &bull; FULL IDENTITY SYSTEM</span>
+            </div>
+            <button
+              onClick={() => setShowBrandModal(true)}
+              className="px-3.5 py-1.5 bg-[#1C1C1C] hover:bg-[#282828] text-xs font-sans font-bold text-[#C8B088] hover:text-[#F85800] border border-[#333] flex items-center gap-2 transition-colors"
+            >
+              <ImageIcon className="w-3.5 h-3.5 text-[#F85800]" />
+              <span>Inspect All 5 Official Brand Assets</span>
+            </button>
+          </div>
+          <FlagshipCutTheCrapBanner navigate={navigate} />
         </div>
       </section>
 
@@ -330,6 +355,20 @@ export const CutTheCrapPage: React.FC<CutTheCrapPageProps> = ({ navigate }) => {
             <p className="text-[17px] text-[#A3A3A3]">
               Available directly through Up Armor Publishing. Select your preferred format below.
             </p>
+          </div>
+
+          {/* Official Founder's Edition Banner Presentation (IMG_4134) */}
+          <div className="mb-6">
+            <FoundersEditionBanner
+              onSelectHardcover={() =>
+                handleAddToCart(
+                  'founders-hardcover',
+                  'CUT THE CRAP',
+                  "Founder's Edition Hardcover (Signed & Numbered)",
+                  49.0
+                )
+              }
+            />
           </div>
 
           {/* 3-Card Row + Disabled Audiobook Slot per Spec Section 11 */}
@@ -566,6 +605,13 @@ export const CutTheCrapPage: React.FC<CutTheCrapPageProps> = ({ navigate }) => {
           <FaqAccordion theme="dark" />
         </div>
       </section>
+
+      {/* Brand Asset Showcase Modal */}
+      <BrandAssetShowcaseModal
+        isOpen={showBrandModal}
+        onClose={() => setShowBrandModal(false)}
+        navigate={navigate}
+      />
     </div>
   );
 };

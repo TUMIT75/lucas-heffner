@@ -1,5 +1,5 @@
 import React from 'react';
-import { StarWingsInsignia } from './BrandLogos';
+import { StarWingsInsignia, PillarCircularBadge } from './BrandLogos';
 import { Sparkles, BookOpen } from 'lucide-react';
 
 interface RealisticBookCoverProps {
@@ -32,46 +32,50 @@ export const RealisticBookCover: React.FC<RealisticBookCoverProps> = ({
             : isDigital
             ? 'bg-gradient-to-br from-[#1F2937] via-[#111827] to-[#0B0F19] border-[#3B82F6]/60'
             : 'bg-gradient-to-br from-[#1C1C1C] via-[#141414] to-[#0A0A0A] border-[#333]'
-        } flex flex-col justify-between p-6 sm:p-8 overflow-hidden`}
+        } flex flex-col justify-between p-5 sm:p-7 overflow-hidden`}
       >
         {/* Book Spine Highlight Bar */}
         <div className="absolute left-0 top-0 bottom-0 w-3 bg-gradient-to-r from-white/15 via-white/5 to-transparent pointer-events-none" />
         <div className="absolute left-3 top-0 bottom-0 w-[1px] bg-black/50 pointer-events-none" />
 
         {/* Top Header & Insignia */}
-        <div className="space-y-3 z-10">
+        <div className="space-y-2 z-10">
           <div className="flex items-center justify-between">
             <span
-              className={`text-[9px] sm:text-[10px] font-sans font-bold uppercase tracking-[0.2em] ${
+              className={`text-[8.5px] sm:text-[9.5px] font-sans font-black uppercase tracking-[0.2em] ${
                 isFounders ? 'text-[#C8B088]' : isDigital ? 'text-[#60A5FA]' : 'text-[#F85800]'
               }`}
             >
               UP ARMOR PUBLISHING
             </span>
             {isFounders && (
-              <span className="text-[9px] font-mono px-1.5 py-0.5 bg-[#C8B088]/20 text-[#C8B088] border border-[#C8B088]/40">
+              <span className="text-[8.5px] font-mono px-1.5 py-0.5 bg-[#C8B088]/20 text-[#C8B088] border border-[#C8B088]/40">
                 LIMITED
               </span>
             )}
             {isDigital && (
-              <span className="text-[9px] font-mono px-1.5 py-0.5 bg-[#3B82F6]/20 text-[#60A5FA] border border-[#3B82F6]/40">
+              <span className="text-[8.5px] font-mono px-1.5 py-0.5 bg-[#3B82F6]/20 text-[#60A5FA] border border-[#3B82F6]/40">
                 PDF / EPUB
               </span>
             )}
           </div>
 
-          <div className="pt-2">
+          <p className="text-[7.5px] sm:text-[8px] font-sans font-bold uppercase tracking-wider text-[#A3A3A3] text-center leading-tight">
+            BECOME THE KIND OF PERSON WHO NEVER HAS TO LOSE THE SAME WEIGHT TWICE.
+          </p>
+
+          <div className="pt-1 flex justify-center">
             <StarWingsInsignia
-              className="w-24 sm:w-28 h-5 sm:h-6"
+              className="w-24 sm:w-28 h-5"
               color={isFounders ? '#C8B088' : '#F85800'}
             />
           </div>
         </div>
 
         {/* Center Title Display */}
-        <div className="space-y-3 z-10 my-auto py-4">
+        <div className="space-y-2 z-10 my-auto py-2 text-center">
           <h2
-            className={`font-display font-black leading-[0.95] tracking-tight ${
+            className={`font-display font-black leading-[0.9] tracking-tight ${
               size === 'sm' ? 'text-2xl' : size === 'md' ? 'text-3xl sm:text-4xl' : 'text-4xl sm:text-5xl'
             } ${
               isFounders
@@ -85,32 +89,49 @@ export const RealisticBookCover: React.FC<RealisticBookCoverProps> = ({
           </h2>
 
           <div
-            className={`w-12 h-[2px] ${
+            className={`w-12 h-[2px] mx-auto ${
               isFounders ? 'bg-[#C8B088]' : 'bg-[#F85800]'
             }`}
           />
 
-          <p className="text-[11px] sm:text-[12px] text-[#C5C3BC] font-sans font-medium leading-snug line-clamp-3">
-            Lose the Fat. Keep the Freedom. The 4 Pillars to Sustainable Body Composition.
-          </p>
+          {!isFounders ? (
+            <div className="flex items-center justify-center gap-1 sm:gap-1.5 pt-1">
+              {(['training', 'nutrition', 'faith', 'discipline'] as const).map((pillar) => (
+                <PillarCircularBadge
+                  key={pillar}
+                  type={pillar}
+                  size="sm"
+                  showLabel={false}
+                  className="transform scale-75 -mx-1"
+                />
+              ))}
+            </div>
+          ) : (
+            <p className="text-[10px] sm:text-[11px] text-[#C8B088] font-serif italic max-w-xs mx-auto pt-1">
+              ★ Numbered &amp; Signed Collector&apos;s Edition ★
+            </p>
+          )}
         </div>
 
         {/* Bottom Author Byline */}
-        <div className="pt-4 border-t border-white/10 z-10 flex items-center justify-between">
+        <div className="pt-3 border-t border-white/10 z-10 flex items-center justify-between">
           <div>
-            <span className="block text-[9px] text-[#8C8C8C] uppercase tracking-wider font-semibold">
+            <span className="block text-[8px] text-[#8C8C8C] uppercase tracking-wider font-semibold">
               Author
             </span>
             <span
-              className={`font-display text-sm sm:text-base tracking-wide ${
+              className={`font-display font-bold text-xs sm:text-sm tracking-wide ${
                 isFounders ? 'text-[#F5F3EF]' : 'text-[#FFFFFF]'
               }`}
             >
               LUCAS HEFFNER
             </span>
+            <span className="block text-[8px] font-mono text-[#8C8C8C]">
+              MBA, NASM-CNC
+            </span>
           </div>
-          <span className="text-[9px] font-mono text-[#888] uppercase">
-            {isFounders ? 'Founder’s Ed.' : isDigital ? 'Digital Ed.' : '1st Edition'}
+          <span className="text-[8.5px] font-mono text-[#888] uppercase">
+            {isFounders ? 'Founder’s' : isDigital ? 'Digital' : '1st Edition'}
           </span>
         </div>
 
