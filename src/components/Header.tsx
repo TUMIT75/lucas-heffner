@@ -68,16 +68,15 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, navigate, cartCoun
 
   // Primary streamlined menu items
   const primaryNavItems: { label: string; route: PageRoute; badge?: string; icon?: React.ReactNode }[] = [
-    { label: 'Cut the Crap', route: '/cutthecrap', badge: 'Flagship' },
-    { label: 'Books', route: '/books' },
-    { label: 'Read Sample', route: '/read-book', icon: <BookOpen className="w-3.5 h-3.5 text-[#F85800]" /> },
+    { label: 'The Book', route: '/cutthecrap', badge: 'Flagship' },
+    { label: 'Sample', route: '/read-book', icon: <BookOpen className="w-3.5 h-3.5 text-[#F85800]" /> },
     { label: 'Toolbox', route: '/toolkit' },
     { label: 'Articles', route: '/articles' },
     { label: 'Store', route: '/store' },
     { label: 'About', route: '/about' },
   ];
 
-  // Secondary grouped items in the "More" dropdown
+  // Secondary grouped items in the "Community & More" dropdown
   const secondaryNavItems: { label: string; desc: string; route: PageRoute; icon: React.ReactNode }[] = [
     {
       label: 'Community Hub',
@@ -98,14 +97,20 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, navigate, cartCoun
       icon: <Sparkles className="w-4 h-4 text-[#F85800]" />,
     },
     {
-      label: 'Resources & Worksheets',
+      label: 'Worksheets & Tools',
       desc: 'Printable matrices & calculators',
       route: '/resources',
       icon: <FileText className="w-4 h-4 text-[#5E7488]" />,
     },
     {
+      label: 'Publishing Library',
+      desc: 'All current & upcoming books',
+      route: '/books',
+      icon: <BookOpen className="w-4 h-4 text-[#8C8C8C]" />,
+    },
+    {
       label: 'Contact Lucas',
-      desc: 'Speaking, media, & bulk orders',
+      desc: 'Speaking, press & bulk inquiries',
       route: '/contact',
       icon: <HelpCircle className="w-4 h-4 text-[#A3A3A3]" />,
     },
@@ -115,22 +120,24 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, navigate, cartCoun
 
   return (
     <>
-      {/* Top Staging Banner */}
-      <aside aria-label="Development environment notice" className="w-full bg-[#181818] text-[#F5F3EF] border-b border-[#2A2A2A] py-1.5 px-4 text-center z-50 relative">
-        <div className="max-w-7xl mx-auto flex items-center justify-between text-[11px] sm:text-[12px] font-sans uppercase tracking-[0.14em]">
+      {/* Top Announcement Bar */}
+      <aside aria-label="Official book release notice" className="w-full bg-[#181818] text-[#F5F3EF] border-b border-[#2A2A2A] py-2 px-4 text-center z-50 relative">
+        <div className="max-w-7xl mx-auto flex items-center justify-between text-[11px] sm:text-[12px] font-sans">
           <div className="flex items-center gap-2 mx-auto">
-            <span className="inline-block w-2 h-2 rounded-full bg-[#F85800] animate-pulse" />
-            <span className="font-semibold">UP ARMOR PUBLISHING &bull; LUCAS HEFFNER</span>
-            <span className="hidden md:inline text-[#8C8C8C] border-l border-[#333] pl-2 font-normal">
-              Official Author &amp; Book Platform
+            <span className="inline-block w-2 h-2 rounded-full bg-[#F85800]" />
+            <span className="font-semibold uppercase tracking-[0.12em]">
+              CUT THE CRAP: LIMITED FIRST PRINTING
+            </span>
+            <span className="hidden md:inline text-[#A3A3A3] border-l border-[#333] pl-2 font-normal">
+              Signed &amp; Numbered Founder&apos;s Hardcover strictly limited to first run.
             </span>
           </div>
           <button
-            onClick={() => handleNav('/sitemap')}
-            className="hidden sm:flex items-center gap-1 text-[#C8B088] hover:text-[#F85800] transition-colors lowercase tracking-normal text-xs"
-            title="View full site route matrix"
+            onClick={() => handleNav('/cutthecrap')}
+            className="hidden sm:flex items-center gap-1 text-[#C8B088] hover:text-[#F85800] transition-colors font-bold tracking-wider uppercase text-[11px]"
           >
-            sitemap <ArrowRight className="w-3 h-3" />
+            <span>Preorder</span>
+            <ArrowRight className="w-3 h-3" />
           </button>
         </div>
       </aside>
@@ -190,7 +197,7 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, navigate, cartCoun
                 }`}
                 aria-expanded={isMoreOpen}
               >
-                <span>More</span>
+                <span>Community</span>
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isMoreOpen ? 'rotate-180 text-[#F85800]' : ''}`} />
                 {isSecondaryActive && <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#F85800]" />}
               </button>

@@ -9,27 +9,8 @@ interface BooksPageProps {
 }
 
 export const BooksPage: React.FC<BooksPageProps> = ({ navigate }) => {
-  const [books, setBooks] = useState<Book[]>(BOOKS_DATA);
+  const books = BOOKS_DATA;
   const [activeFilter, setActiveFilter] = useState<'all' | BookStatus>('all');
-
-  // Handle owner interactive status toggling per brief Section 4
-  const handleStatusChange = (id: string, newStatus: BookStatus) => {
-    setBooks((prev) =>
-      prev.map((b) => {
-        if (b.id === id) {
-          const statusLabels: Record<BookStatus, string> = {
-            'in-development': 'In Development',
-            'coming-soon': 'Coming Soon',
-            preorder: 'Preorder',
-            available: 'Available Now',
-            'sold-out': 'Sold Out',
-          };
-          return { ...b, status: newStatus, statusLabel: statusLabels[newStatus] };
-        }
-        return b;
-      })
-    );
-  };
 
   const sections: { key: BookStatus; title: string; desc: string }[] = [
     {
@@ -130,7 +111,6 @@ export const BooksPage: React.FC<BooksPageProps> = ({ navigate }) => {
                         key={book.id}
                         book={book}
                         navigate={navigate}
-                        onStatusChange={handleStatusChange}
                       />
                     ))}
                   </div>
@@ -150,7 +130,6 @@ export const BooksPage: React.FC<BooksPageProps> = ({ navigate }) => {
                 key={book.id}
                 book={book}
                 navigate={navigate}
-                onStatusChange={handleStatusChange}
               />
             ))}
           </div>

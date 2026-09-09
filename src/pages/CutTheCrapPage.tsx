@@ -159,20 +159,7 @@ export const CutTheCrapPage: React.FC<CutTheCrapPageProps> = ({ navigate }) => {
 
       {/* Official Cut The Crap Flagship Banner Section (IMG_4132) */}
       <section className="bg-[#0D0D0D] py-14 px-6 sm:px-8 border-b border-[#222]">
-        <div className="max-w-[1280px] mx-auto space-y-4">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-            <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#F85800] uppercase tracking-wider">
-              <span className="w-2 h-2 rounded-full bg-[#F85800]" />
-              <span>UP ARMOR OFFICIAL LAUNCH BANNER &bull; FULL IDENTITY SYSTEM</span>
-            </div>
-            <button
-              onClick={() => setShowBrandModal(true)}
-              className="px-3.5 py-1.5 bg-[#1C1C1C] hover:bg-[#282828] text-xs font-sans font-bold text-[#C8B088] hover:text-[#F85800] border border-[#333] flex items-center gap-2 transition-colors"
-            >
-              <ImageIcon className="w-3.5 h-3.5 text-[#F85800]" />
-              <span>Inspect All 5 Official Brand Assets</span>
-            </button>
-          </div>
+        <div className="max-w-[1280px] mx-auto">
           <FlagshipCutTheCrapBanner navigate={navigate} />
         </div>
       </section>

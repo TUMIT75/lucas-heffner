@@ -14,7 +14,7 @@ export const FoundersEditionCard: React.FC<FoundersEditionCardProps> = ({
   initiallySoldOut = false,
   className = '',
 }) => {
-  const [isSoldOut, setIsSoldOut] = useState(initiallySoldOut);
+  const [isSoldOut] = useState(initiallySoldOut);
   const [isAdded, setIsAdded] = useState(false);
 
   const handlePreorder = () => {
@@ -27,37 +27,7 @@ export const FoundersEditionCard: React.FC<FoundersEditionCardProps> = ({
   };
 
   return (
-    <div className={`space-y-3 w-full ${className}`}>
-      {/* Interactive Toggle for Reviewers */}
-      <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-2 bg-[#17120C] border border-[#7A5826]/40 text-xs rounded-t-sm">
-        <span className="text-[#D4AF37] font-mono font-medium flex items-center gap-1.5">
-          <Sparkles className="w-3.5 h-3.5 text-[#F85800]" />
-          Founder&apos;s Edition Showcase (IMG_4134 Authentic Replica):
-        </span>
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => setIsSoldOut(false)}
-            className={`px-2.5 py-1 font-sans text-[11px] uppercase tracking-wider font-bold transition-colors ${
-              !isSoldOut ? 'bg-[#F85800] text-[#141414]' : 'bg-[#241A10] text-[#8C6F42] hover:text-[#C8B088]'
-            }`}
-          >
-            Preorder (Active)
-          </button>
-          <button
-            type="button"
-            onClick={() => setIsSoldOut(true)}
-            className={`px-2.5 py-1 font-sans text-[11px] uppercase tracking-wider font-bold transition-colors ${
-              isSoldOut
-                ? 'bg-[#503818] text-[#D4AF37] border border-[#D4AF37]'
-                : 'bg-[#241A10] text-[#8C6F42] hover:text-[#C8B088]'
-            }`}
-          >
-            Sold Out State
-          </button>
-        </div>
-      </div>
-
+    <div className={`w-full ${className}`}>
       {/* Main Card Container strictly replicating IMG_4134 */}
       <div
         className={`relative w-full rounded-sm overflow-hidden border-2 border-[#7A5826] shadow-[0_20px_50px_rgba(0,0,0,0.95)] text-[#F5F3EF] p-5 sm:p-7 lg:p-8 transition-all ${
@@ -173,15 +143,7 @@ export const FoundersEditionCard: React.FC<FoundersEditionCardProps> = ({
               >
                 CUT THE CRAP
               </h3>
-              <h4
-                className="font-display font-extrabold text-lg sm:text-xl xl:text-2xl tracking-[0.14em] leading-tight mt-1"
-                style={{
-                  background: 'linear-gradient(180deg, #FFF0CF 0%, #D4AF37 50%, #8C641A 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  filter: 'drop-shadow(0 2px 3px rgba(0,0,0,0.9))',
-                }}
-              >
+              <h4 className="font-display font-extrabold text-lg sm:text-xl xl:text-2xl text-[#D4AF37] tracking-[0.14em] leading-tight mt-1 drop-shadow-md">
                 FOUNDER&apos;S EDITION
               </h4>
             </div>

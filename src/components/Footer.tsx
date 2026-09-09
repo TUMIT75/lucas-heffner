@@ -120,13 +120,13 @@ export const Footer: React.FC<FooterProps> = ({ navigate }) => {
               <li>
                 <button onClick={() => navigate('/books')} className="hover:text-[#F85800] transition-colors text-left flex items-center gap-1.5">
                   <span>Iron &amp; Fuel</span>
-                  <span className="text-[10px] uppercase font-bold text-[#8C8C8C]">[PLACEHOLDER]</span>
+                  <span className="text-[10px] uppercase font-semibold text-[#8C8C8C] tracking-wider">(Upcoming)</span>
                 </button>
               </li>
               <li>
                 <button onClick={() => navigate('/books')} className="hover:text-[#F85800] transition-colors text-left flex items-center gap-1.5">
                   <span>Unbroken Habits</span>
-                  <span className="text-[10px] uppercase font-bold text-[#8C8C8C]">[PLACEHOLDER]</span>
+                  <span className="text-[10px] uppercase font-semibold text-[#8C8C8C] tracking-wider">(Upcoming)</span>
                 </button>
               </li>
               <li>

@@ -26,7 +26,6 @@ import { SitemapPage } from './pages/SitemapPage';
 import { LegalPage } from './pages/LegalPage';
 import { BookReaderPage } from './pages/BookReaderPage';
 import { ARTICLES_DATA } from './data/siteData';
-import { Compass, Sparkles } from 'lucide-react';
 
 function AppContent() {
   const [currentRoute, setCurrentRoute] = useState<PageRoute>(() => {
@@ -45,22 +44,29 @@ function AppContent() {
   });
 
   const [selectedArticle, setSelectedArticle] = useState<Article>(ARTICLES_DATA[0]);
-  const [showDevNavigator, setShowDevNavigator] = useState(false);
   const { itemCount } = useCart();
 
   // Clean HTML5 History navigation without /#
   const navigate = (route: PageRoute) => {
     setCurrentRoute(route);
-    if (window.location.pathname !== route || window.location.hash) {
-      window.history.pushState(null, '', route);
+    try {
+      if (window.location.pathname !== route || window.location.hash) {
+        window.history.pushState(null, '', route);
+      }
+    } catch {
+      // Safe fallback in sandboxed iframes
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   // Strip any lingering hash on mount and replace with normal clean route
   useEffect(() => {
-    if (window.location.hash) {
-      window.history.replaceState(null, '', currentRoute);
+    try {
+      if (window.location.hash) {
+        window.history.replaceState(null, '', currentRoute);
+      }
+    } catch {
+      // Safe fallback in sandboxed iframes
     }
   }, [currentRoute]);
 
@@ -139,73 +145,8 @@ function AppContent() {
       {/* Main Page View */}
       <main className="flex-1 w-full">{renderPage()}</main>
 
-      {/* Global Byte-Identical Footer with Up Armor Imprint */}
+      {/* Global Footer with Up Armor Imprint */}
       <Footer navigate={navigate} />
-
-      {/* Development Quick Navigation Drawer for Reviewing All Pages */}
-      <div className="fixed bottom-4 right-4 z-50">
-        {showDevNavigator ? (
-          <div className="bg-[#141414] border-2 border-[#F85800] p-4 shadow-2xl max-w-xs w-72 text-xs space-y-3 max-h-[80vh] overflow-y-auto">
-            <div className="flex items-center justify-between border-b border-[#333] pb-2">
-              <span className="font-mono font-bold text-[#F85800] uppercase tracking-wider flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5" /> Quick Route Jump
-              </span>
-              <button
-                onClick={() => setShowDevNavigator(false)}
-                className="text-[#888] hover:text-[#FFF] font-bold px-1"
-              >
-                ✕
-              </button>
-            </div>
-            <div className="space-y-1">
-              {[
-                { label: 'Home (/)', r: '/' },
-                { label: 'Books Library (/books)', r: '/books' },
-                { label: 'Cut the Crap (/cutthecrap)', r: '/cutthecrap' },
-                { label: 'Toolbox (/toolkit)', r: '/toolkit' },
-                { label: 'Community (/community)', r: '/community' },
-                { label: 'Share Click Moment', r: '/shareyourclickmoment' },
-                { label: 'Find Battle Buddy', r: '/findyourbattlebuddy' },
-                { label: 'Resources Hub', r: '/resources' },
-                { label: 'Articles Index', r: '/articles' },
-                { label: 'Store (/store)', r: '/store' },
-                { label: 'Cart (/cart)', r: '/cart' },
-                { label: 'Checkout (/checkout)', r: '/checkout' },
-                { label: 'My Account (/my-account)', r: '/my-account' },
-                { label: 'About Lucas (/about)', r: '/about' },
-                { label: 'Contact (/contact)', r: '/contact' },
-                { label: 'Brand Style Guide', r: '/style-guide' },
-                { label: 'Master Coded Sitemap', r: '/sitemap' },
-              ].map((item) => (
-                <button
-                  key={item.r}
-                  onClick={() => {
-                    navigate(item.r as PageRoute);
-                    setShowDevNavigator(false);
-                  }}
-                  className={`w-full text-left px-2 py-1.5 font-sans transition-colors rounded-none flex items-center justify-between ${
-                    currentRoute === item.r
-                      ? 'bg-[#F85800] text-[#141414] font-bold'
-                      : 'text-[#DDD] hover:bg-[#222] hover:text-[#F85800]'
-                  }`}
-                >
-                  <span>{item.label}</span>
-                  {currentRoute === item.r && <span>&bull;</span>}
-                </button>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <button
-            onClick={() => setShowDevNavigator(true)}
-            className="p-2.5 bg-[#1E1E1E] hover:bg-[#2A2A2A] text-[#C8B088] hover:text-[#F85800] border border-[#333] shadow-lg flex items-center gap-2 text-xs font-mono"
-            title="Open Quick Page Switcher"
-          >
-            <Compass className="w-4 h-4 text-[#F85800]" />
-            <span className="hidden sm:inline font-bold">ROUTES ({currentRoute})</span>
-          </button>
-        )}
-      </div>
     </div>
   );
 }
