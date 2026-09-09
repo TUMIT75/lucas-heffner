@@ -67,9 +67,9 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, navigate, cartCoun
   };
 
   // Primary streamlined menu items
-  const primaryNavItems: { label: string; route: PageRoute; badge?: string; icon?: React.ReactNode }[] = [
-    { label: 'The Book', route: '/cutthecrap', badge: 'Flagship' },
-    { label: 'Sample', route: '/read-book', icon: <BookOpen className="w-3.5 h-3.5 text-[#F85800]" /> },
+  const primaryNavItems: { label: string; route: PageRoute }[] = [
+    { label: 'The Book', route: '/cutthecrap' },
+    { label: 'Sample', route: '/read-book' },
     { label: 'Toolbox', route: '/toolkit' },
     { label: 'Articles', route: '/articles' },
     { label: 'Store', route: '/store' },
@@ -120,28 +120,6 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, navigate, cartCoun
 
   return (
     <>
-      {/* Top Announcement Bar */}
-      <aside aria-label="Official book release notice" className="w-full bg-[#181818] text-[#F5F3EF] border-b border-[#2A2A2A] py-2 px-4 text-center z-50 relative">
-        <div className="max-w-7xl mx-auto flex items-center justify-between text-[11px] sm:text-[12px] font-sans">
-          <div className="flex items-center gap-2 mx-auto">
-            <span className="inline-block w-2 h-2 rounded-full bg-[#F85800]" />
-            <span className="font-semibold uppercase tracking-[0.12em]">
-              CUT THE CRAP: LIMITED FIRST PRINTING
-            </span>
-            <span className="hidden md:inline text-[#A3A3A3] border-l border-[#333] pl-2 font-normal">
-              Signed &amp; Numbered Founder&apos;s Hardcover strictly limited to first run.
-            </span>
-          </div>
-          <button
-            onClick={() => handleNav('/cutthecrap')}
-            className="hidden sm:flex items-center gap-1 text-[#C8B088] hover:text-[#F85800] transition-colors font-bold tracking-wider uppercase text-[11px]"
-          >
-            <span>Preorder</span>
-            <ArrowRight className="w-3 h-3" />
-          </button>
-        </div>
-      </aside>
-
       {/* Main Sticky Header */}
       <header
         className={`sticky top-0 z-40 w-full transition-all duration-200 ${
@@ -161,26 +139,20 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, navigate, cartCoun
           </button>
 
           {/* Streamlined Desktop Navigation Links (Visible on lg and up) */}
-          <nav className="hidden lg:flex items-center gap-4 xl:gap-6 text-[13px] xl:text-[14px] font-sans font-medium uppercase tracking-[0.06em]">
+          <nav className="hidden lg:flex items-center gap-5 xl:gap-7 text-[13px] xl:text-[14px] font-sans font-medium uppercase tracking-[0.06em]">
             {primaryNavItems.map((item) => {
               const isActive = currentRoute === item.route;
               return (
                 <button
                   key={item.route}
                   onClick={() => handleNav(item.route)}
-                  className={`transition-colors py-1.5 px-1 relative flex items-center gap-1.5 whitespace-nowrap ${
+                  className={`transition-colors py-1.5 px-1 relative whitespace-nowrap ${
                     isActive
                       ? 'text-[#F85800] font-bold'
                       : 'text-[#F5F3EF]/85 hover:text-[#F85800]'
                   }`}
                 >
-                  {item.icon}
                   <span>{item.label}</span>
-                  {item.badge && (
-                    <span className="hidden xl:inline text-[9px] font-mono px-1.5 py-0.2 bg-[#F85800]/20 border border-[#F85800]/40 text-[#F85800] font-bold tracking-wider">
-                      {item.badge}
-                    </span>
-                  )}
                   {isActive && <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#F85800]" />}
                 </button>
               );

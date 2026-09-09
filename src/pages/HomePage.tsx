@@ -80,29 +80,6 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
 
   return (
     <div className="w-full bg-[#141414] text-[#F5F3EF]">
-      {/* Interactive Launch Status Toggle per brief */}
-      <div className="bg-[#181818] border-b border-[#2A2A2A] px-4 py-2 text-xs flex flex-wrap items-center justify-between gap-2">
-        <span className="text-[#8C8C8C] font-mono">
-          Interactive State Switcher (Brief Section 2):
-        </span>
-        <div className="flex items-center gap-2">
-          <span className="text-[#A3A3A3] text-[11px] uppercase tracking-wider">CTA State:</span>
-          {(['learn-more', 'preorder', 'order-now'] as const).map((st) => (
-            <button
-              key={st}
-              onClick={() => setLaunchStatus(st)}
-              className={`px-2.5 py-1 text-[11px] font-sans font-bold uppercase tracking-wider transition-colors ${
-                launchStatus === st
-                  ? 'bg-[#F85800] text-[#141414]'
-                  : 'bg-[#222] text-[#888] hover:text-[#CCC]'
-              }`}
-            >
-              {st.replace('-', ' ')}
-            </button>
-          ))}
-        </div>
-      </div>
-
       {/* Hero Section with Realistic Book Cover & Author Credentials */}
       <section className="relative bg-[#141414] text-[#F5F3EF] pt-16 pb-24 lg:pt-24 lg:pb-32 px-6 sm:px-8 border-b border-[#222] overflow-hidden">
         {/* Subtle geometric background grid */}
@@ -110,22 +87,14 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
 
         <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
           <div className="lg:col-span-7 space-y-6">
-            {/* Author Credential Eyebrow with Headshot */}
-            <div className="flex items-center gap-3">
-              <img
-                src={IMAGE_ASSETS.author.heroPortrait}
-                alt="Lucas Heffner - Author & Veteran"
-                referrerPolicy="no-referrer"
-                className="w-12 h-12 object-cover border border-[#F85800]/60 shadow"
-              />
-              <div>
-                <span className="eyebrow-label text-[#C8B088] tracking-[0.16em] block">
-                  LUCAS HEFFNER
-                </span>
-                <p className="text-xs font-sans uppercase tracking-wider text-[#A3A3A3]">
-                  Author &bull; Certified Nutrition Coach &bull; Veteran &bull; Entrepreneur
-                </p>
-              </div>
+            {/* Author Credential Eyebrow */}
+            <div className="space-y-1">
+              <span className="eyebrow-label text-[#C8B088] tracking-[0.16em] block">
+                A NEW BOOK BY LUCAS HEFFNER
+              </span>
+              <p className="text-xs font-sans uppercase tracking-wider text-[#A3A3A3]">
+                Author &bull; Certified Nutrition Coach &bull; U.S. Army Veteran &bull; Founder
+              </p>
             </div>
 
             {/* CUT THE CRAP Headline */}
@@ -139,8 +108,8 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
             </div>
 
             {/* Verbatim Subheadline */}
-            <p className="text-[18px] sm:text-[21px] text-[#D1CFC7] leading-relaxed max-w-xl font-medium">
-              "A practical approach to losing weight, building habits that last, and finally getting off the diet roller coaster."
+            <p className="text-[18px] sm:text-[21px] text-[#D1CFC7] leading-relaxed max-w-xl font-normal">
+              A practical approach to losing weight, building habits that last, and finally getting off the diet roller coaster.
             </p>
 
             {/* Action Buttons: Read Book, Buy Physical, Buy PDF */}
@@ -189,17 +158,11 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
 
           {/* Right Hero Visual: 3D Realistic Book Cover Presentation */}
           <div className="lg:col-span-5 flex flex-col items-center justify-center">
-            <div className="relative">
+            <div className="relative flex flex-col items-center">
               <RealisticBookCover edition="hardcover" size="lg" />
-
-              {/* Floating Quick Read Pill */}
-              <button
-                onClick={() => navigate('/read-book')}
-                className="mt-6 w-full py-3 bg-[#1C1C1C] hover:bg-[#252525] border border-[#3A3A3A] text-xs font-sans font-bold uppercase tracking-wider text-[#F85800] flex items-center justify-center gap-2 transition-colors shadow-lg"
-              >
-                <BookOpen className="w-4 h-4" />
-                <span>Open Interactive In-Browser Reader &rarr;</span>
-              </button>
+              <div className="mt-5 text-center text-xs font-sans text-[#8C8C8C] tracking-wider uppercase">
+                First Edition Hardcover &bull; Up Armor Publishing
+              </div>
             </div>
           </div>
         </div>
@@ -209,18 +172,18 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
       <section className="bg-[#181818] border-b border-[#262626] py-8 px-6 sm:px-8">
         <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Format 1: Hardcover Founder's Edition */}
-          <div className="p-6 bg-[#211A11] border border-[#C8B088]/60 flex items-center justify-between gap-4">
-            <div className="space-y-1">
-              <span className="text-[10px] uppercase font-mono font-bold text-[#C8B088] bg-[#C8B088]/15 px-2 py-0.5 border border-[#C8B088]/30">
+          <div className="p-6 bg-[#1F1912] border border-[#8C6F42]/60 flex items-center justify-between gap-4">
+            <div className="space-y-1.5">
+              <span className="inline-block text-[11px] uppercase font-sans font-bold text-[#D4AF37] bg-[#D4AF37]/10 px-2.5 py-1 border border-[#D4AF37]/30 tracking-wider">
                 Collector's Edition
               </span>
-              <h4 className="font-display text-lg text-[#F5F3EF]">Founder's Hardcover</h4>
-              <p className="text-xs text-[#A3A3A3]">Signed &amp; numbered gold-foil edition</p>
-              <div className="text-sm font-bold text-[#C8B088] pt-1">$49.00</div>
+              <h4 className="font-display text-xl text-[#F5F3EF]">Founder's Hardcover</h4>
+              <p className="text-[14px] text-[#C4C2B9] leading-snug">Signed &amp; numbered gold-foil edition</p>
+              <div className="text-base font-bold font-sans text-[#D4AF37] pt-0.5">$49.00</div>
             </div>
             <button
               onClick={() => handleQuickAdd('hardcover')}
-              className="px-4 py-2.5 bg-[#C8B088] hover:bg-[#B8A078] text-[#141414] text-xs font-sans font-bold uppercase tracking-wider whitespace-nowrap"
+              className="px-5 py-3 bg-[#D4AF37] hover:bg-[#C09B2A] text-[#141414] text-xs font-sans font-bold uppercase tracking-wider whitespace-nowrap transition-colors"
             >
               Preorder
             </button>
@@ -228,17 +191,17 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
 
           {/* Format 2: Paperback Edition */}
           <div className="p-6 bg-[#1A1A1A] border border-[#2F2F2F] flex items-center justify-between gap-4">
-            <div className="space-y-1">
-              <span className="text-[10px] uppercase font-mono font-bold text-[#8C8C8C] bg-[#262626] px-2 py-0.5 border border-[#3A3A3A]">
+            <div className="space-y-1.5">
+              <span className="inline-block text-[11px] uppercase font-sans font-bold text-[#A3A3A3] bg-[#262626] px-2.5 py-1 border border-[#3A3A3A] tracking-wider">
                 Print Edition
               </span>
-              <h4 className="font-display text-lg text-[#F5F3EF]">Paperback Edition</h4>
-              <p className="text-xs text-[#A3A3A3]">Standard premium trade print copy</p>
-              <div className="text-sm font-bold text-[#F85800] pt-1">$24.99</div>
+              <h4 className="font-display text-xl text-[#F5F3EF]">Paperback Edition</h4>
+              <p className="text-[14px] text-[#C4C2B9] leading-snug">Standard premium trade print copy</p>
+              <div className="text-base font-bold font-sans text-[#F85800] pt-0.5">$24.99</div>
             </div>
             <button
               onClick={() => handleQuickAdd('paperback')}
-              className="px-4 py-2.5 bg-[#F85800] hover:bg-[#E05000] text-[#141414] text-xs font-sans font-bold uppercase tracking-wider whitespace-nowrap"
+              className="px-5 py-3 bg-[#F85800] hover:bg-[#E05000] text-[#141414] text-xs font-sans font-bold uppercase tracking-wider whitespace-nowrap transition-colors"
             >
               Order
             </button>
@@ -246,17 +209,17 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
 
           {/* Format 3: Digital PDF & ePub Edition */}
           <div className="p-6 bg-[#1A1A1A] border border-[#2F2F2F] flex items-center justify-between gap-4">
-            <div className="space-y-1">
-              <span className="text-[10px] uppercase font-mono font-bold text-[#60A5FA] bg-[#1E293B] px-2 py-0.5 border border-[#3B82F6]/40">
+            <div className="space-y-1.5">
+              <span className="inline-block text-[11px] uppercase font-sans font-bold text-[#F85800] bg-[#F85800]/10 px-2.5 py-1 border border-[#F85800]/30 tracking-wider">
                 Instant Digital
               </span>
-              <h4 className="font-display text-lg text-[#F5F3EF]">PDF &amp; ePub Edition</h4>
-              <p className="text-xs text-[#A3A3A3]">Immediate download + printable matrix</p>
-              <div className="text-sm font-bold text-[#60A5FA] pt-1">$14.99</div>
+              <h4 className="font-display text-xl text-[#F5F3EF]">PDF &amp; ePub Edition</h4>
+              <p className="text-[14px] text-[#C4C2B9] leading-snug">Immediate download + printable matrix</p>
+              <div className="text-base font-bold font-sans text-[#F5F3EF] pt-0.5">$14.99</div>
             </div>
             <button
               onClick={() => handleQuickAdd('pdf')}
-              className="px-4 py-2.5 bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-xs font-sans font-bold uppercase tracking-wider whitespace-nowrap"
+              className="px-5 py-3 bg-[#262626] hover:bg-[#333] text-[#F5F3EF] border border-[#444] text-xs font-sans font-bold uppercase tracking-wider whitespace-nowrap transition-colors"
             >
               Buy PDF
             </button>
@@ -311,16 +274,16 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
             ].map((pillar) => (
               <div
                 key={pillar.title}
-                className="relative bg-[#1C1C1C] border border-[#2B2B2B] overflow-hidden group card-hover flex flex-col justify-between"
+                className="relative bg-[#1C1C1C] border border-[#2B2B2B] hover:border-[#F85800]/60 transition-colors duration-300 overflow-hidden group flex flex-col justify-between"
               >
-                <div className="h-44 w-full relative overflow-hidden">
+                <div className="h-48 w-full relative overflow-hidden bg-[#1C1C1C] -mb-px">
                   <img
                     src={pillar.img}
                     alt={pillar.title}
                     referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-70 group-hover:opacity-90"
+                    className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-out opacity-80 group-hover:opacity-95 will-change-transform transform-gpu"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#1C1C1C] via-transparent to-black/40" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1C1C1C] via-[#1C1C1C]/30 to-transparent pointer-events-none" />
                   <div className="absolute top-4 left-4">
                     <span className="px-2.5 py-1 bg-[#141414]/90 border border-[#F85800] text-[#F85800] font-mono text-[11px] uppercase font-bold tracking-wider">
                       {pillar.title}
@@ -391,14 +354,14 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
             <div>
               <span className="eyebrow-label text-[#F85800]">THE AUTHOR'S JOURNEY</span>
               <h2 className="text-h2 text-[#141414] mt-1">
-                "I didn't write Cut the Crap because I've always had nutrition figured out. I wrote it because I didn't."
+                I didn't write Cut the Crap because I've always had nutrition figured out. I wrote it because I didn't.
               </h2>
             </div>
 
             {/* Asymmetric Pull Quote */}
             <div className="editorial-pullquote p-6 sm:p-8 bg-white border-l-4 border-[#F85800] shadow-sm text-[#141414]">
               <p className="relative z-10 text-[20px] sm:text-[22px] leading-relaxed">
-                "I know what it's like to struggle with weight, lose it, gain it back, and wonder why doing everything 'right' still doesn't seem to work. Eventually, I stopped looking for another diet and started learning how nutrition actually works."
+                I know what it's like to struggle with weight, lose it, gain it back, and wonder why doing everything 'right' still doesn't seem to work. Eventually, I stopped looking for another diet and started learning how nutrition actually works.
               </p>
             </div>
 
@@ -519,11 +482,6 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
                 <ArrowRight className="w-4 h-4 text-[#F85800]" />
               </button>
             </div>
-          </div>
-
-          {/* Official Founder's Edition Banner Display (IMG_4134) */}
-          <div className="pt-8 border-t border-[#222]">
-            <FoundersEditionBanner onSelectHardcover={() => handleQuickAdd('hardcover')} />
           </div>
         </div>
       </section>

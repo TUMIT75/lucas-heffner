@@ -454,32 +454,32 @@ export const CutTheCrapPage: React.FC<CutTheCrapPageProps> = ({ navigate }) => {
             </div>
 
             {/* Card 3: Digital PDF & ePub Edition */}
-            <div className="bg-[#1C1C1C] border-2 border-[#3B82F6]/60 p-6 flex flex-col justify-between card-hover relative">
-              <div className="absolute -top-3 right-4 bg-[#2563EB] text-white text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 shadow">
-                INSTANT PDF
+            <div className="bg-[#1C1C1C] border border-[#333] hover:border-[#F85800]/60 p-6 flex flex-col justify-between card-hover relative">
+              <div className="absolute -top-3 right-4 bg-[#F85800] text-[#141414] text-[10px] font-sans font-bold uppercase tracking-wider px-2.5 py-0.5 shadow">
+                INSTANT DIGITAL
               </div>
               <div>
-                <div className="text-xs uppercase font-sans font-bold text-[#60A5FA] tracking-widest mb-1">
+                <div className="text-xs uppercase font-sans font-bold text-[#C8B088] tracking-widest mb-1">
                   Immediate Digital Access
                 </div>
                 <h3 className="font-display text-2xl text-[#F5F3EF] mb-1">
                   PDF &amp; ePub Edition
                 </h3>
                 <p className="text-xs text-[#8C8C8C] mb-4">Complete 18 chapters + hyperlinked matrix</p>
-                <div className="text-3xl font-display font-bold text-[#60A5FA] mb-4">
+                <div className="text-3xl font-display font-bold text-[#F5F3EF] mb-4">
                   $14.99
                 </div>
                 <ul className="text-xs text-[#A3A3A3] space-y-2 mb-6">
                   <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#60A5FA] shrink-0" />
+                    <Check className="w-4 h-4 text-[#F85800] shrink-0" />
                     <span>Instant high-res PDF download</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#60A5FA] shrink-0" />
+                    <Check className="w-4 h-4 text-[#F85800] shrink-0" />
                     <span>DRM-free ePub for Kindle &amp; Apple Books</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#60A5FA] shrink-0" />
+                    <Check className="w-4 h-4 text-[#F85800] shrink-0" />
                     <span>Printable habit checklists &amp; meal trackers</span>
                   </li>
                 </ul>
@@ -489,7 +489,7 @@ export const CutTheCrapPage: React.FC<CutTheCrapPageProps> = ({ navigate }) => {
                   onClick={() =>
                     handleAddToCart('ebook-edition', 'CUT THE CRAP', 'Digital PDF & ePub Edition', 14.99, true)
                   }
-                  className="w-full py-3.5 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-sans font-bold text-xs uppercase tracking-[0.1em] transition-colors flex items-center justify-center gap-2 shadow"
+                  className="w-full py-3.5 bg-[#F85800] hover:bg-[#E05000] text-[#141414] font-sans font-bold text-xs uppercase tracking-[0.1em] transition-colors flex items-center justify-center gap-2 shadow"
                 >
                   <Download className="w-4 h-4" />
                   <span>Buy Instant PDF ($14.99)</span>
@@ -540,7 +540,7 @@ export const CutTheCrapPage: React.FC<CutTheCrapPageProps> = ({ navigate }) => {
         <div className="max-w-[1280px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="space-y-2">
             <span className="eyebrow-label text-[#F85800]">COMPANION SUITE</span>
-            <h3 className="text-h3 text-[#F5F3EF]">"The book doesn't end on the last page."</h3>
+            <h3 className="text-h3 text-[#F5F3EF]">The book doesn't end on the last page.</h3>
             <p className="text-sm text-[#A3A3A3] max-w-xl">
               Access the exact digital scales, apps, kitchen gear, and tracking protocols referenced throughout the chapters.
             </p>

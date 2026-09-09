@@ -115,19 +115,6 @@
     margin-right: -24px;
   }
 }
-.editorial-pullquote::before {
-  content: '“';
-  position: absolute;
-  top: -24px;
-  left: -20px;
-  font-family: 'Archivo Black', Impact, sans-serif;
-  font-size: 88px;
-  line-height: 1;
-  color: #F85800;
-  opacity: 0.15;
-  pointer-events: none;
-  z-index: 0;
-}
 
 /* Founder's Edition Scoped Styling */
 .founders-edition {
@@ -170,12 +157,12 @@
   pointer-events: auto;
 }
 
-/* Interactive Card Hover per Spec */
+/* Interactive Card Hover */
 .card-hover {
-  transition: transform 200ms ease, border-color 200ms ease;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
 }
 .card-hover:hover {
-  transform: translateY(-4px);
-  border-color: #F85800;
+  border-color: rgba(248, 88, 0, 0.5);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.4);
 }
 

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { StarWingsInsignia, FoundersEmbossedBadge } from './BrandLogos';
-import { BrandedQrCode } from './OfficialBrandBanners';
-import { ShoppingBag, Check, Sparkles, Shield, Award } from 'lucide-react';
+import { StarWingsInsignia } from './BrandLogos';
+import { ShoppingBag, Check, Shield, Award, CheckCircle2 } from 'lucide-react';
 
 interface FoundersEditionCardProps {
   onAddToCart?: () => void;
@@ -28,27 +27,12 @@ export const FoundersEditionCard: React.FC<FoundersEditionCardProps> = ({
 
   return (
     <div className={`w-full ${className}`}>
-      {/* Main Card Container strictly replicating IMG_4134 */}
+      {/* Main Card Container */}
       <div
-        className={`relative w-full rounded-sm overflow-hidden border-2 border-[#7A5826] shadow-[0_20px_50px_rgba(0,0,0,0.95)] text-[#F5F3EF] p-5 sm:p-7 lg:p-8 transition-all ${
+        className={`relative w-full rounded-none overflow-hidden border border-[#7A5826]/70 shadow-[0_20px_60px_rgba(0,0,0,0.85)] text-[#F5F3EF] p-6 sm:p-8 lg:p-10 bg-[#16120E] transition-all ${
           isSoldOut ? 'opacity-90' : ''
         }`}
-        style={{
-          background:
-            'radial-gradient(ellipse at 50% 30%, #342210 0%, #201408 55%, #120B04 100%)',
-        }}
       >
-        {/* Subtle leather texture grid overlay */}
-        <div
-          className="absolute inset-0 opacity-15 pointer-events-none"
-          style={{
-            backgroundImage:
-              'radial-gradient(#D4AF37 0.75px, transparent 0.75px), radial-gradient(#141414 0.75px, transparent 0.75px)',
-            backgroundSize: '14px 14px',
-            backgroundPosition: '0 0, 7px 7px',
-          }}
-        />
-
         {/* Sold Out Stamp Overlay */}
         {isSoldOut && (
           <div className="absolute inset-0 z-30 flex items-center justify-center bg-black/60 backdrop-blur-[2px] pointer-events-none">
@@ -63,10 +47,10 @@ export const FoundersEditionCard: React.FC<FoundersEditionCardProps> = ({
           </div>
         )}
 
-        {/* Responsive 3-Part Layout: Left Book, Center Info, Right Preorder */}
-        <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8">
-          {/* 1. Left Column: 3D Leather Hardcover Mockup */}
-          <div className="w-full lg:w-[200px] xl:w-[220px] shrink-0 flex justify-center">
+        {/* Responsive 3-Column Layout: Left Book, Center Details, Right Purchase Box */}
+        <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-10">
+          {/* 1. Left Column: Leather Hardcover Book Presentation */}
+          <div className="w-full lg:w-[210px] shrink-0 flex justify-center">
             <div
               className="w-[170px] sm:w-[190px] aspect-[1/1.45] rounded-r-sm shadow-[16px_20px_40px_rgba(0,0,0,0.95)] flex overflow-hidden border border-[#8C6F42]/80 bg-[#1A1005] select-none transition-transform duration-300 hover:scale-[1.02]"
               style={{
@@ -131,108 +115,106 @@ export const FoundersEditionCard: React.FC<FoundersEditionCardProps> = ({
             </div>
           </div>
 
-          {/* 2. Center Column: Heading, Quote, Plaque & Bullet Points */}
-          <div className="flex-1 min-w-0 text-center lg:text-left space-y-3">
-            <div>
-              <h3
-                className="font-display font-black text-2xl sm:text-3xl xl:text-4xl text-[#120B04] tracking-widest leading-none"
-                style={{
-                  textShadow:
-                    '0 1px 0 rgba(255,255,255,0.2), 0 -1px 2px rgba(0,0,0,0.9), 1px 0 1px rgba(0,0,0,0.8)',
-                }}
-              >
-                CUT THE CRAP
+          {/* 2. Center Column: Cohesive Typography & Specifications */}
+          <div className="flex-1 min-w-0 text-center lg:text-left space-y-4">
+            <div className="space-y-1">
+              <span className="text-xs font-sans font-bold uppercase tracking-[0.18em] text-[#D4AF37] block">
+                LIMITED COLLECTOR'S RELEASE
+              </span>
+              <h3 className="font-display font-black text-2xl sm:text-3xl xl:text-4xl text-[#F5F3EF] tracking-tight">
+                Cut the Crap <span className="text-[#D4AF37]">Founder&apos;s Edition</span>
               </h3>
-              <h4 className="font-display font-extrabold text-lg sm:text-xl xl:text-2xl text-[#D4AF37] tracking-[0.14em] leading-tight mt-1 drop-shadow-md">
-                FOUNDER&apos;S EDITION
-              </h4>
             </div>
 
-            {/* Winged Star Insignia */}
-            <div className="flex justify-center lg:justify-start">
-              <StarWingsInsignia className="w-32 sm:w-40 h-5" color="#D4AF37" />
-            </div>
-
-            {/* Italic Subtitle Quote */}
-            <p className="text-sm sm:text-base italic font-serif text-[#E0D5C1] leading-relaxed max-w-lg">
-              &ldquo;Become the kind of person who never has to lose the same weight twice.&rdquo;
+            {/* Clear, readable subtitle */}
+            <p className="text-[15px] sm:text-[16px] text-[#D1CFC7] leading-relaxed max-w-lg font-normal">
+              Become the kind of person who never has to lose the same weight twice.
             </p>
 
-            {/* Gold Limited Plaque */}
-            <div className="inline-block bg-[#160E06] border border-[#8C6F42] px-3.5 py-1.5 shadow-inner">
-              <span className="text-[10px] sm:text-[11px] font-sans font-black uppercase tracking-[0.18em] text-[#D4AF37] block">
-                ★ LIMITED ★ SIGNED ★ INDIVIDUALLY NUMBERED
+            {/* Limited Plaque Badge */}
+            <div className="inline-flex items-center gap-2 bg-[#211A12] border border-[#7A5826]/70 px-3.5 py-1.5">
+              <Shield className="w-3.5 h-3.5 text-[#D4AF37] shrink-0" />
+              <span className="text-[11px] font-sans font-bold uppercase tracking-[0.14em] text-[#D4AF37]">
+                Strict First Run &bull; Signed &amp; Individually Numbered
               </span>
             </div>
 
-            {/* Core Value Bullets */}
-            <div className="text-xs text-[#C8B088] space-y-1 pt-1 font-sans">
-              <p className="flex items-center gap-2 justify-center lg:justify-start">
-                <span className="text-[#D4AF37] text-xs">&bull;</span>
-                <span>Custom gold &amp; leather texture hardcover binding</span>
-              </p>
-              <p className="flex items-center gap-2 justify-center lg:justify-start">
-                <span className="text-[#D4AF37] text-xs">&bull;</span>
-                <span>Strict one-time printing (Never replaced with a standard hardcover)</span>
-              </p>
-              <p className="flex items-center gap-2 justify-center lg:justify-start">
-                <span className="text-[#D4AF37] text-xs">&bull;</span>
-                <span>Exclusive founding reader acknowledgment</span>
-              </p>
+            {/* Specifications */}
+            <div className="text-[13px] sm:text-[14px] text-[#C8B088] space-y-2 pt-1 font-sans">
+              <div className="flex items-start gap-2.5 justify-center lg:justify-start">
+                <CheckCircle2 className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" />
+                <span className="text-[#D1CFC7]">Bonded leatherette hardcover with authentic gold-foil debossing</span>
+              </div>
+              <div className="flex items-start gap-2.5 justify-center lg:justify-start">
+                <CheckCircle2 className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" />
+                <span className="text-[#D1CFC7]">Personally hand-signed &amp; numbered by Lucas Heffner (500 copies)</span>
+              </div>
+              <div className="flex items-start gap-2.5 justify-center lg:justify-start">
+                <CheckCircle2 className="w-4 h-4 text-[#D4AF37] shrink-0 mt-0.5" />
+                <span className="text-[#D1CFC7]">Includes complete instant digital suite (ePub + PDF) &amp; worksheets</span>
+              </div>
             </div>
           </div>
 
-          {/* 3. Right Column: Dedicated Preorder Box (Fixed Width, Never Squeezed) */}
-          <div className="w-full sm:w-[240px] lg:w-[250px] xl:w-[260px] shrink-0 bg-[#160E05]/95 border border-[#8C6F42]/80 p-4 sm:p-5 text-center flex flex-col items-center justify-between rounded-sm shadow-xl space-y-3">
+          {/* 3. Right Column: Dedicated Preorder Box (Clear, spacious, authentic) */}
+          <div className="w-full sm:w-[280px] lg:w-[300px] shrink-0 bg-[#1F1912] border border-[#7A5826]/80 p-6 text-center flex flex-col items-center justify-between rounded-none shadow-xl space-y-4">
             {/* Header */}
-            <div className="text-[11px] font-sans font-black uppercase tracking-[0.2em] text-[#D4AF37]">
-              — PREORDER YOUR COPY —
+            <div className="space-y-1">
+              <div className="text-[11px] font-sans font-bold uppercase tracking-[0.18em] text-[#D4AF37]">
+                FIRST RUN PREORDER
+              </div>
+              <div className="text-xs text-[#A89880]">
+                Strict run of 500 copies
+              </div>
             </div>
-
-            {/* Branded Gold QR Code */}
-            <div className="w-28 h-28 sm:w-32 sm:h-32 aspect-square flex items-center justify-center relative">
-              <BrandedQrCode size={120} centerBadgeType="gold-star" />
-            </div>
-
-            {/* Subtext */}
-            <p className="text-[11px] italic text-[#C8B088] leading-tight">
-              Available only during the founding release.
-            </p>
 
             {/* Price Tag */}
-            <div className="w-full pt-2 border-t border-[#8C6F42]/30">
-              <div className="text-2xl sm:text-3xl font-display font-black text-[#F5F3EF] mb-2 tracking-wide">
+            <div className="py-2 w-full border-y border-[#7A5826]/40 text-center">
+              <div className="text-3xl sm:text-4xl font-display font-black text-[#F5F3EF] tracking-wide">
                 $49.00
               </div>
-
-              {/* Action Button: High contrast, full-width, clean typography */}
-              <button
-                type="button"
-                disabled={isSoldOut}
-                onClick={handlePreorder}
-                className={`w-full py-3 px-3 font-sans font-black text-[11px] sm:text-xs uppercase tracking-[0.1em] transition-all flex items-center justify-center gap-1.5 shadow-md ${
-                  isSoldOut
-                    ? 'bg-[#382614] text-[#8C6F42] cursor-not-allowed opacity-60'
-                    : isAdded
-                    ? 'bg-[#2E7D32] text-white'
-                    : 'bg-[#F85800] hover:bg-[#E05000] text-[#141414] active:scale-[0.98]'
-                }`}
-              >
-                {isAdded ? (
-                  <>
-                    <Check className="w-4 h-4 shrink-0" />
-                    <span className="whitespace-nowrap">Added to Cart</span>
-                  </>
-                ) : isSoldOut ? (
-                  <span className="whitespace-nowrap">Sold Out</span>
-                ) : (
-                  <>
-                    <ShoppingBag className="w-4 h-4 shrink-0" />
-                    <span className="whitespace-nowrap">Preorder Founder's Edition</span>
-                  </>
-                )}
-              </button>
+              <div className="text-[11px] text-[#C8B088] font-sans uppercase tracking-wider mt-1">
+                Free Domestic Shipping
+              </div>
             </div>
+
+            {/* Availability status */}
+            <div className="text-xs text-[#E5D2A0] font-sans flex items-center justify-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse" />
+              <span>Available for immediate reservation</span>
+            </div>
+
+            {/* Action Button: Full-width, never cut off, clear contrast */}
+            <button
+              type="button"
+              disabled={isSoldOut}
+              onClick={handlePreorder}
+              className={`w-full py-4 px-4 font-sans font-bold text-xs uppercase tracking-[0.1em] transition-all flex items-center justify-center gap-2 shadow-lg ${
+                isSoldOut
+                  ? 'bg-[#382614] text-[#8C6F42] cursor-not-allowed opacity-60'
+                  : isAdded
+                  ? 'bg-[#2E7D32] text-white'
+                  : 'bg-[#D4AF37] hover:bg-[#C09B2A] text-[#141414] active:scale-[0.99]'
+              }`}
+            >
+              {isAdded ? (
+                <>
+                  <Check className="w-4 h-4 shrink-0" />
+                  <span>Added to Cart</span>
+                </>
+              ) : isSoldOut ? (
+                <span>Sold Out</span>
+              ) : (
+                <>
+                  <ShoppingBag className="w-4 h-4 shrink-0" />
+                  <span>Preorder Founder's Edition</span>
+                </>
+              )}
+            </button>
+
+            <p className="text-[11px] text-[#8C7A64] leading-tight">
+              Ships upon print completion. Includes digital edition immediately.
+            </p>
           </div>
         </div>
       </div>
