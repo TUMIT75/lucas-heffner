@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
-import { StarWingsInsignia } from './BrandLogos';
-import { ShoppingBag, Check, ShieldCheck, Sparkles, AlertCircle } from 'lucide-react';
+import { StarWingsInsignia, FoundersEmbossedBadge } from './BrandLogos';
+import { BrandedQrCode } from './OfficialBrandBanners';
+import { ShoppingBag, Check, Sparkles, Shield, Award } from 'lucide-react';
 
 interface FoundersEditionCardProps {
   onAddToCart?: () => void;
   initiallySoldOut?: boolean;
+  className?: string;
 }
 
 export const FoundersEditionCard: React.FC<FoundersEditionCardProps> = ({
   onAddToCart,
   initiallySoldOut = false,
+  className = '',
 }) => {
   const [isSoldOut, setIsSoldOut] = useState(initiallySoldOut);
   const [isAdded, setIsAdded] = useState(false);
@@ -24,19 +27,19 @@ export const FoundersEditionCard: React.FC<FoundersEditionCardProps> = ({
   };
 
   return (
-    <div className="space-y-4">
-      {/* Interactive Toggle for Mockup Reviewers */}
-      <div className="flex items-center justify-between px-4 py-2 bg-[#1A1A1A] border border-[#333] text-xs">
-        <span className="text-[#C8B088] font-mono font-medium flex items-center gap-1.5">
+    <div className={`space-y-3 w-full ${className}`}>
+      {/* Interactive Toggle for Reviewers */}
+      <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-2 bg-[#17120C] border border-[#7A5826]/40 text-xs rounded-t-sm">
+        <span className="text-[#D4AF37] font-mono font-medium flex items-center gap-1.5">
           <Sparkles className="w-3.5 h-3.5 text-[#F85800]" />
-          Founder's Edition Display State:
+          Founder&apos;s Edition Showcase (IMG_4134 Authentic Replica):
         </span>
         <div className="flex items-center gap-2">
           <button
             type="button"
             onClick={() => setIsSoldOut(false)}
-            className={`px-3 py-1 font-sans text-xs uppercase tracking-wider font-bold transition-colors ${
-              !isSoldOut ? 'bg-[#F85800] text-[#141414]' : 'bg-[#262626] text-[#888] hover:text-[#CCC]'
+            className={`px-2.5 py-1 font-sans text-[11px] uppercase tracking-wider font-bold transition-colors ${
+              !isSoldOut ? 'bg-[#F85800] text-[#141414]' : 'bg-[#241A10] text-[#8C6F42] hover:text-[#C8B088]'
             }`}
           >
             Preorder (Active)
@@ -44,177 +47,226 @@ export const FoundersEditionCard: React.FC<FoundersEditionCardProps> = ({
           <button
             type="button"
             onClick={() => setIsSoldOut(true)}
-            className={`px-3 py-1 font-sans text-xs uppercase tracking-wider font-bold transition-colors ${
-              isSoldOut ? 'bg-[#503818] text-[#C8B088] border border-[#C8B088]' : 'bg-[#262626] text-[#888] hover:text-[#CCC]'
+            className={`px-2.5 py-1 font-sans text-[11px] uppercase tracking-wider font-bold transition-colors ${
+              isSoldOut
+                ? 'bg-[#503818] text-[#D4AF37] border border-[#D4AF37]'
+                : 'bg-[#241A10] text-[#8C6F42] hover:text-[#C8B088]'
             }`}
           >
-            Sold Out Stamp (Preview)
+            Sold Out State
           </button>
         </div>
       </div>
 
-      {/* Main Card Container with Scoped .founders-edition class */}
-      <div className={`founders-edition border-2 relative overflow-hidden transition-all duration-300 p-6 sm:p-10 ${
-        isSoldOut ? 'sold-out-card' : 'shadow-2xl'
-      }`}>
-        {/* Sold Out Stamp per Spec Section 7 */}
+      {/* Main Card Container strictly replicating IMG_4134 */}
+      <div
+        className={`relative w-full rounded-sm overflow-hidden border-2 border-[#7A5826] shadow-[0_20px_50px_rgba(0,0,0,0.95)] text-[#F5F3EF] p-5 sm:p-7 lg:p-8 transition-all ${
+          isSoldOut ? 'opacity-90' : ''
+        }`}
+        style={{
+          background:
+            'radial-gradient(ellipse at 50% 30%, #342210 0%, #201408 55%, #120B04 100%)',
+        }}
+      >
+        {/* Subtle leather texture grid overlay */}
+        <div
+          className="absolute inset-0 opacity-15 pointer-events-none"
+          style={{
+            backgroundImage:
+              'radial-gradient(#D4AF37 0.75px, transparent 0.75px), radial-gradient(#141414 0.75px, transparent 0.75px)',
+            backgroundSize: '14px 14px',
+            backgroundPosition: '0 0, 7px 7px',
+          }}
+        />
+
+        {/* Sold Out Stamp Overlay */}
         {isSoldOut && (
-          <div className="sold-out-stamp select-none pointer-events-none text-center">
-            <span className="block text-2xl sm:text-4xl font-display font-black text-[#F5F3EF] tracking-widest">
-              SOLD OUT
-            </span>
-            <span className="block text-[11px] font-sans font-semibold tracking-wider text-[#C8B088] mt-0.5">
-              NO REPRINTS &bull; VAULT CLOSED
-            </span>
+          <div className="absolute inset-0 z-30 flex items-center justify-center bg-black/60 backdrop-blur-[2px] pointer-events-none">
+            <div className="border-4 border-[#D4AF37] bg-[#140D05]/95 px-8 py-4 rotate-[-6deg] shadow-2xl text-center">
+              <span className="block text-3xl sm:text-5xl font-display font-black text-[#D4AF37] tracking-[0.25em]">
+                SOLD OUT
+              </span>
+              <span className="block text-xs font-sans font-bold tracking-[0.2em] text-[#E5D2A0] mt-1 uppercase">
+                STRICT ONE-TIME PRINTING &bull; NO REPRINTS
+              </span>
+            </div>
           </div>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          {/* Left: Book Mockup */}
-          <div className="lg:col-span-4 flex justify-center">
-            <div className="w-56 sm:w-64 aspect-5/7 bg-[#3D2912] border-2 border-[#C8B088]/60 shadow-[12px_16px_30px_rgba(0,0,0,0.8)] rounded-r-md p-5 flex flex-col justify-between text-center relative overflow-hidden transform lg:-rotate-1 hover:rotate-0 transition-transform">
-              {/* Spine shadow simulation */}
-              <div className="absolute left-0 top-0 bottom-0 w-4 bg-gradient-to-r from-black/60 to-transparent" />
-              {/* Embossed header */}
-              <div className="pt-2">
-                <span className="text-[9px] font-sans font-bold uppercase tracking-[0.2em] text-[#C8B088]/90 block mb-1">
-                  BECOME THE KIND OF PERSON WHO NEVER
+        {/* Responsive 3-Part Layout: Left Book, Center Info, Right Preorder */}
+        <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8">
+          {/* 1. Left Column: 3D Leather Hardcover Mockup */}
+          <div className="w-full lg:w-[200px] xl:w-[220px] shrink-0 flex justify-center">
+            <div
+              className="w-[170px] sm:w-[190px] aspect-[1/1.45] rounded-r-sm shadow-[16px_20px_40px_rgba(0,0,0,0.95)] flex overflow-hidden border border-[#8C6F42]/80 bg-[#1A1005] select-none transition-transform duration-300 hover:scale-[1.02]"
+              style={{
+                background: 'linear-gradient(135deg, #36220E 0%, #201306 60%, #120A03 100%)',
+              }}
+            >
+              {/* Spine */}
+              <div className="w-5 h-full bg-gradient-to-r from-[#442B12] via-[#2A1A0A] to-[#140D05] border-r border-black/80 flex flex-col items-center justify-between py-4 shrink-0">
+                <span className="text-[9px] text-[#D4AF37]">★</span>
+                <span
+                  className="text-[8px] uppercase tracking-[0.2em] font-sans font-bold text-[#C8B088] whitespace-nowrap rotate-90"
+                  style={{ transformOrigin: 'center' }}
+                >
+                  CUT THE CRAP
                 </span>
-                <span className="text-[9px] font-sans font-bold uppercase tracking-[0.2em] text-[#C8B088]/90 block">
-                  HAS TO LOSE THE SAME WEIGHT TWICE.
-                </span>
+                <span className="text-[9px] text-[#D4AF37]">★</span>
               </div>
 
-              {/* Embossed Cut The Crap Center */}
-              <div className="my-4 py-3 border-y border-[#C8B088]/30">
-                <span className="text-3xl sm:text-4xl font-display font-black text-[#C8B088] tracking-widest block drop-shadow-[0_2px_2px_rgba(0,0,0,0.9)]">
-                  CUT
-                </span>
-                <div className="flex items-center justify-center gap-2 my-1">
-                  <span className="w-4 h-[1px] bg-[#C8B088]/50" />
-                  <span className="text-[10px] font-display text-[#C8B088]">THE</span>
-                  <span className="w-4 h-[1px] bg-[#C8B088]/50" />
+              {/* Cover Face */}
+              <div className="flex-1 p-3 flex flex-col justify-between text-center relative">
+                <div className="pt-1">
+                  <p className="text-[7.5px] font-sans font-bold uppercase tracking-wider text-[#A08055] leading-tight">
+                    BECOME THE KIND OF PERSON WHO NEVER HAS TO LOSE THE SAME WEIGHT TWICE.
+                  </p>
                 </div>
-                <span className="text-3xl sm:text-4xl font-display font-black text-[#C8B088] tracking-widest block drop-shadow-[0_2px_2px_rgba(0,0,0,0.9)]">
-                  CRAP
-                </span>
-              </div>
 
-              {/* Spine and Credentials */}
-              <div className="pb-2">
-                <div className="flex justify-center my-1.5">
-                  <StarWingsInsignia className="w-16 h-4" color="#C8B088" />
+                <div className="my-auto py-1">
+                  <h4
+                    className="font-display font-black text-2xl text-[#120B04] tracking-widest leading-none"
+                    style={{
+                      textShadow:
+                        '0 1px 0 rgba(255,255,255,0.18), 0 -1px 2px rgba(0,0,0,0.9), 1px 0 1px rgba(0,0,0,0.8)',
+                    }}
+                  >
+                    CUT
+                  </h4>
+                  <div className="flex items-center justify-center gap-1.5 my-0.5">
+                    <span className="w-3 h-[1px] bg-[#8C6F42]/60" />
+                    <span className="text-[8px] font-sans font-bold tracking-[0.2em] text-[#8C6F42]">THE</span>
+                    <span className="w-3 h-[1px] bg-[#8C6F42]/60" />
+                  </div>
+                  <h4
+                    className="font-display font-black text-2xl text-[#120B04] tracking-widest leading-none"
+                    style={{
+                      textShadow:
+                        '0 1px 0 rgba(255,255,255,0.18), 0 -1px 2px rgba(0,0,0,0.9), 1px 0 1px rgba(0,0,0,0.8)',
+                    }}
+                  >
+                    CRAP
+                  </h4>
+                  <div className="pt-1.5 flex justify-center">
+                    <StarWingsInsignia className="w-16 h-3.5" color="#8C6F42" />
+                  </div>
                 </div>
-                <span className="text-[10px] font-sans uppercase font-bold tracking-wider text-[#D0B890]">
-                  LUCAS HEFFNER, MBA, NASM-CNC
-                </span>
+
+                <div className="pt-1 border-t border-[#4A3219]">
+                  <span className="text-[7.5px] font-sans font-bold uppercase tracking-wider text-[#C8B088]">
+                    LUCAS HEFFNER
+                  </span>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Center: Title, Wing Motif, Quote, Badge */}
-          <div className="lg:col-span-5 text-center lg:text-left space-y-4">
+          {/* 2. Center Column: Heading, Quote, Plaque & Bullet Points */}
+          <div className="flex-1 min-w-0 text-center lg:text-left space-y-3">
             <div>
-              <h3 className="font-display text-3xl sm:text-4xl lg:text-5xl text-[#C8B088] tracking-wider leading-none drop-shadow-md">
+              <h3
+                className="font-display font-black text-2xl sm:text-3xl xl:text-4xl text-[#120B04] tracking-widest leading-none"
+                style={{
+                  textShadow:
+                    '0 1px 0 rgba(255,255,255,0.2), 0 -1px 2px rgba(0,0,0,0.9), 1px 0 1px rgba(0,0,0,0.8)',
+                }}
+              >
                 CUT THE CRAP
               </h3>
-              <h4 className="font-display text-2xl sm:text-3xl text-[#D0B890] tracking-wide mt-1">
-                FOUNDER'S EDITION
+              <h4
+                className="font-display font-extrabold text-lg sm:text-xl xl:text-2xl tracking-[0.14em] leading-tight mt-1"
+                style={{
+                  background: 'linear-gradient(180deg, #FFF0CF 0%, #D4AF37 50%, #8C641A 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  filter: 'drop-shadow(0 2px 3px rgba(0,0,0,0.9))',
+                }}
+              >
+                FOUNDER&apos;S EDITION
               </h4>
             </div>
 
-            <div className="flex items-center justify-center lg:justify-start my-2">
-              <StarWingsInsignia className="w-28 h-6" color="#C8B088" />
+            {/* Winged Star Insignia */}
+            <div className="flex justify-center lg:justify-start">
+              <StarWingsInsignia className="w-32 sm:w-40 h-5" color="#D4AF37" />
             </div>
 
-            <p className="text-[16px] sm:text-[18px] italic font-sans text-[#F5F3EF] leading-relaxed max-w-md">
-              "Become the kind of person who never has to lose the same weight twice."
+            {/* Italic Subtitle Quote */}
+            <p className="text-sm sm:text-base italic font-serif text-[#E0D5C1] leading-relaxed max-w-lg">
+              &ldquo;Become the kind of person who never has to lose the same weight twice.&rdquo;
             </p>
 
-            {/* Foil Insignia Pill */}
-            <div className="inline-block bg-[#2A1D0B] border border-[#C8B088] px-4 py-2.5 shadow-inner">
-              <span className="text-[12px] sm:text-[13px] font-display text-[#C8B088] uppercase tracking-[0.14em] block">
+            {/* Gold Limited Plaque */}
+            <div className="inline-block bg-[#160E06] border border-[#8C6F42] px-3.5 py-1.5 shadow-inner">
+              <span className="text-[10px] sm:text-[11px] font-sans font-black uppercase tracking-[0.18em] text-[#D4AF37] block">
                 ★ LIMITED ★ SIGNED ★ INDIVIDUALLY NUMBERED
               </span>
             </div>
 
-            <div className="text-xs text-[#C8B088]/80 space-y-1 pt-1">
-              <p>&bull; Custom gold &amp; leather texture hardcover binding</p>
-              <p>&bull; Strict one-time printing (Never replaced with a standard hardcover)</p>
-              <p>&bull; Exclusive founding reader acknowledgment</p>
+            {/* Core Value Bullets */}
+            <div className="text-xs text-[#C8B088] space-y-1 pt-1 font-sans">
+              <p className="flex items-center gap-2 justify-center lg:justify-start">
+                <span className="text-[#D4AF37] text-xs">&bull;</span>
+                <span>Custom gold &amp; leather texture hardcover binding</span>
+              </p>
+              <p className="flex items-center gap-2 justify-center lg:justify-start">
+                <span className="text-[#D4AF37] text-xs">&bull;</span>
+                <span>Strict one-time printing (Never replaced with a standard hardcover)</span>
+              </p>
+              <p className="flex items-center gap-2 justify-center lg:justify-start">
+                <span className="text-[#D4AF37] text-xs">&bull;</span>
+                <span>Exclusive founding reader acknowledgment</span>
+              </p>
             </div>
           </div>
 
-          {/* Right: QR / Preorder Block */}
-          <div className="lg:col-span-3 bg-[#1A1208]/90 border border-[#C8B088]/50 p-6 text-center space-y-4">
-            <div className="text-[11px] font-display uppercase tracking-widest text-[#C8B088]">
+          {/* 3. Right Column: Dedicated Preorder Box (Fixed Width, Never Squeezed) */}
+          <div className="w-full sm:w-[240px] lg:w-[250px] xl:w-[260px] shrink-0 bg-[#160E05]/95 border border-[#8C6F42]/80 p-4 sm:p-5 text-center flex flex-col items-center justify-between rounded-sm shadow-xl space-y-3">
+            {/* Header */}
+            <div className="text-[11px] font-sans font-black uppercase tracking-[0.2em] text-[#D4AF37]">
               — PREORDER YOUR COPY —
             </div>
 
-            {/* QR Mockup with Star Logo Center */}
-            <div className="w-36 h-36 mx-auto bg-white p-2.5 rounded shadow-md flex items-center justify-center relative">
-              <svg className="w-full h-full text-black" viewBox="0 0 100 100" fill="currentColor">
-                {/* 3 Corner Finder Patterns */}
-                <rect x="0" y="0" width="28" height="28" fill="none" stroke="black" strokeWidth="4" />
-                <rect x="7" y="7" width="14" height="14" fill="black" />
-                <rect x="72" y="0" width="28" height="28" fill="none" stroke="black" strokeWidth="4" />
-                <rect x="79" y="7" width="14" height="14" fill="black" />
-                <rect x="0" y="72" width="28" height="28" fill="none" stroke="black" strokeWidth="4" />
-                <rect x="7" y="79" width="14" height="14" fill="black" />
-                {/* Grid Modules */}
-                <rect x="36" y="8" width="6" height="6" />
-                <rect x="48" y="8" width="6" height="6" />
-                <rect x="58" y="14" width="6" height="6" />
-                <rect x="36" y="24" width="6" height="6" />
-                <rect x="14" y="42" width="6" height="6" />
-                <rect x="28" y="42" width="6" height="6" />
-                <rect x="42" y="38" width="6" height="6" />
-                <rect x="52" y="44" width="6" height="6" />
-                <rect x="68" y="36" width="6" height="6" />
-                <rect x="80" y="42" width="6" height="6" />
-                <rect x="36" y="68" width="6" height="6" />
-                <rect x="52" y="68" width="6" height="6" />
-                <rect x="74" y="74" width="6" height="6" />
-                <rect x="86" y="74" width="6" height="6" />
-                <rect x="74" y="86" width="6" height="6" />
-              </svg>
-              {/* Star emblem in center */}
-              <div className="absolute inset-0 m-auto w-8 h-8 bg-[#141414] border border-[#F85800] rounded-full flex items-center justify-center">
-                <span className="text-[#F85800] text-xs font-bold">★</span>
-              </div>
+            {/* Branded Gold QR Code */}
+            <div className="w-28 h-28 sm:w-32 sm:h-32 aspect-square flex items-center justify-center relative">
+              <BrandedQrCode size={120} centerBadgeType="gold-star" />
             </div>
 
-            <p className="text-xs italic text-[#C8B088] leading-tight">
+            {/* Subtext */}
+            <p className="text-[11px] italic text-[#C8B088] leading-tight">
               Available only during the founding release.
             </p>
 
-            <div className="pt-2 border-t border-[#C8B088]/30">
-              <div className="text-2xl font-display font-bold text-[#F5F3EF] mb-2">
+            {/* Price Tag */}
+            <div className="w-full pt-2 border-t border-[#8C6F42]/30">
+              <div className="text-2xl sm:text-3xl font-display font-black text-[#F5F3EF] mb-2 tracking-wide">
                 $49.00
               </div>
+
+              {/* Action Button: High contrast, full-width, clean typography */}
               <button
                 type="button"
                 disabled={isSoldOut}
                 onClick={handlePreorder}
-                className={`w-full py-3.5 font-sans font-bold text-xs uppercase tracking-[0.1em] transition-all flex items-center justify-center gap-2 ${
+                className={`w-full py-3 px-3 font-sans font-black text-[11px] sm:text-xs uppercase tracking-[0.1em] transition-all flex items-center justify-center gap-1.5 shadow-md ${
                   isSoldOut
-                    ? 'bg-[#4A3A22] text-[#888] cursor-not-allowed opacity-50'
+                    ? 'bg-[#382614] text-[#8C6F42] cursor-not-allowed opacity-60'
                     : isAdded
                     ? 'bg-[#2E7D32] text-white'
-                    : 'bg-[#F85800] hover:bg-[#E05000] text-[#141414]'
+                    : 'bg-[#F85800] hover:bg-[#E05000] text-[#141414] active:scale-[0.98]'
                 }`}
               >
                 {isAdded ? (
                   <>
-                    <Check className="w-4 h-4" />
-                    <span>Added to Cart</span>
+                    <Check className="w-4 h-4 shrink-0" />
+                    <span className="whitespace-nowrap">Added to Cart</span>
                   </>
                 ) : isSoldOut ? (
-                  <span>Sold Out</span>
+                  <span className="whitespace-nowrap">Sold Out</span>
                 ) : (
                   <>
-                    <ShoppingBag className="w-4 h-4" />
-                    <span>Preorder Founder's Edition</span>
+                    <ShoppingBag className="w-4 h-4 shrink-0" />
+                    <span className="whitespace-nowrap">Preorder Founder's Edition</span>
                   </>
                 )}
               </button>

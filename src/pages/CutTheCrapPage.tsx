@@ -379,13 +379,16 @@ export const CutTheCrapPage: React.FC<CutTheCrapPageProps> = ({ navigate }) => {
                 Limited &bull; Signed
               </div>
               <div>
-                <div className="text-xs uppercase font-sans font-bold text-[#C8B088] tracking-widest mb-1">
-                  Collector's Release
+                <div className="flex items-center justify-between mb-3">
+                  <div className="text-xs uppercase font-sans font-bold text-[#C8B088] tracking-widest">
+                    Collector's Release
+                  </div>
+                  <FoundersEmbossedBadge size={48} />
                 </div>
                 <h3 className="font-display text-2xl text-[#C8B088] mb-1">
                   Founder's Edition
                 </h3>
-                <p className="text-xs text-[#D0B890] mb-4">Hardcover Volume</p>
+                <p className="text-xs text-[#D0B890] mb-4">Hardcover Volume &bull; Strict 1-Time Run</p>
                 <div className="text-3xl font-display font-bold text-[#F5F3EF] mb-4">
                   $49.00
                 </div>

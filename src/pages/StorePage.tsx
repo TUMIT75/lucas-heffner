@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { PageRoute } from '../types';
 import { useCart } from '../context/CartContext';
 import { RealisticBookCover } from '../components/RealisticBookCover';
+import { FoundersEditionCard } from '../components/FoundersEditionCard';
+import { FoundersEmbossedBadge } from '../components/BrandLogos';
 import { IMAGE_ASSETS } from '../data/imageAssets';
 import { ShoppingBag, Check, ArrowRight, BookOpen, Download, ShieldCheck, Sparkles } from 'lucide-react';
 
@@ -119,8 +121,28 @@ export const StorePage: React.FC<StorePageProps> = ({ navigate }) => {
         </div>
       </section>
 
+      {/* Featured Showcase: Founder's Edition Banner (IMG_4134) */}
+      <section className="pt-12 px-6 sm:px-8 max-w-[1280px] mx-auto">
+        <FoundersEditionCard
+          onAddToCart={() =>
+            handleAdd({
+              id: 'founders-hardcover',
+              title: 'CUT THE CRAP',
+              edition: "Founder's Edition Hardcover",
+              price: 49.0,
+              description: 'Signed, numbered, gold-embossed limited hardcover edition. Strict one-time printing run.',
+              badge: "Founder's Edition",
+              isFounders: true,
+              isDigital: false,
+              image: IMAGE_ASSETS.books.bookStack,
+              bookEdition: 'hardcover' as const,
+            })
+          }
+        />
+      </section>
+
       {/* Catalog Grid */}
-      <section className="py-16 sm:py-24 px-6 sm:px-8">
+      <section className="py-16 sm:py-20 px-6 sm:px-8">
         <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {products.map((prod) => {
             const isAdded = addedItemId === prod.id;
@@ -171,6 +193,13 @@ export const StorePage: React.FC<StorePageProps> = ({ navigate }) => {
                         referrerPolicy="no-referrer"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90"
                       />
+                    )}
+
+                    {/* Foil Medallion Stamp if Founder's */}
+                    {prod.isFounders && (
+                      <div className="absolute top-2 right-2 scale-75 drop-shadow-lg pointer-events-none">
+                        <FoundersEmbossedBadge size={44} />
+                      </div>
                     )}
                   </div>
 

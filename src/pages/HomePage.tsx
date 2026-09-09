@@ -464,80 +464,73 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Scoped Founder's Card */}
-            <div>
-              <FoundersEditionCard />
+          {/* Scoped Founder's Card Showcase - Full Width per IMG_4134 */}
+          <div className="w-full">
+            <FoundersEditionCard />
+          </div>
+
+          {/* Book Highlights & Table of Contents Excerpt */}
+          <div className="bg-[#1A1A1A] border border-[#2B2B2B] p-8 sm:p-12">
+            <div className="max-w-3xl space-y-2 mb-8">
+              <span className="text-xs font-mono uppercase font-bold text-[#F85800] tracking-wider block">
+                INSIDE THE BOOK
+              </span>
+              <h3 className="font-display text-2xl sm:text-3xl text-[#F5F3EF]">
+                What You'll Master in 18 Chapters
+              </h3>
+              <p className="text-sm text-[#A3A3A3]">
+                A rigorous, practical curriculum built from real client transformations, behavioral psychology, and metabolic science.
+              </p>
             </div>
 
-            {/* Book Highlights & Table of Contents Excerpt */}
-            <div className="space-y-8 bg-[#1A1A1A] border border-[#2B2B2B] p-8 sm:p-10">
-              <div className="space-y-2">
-                <span className="text-xs font-mono uppercase font-bold text-[#F85800] tracking-wider block">
-                  INSIDE THE BOOK
-                </span>
-                <h3 className="font-display text-2xl text-[#F5F3EF]">
-                  What You'll Master in 18 Chapters
-                </h3>
-              </div>
-
-              <div className="space-y-4 text-sm text-[#A3A3A3]">
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-[#F85800] shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="text-[#F5F3EF] block">The First Law of Thermodynamics Demystified</strong>
-                    How energy balance actually dictates weight change without obsessive counting forever.
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-[#F85800] shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="text-[#F5F3EF] block">The Protein Leverage Strategy</strong>
-                    Using the thermic effect of food and peptide satiety hormones to kill uncontrollable cravings.
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-[#F85800] shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="text-[#F5F3EF] block">The Minimum Viable Day Protocol</strong>
-                    A non-negotiable floor that protects your momentum during vacations, illnesses, and busy work weeks.
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-[#F85800] shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="text-[#F5F3EF] block">Social Autonomy Framework</strong>
-                    Enjoying real dinners, pizza with your children, and holiday gatherings without blowing up your progress.
-                  </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-[#A3A3A3]">
+              <div className="flex items-start gap-3 bg-[#141414] p-4 border border-[#262626]">
+                <CheckCircle2 className="w-5 h-5 text-[#F85800] shrink-0 mt-0.5" />
+                <div>
+                  <strong className="text-[#F5F3EF] block font-sans">The First Law of Thermodynamics Demystified</strong>
+                  How energy balance actually dictates weight change without obsessive counting forever.
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-[#2A2A2A] flex flex-col sm:flex-row gap-4">
-                <button
-                  onClick={() => {
-                    navigate('/read-book');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                  className="px-6 py-3.5 bg-[#F85800] hover:bg-[#E05000] text-[#141414] font-sans font-bold text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
-                >
-                  <BookOpen className="w-4 h-4" />
-                  <span>Start Reading Online</span>
-                </button>
-
-                <button
-                  onClick={() => {
-                    navigate('/cutthecrap');
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
-                  className="px-6 py-3.5 bg-[#252525] hover:bg-[#333] text-[#F5F3EF] font-sans font-bold text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
-                >
-                  <span>Book Details &amp; FAQs</span>
-                  <ChevronRight className="w-4 h-4" />
-                </button>
+              <div className="flex items-start gap-3 bg-[#141414] p-4 border border-[#262626]">
+                <CheckCircle2 className="w-5 h-5 text-[#F85800] shrink-0 mt-0.5" />
+                <div>
+                  <strong className="text-[#F5F3EF] block font-sans">The Protein Leverage Strategy</strong>
+                  Using the thermic effect of food and peptide satiety hormones to kill uncontrollable cravings.
+                </div>
               </div>
+
+              <div className="flex items-start gap-3 bg-[#141414] p-4 border border-[#262626]">
+                <CheckCircle2 className="w-5 h-5 text-[#F85800] shrink-0 mt-0.5" />
+                <div>
+                  <strong className="text-[#F5F3EF] block font-sans">The Minimum Viable Day Protocol</strong>
+                  A non-negotiable floor that protects your momentum during vacations, illnesses, and busy work weeks.
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3 bg-[#141414] p-4 border border-[#262626]">
+                <CheckCircle2 className="w-5 h-5 text-[#F85800] shrink-0 mt-0.5" />
+                <div>
+                  <strong className="text-[#F5F3EF] block font-sans">Social Autonomy Framework</strong>
+                  Enjoying real dinners, pizza with your children, and holiday gatherings without blowing up your progress.
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8 pt-6 border-t border-[#2A2A2A] flex flex-col sm:flex-row gap-4 items-center justify-between">
+              <span className="text-xs text-[#888] font-sans">
+                Full 312-page curriculum included in all print &amp; digital formats.
+              </span>
+              <button
+                onClick={() => {
+                  navigate('/read-book');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="px-6 py-3 bg-[#1F1F1F] hover:bg-[#282828] border border-[#3A3A3A] text-xs font-sans font-bold uppercase tracking-wider text-[#F5F3EF] flex items-center gap-2 transition-colors"
+              >
+                <span>Read Free Excerpt Chapter</span>
+                <ArrowRight className="w-4 h-4 text-[#F85800]" />
+              </button>
             </div>
           </div>
 
