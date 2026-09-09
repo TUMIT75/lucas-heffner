@@ -3,7 +3,6 @@ import { PageRoute } from '../types';
 import { useCart } from '../context/CartContext';
 import { RealisticBookCover } from '../components/RealisticBookCover';
 import { FoundersEditionCard } from '../components/FoundersEditionCard';
-import { FoundersEmbossedBadge } from '../components/BrandLogos';
 import { IMAGE_ASSETS } from '../data/imageAssets';
 import { ShoppingBag, Check, ArrowRight, BookOpen, Download, ShieldCheck, Sparkles } from 'lucide-react';
 
@@ -151,10 +150,10 @@ export const StorePage: React.FC<StorePageProps> = ({ navigate }) => {
                 key={prod.id}
                 className={`p-6 sm:p-8 flex flex-col justify-between border card-hover ${
                   prod.isFounders
-                    ? 'founders-edition border-2 shadow-xl'
+                    ? 'bg-[#1F1912] border-2 border-[#8C6F42] hover:border-[#D4AF37] shadow-xl'
                     : prod.isDigital
-                    ? 'bg-[#1C1C1C] border-[#2563EB]/50 shadow-lg'
-                    : 'bg-[#1C1C1C] border-[#2B2B2B]'
+                    ? 'bg-[#1C1C1C] border-[#333] hover:border-[#F85800]/60 shadow-lg'
+                    : 'bg-[#1C1C1C] border-[#2B2B2B] hover:border-[#F85800]/60'
                 }`}
               >
                 <div>
@@ -163,9 +162,9 @@ export const StorePage: React.FC<StorePageProps> = ({ navigate }) => {
                     <span
                       className={`text-[10px] font-sans font-bold uppercase tracking-widest px-2.5 py-1 ${
                         prod.isFounders
-                          ? 'bg-[#2A1D0B] text-[#C8B088] border border-[#C8B088]'
+                          ? 'bg-[#2A1D0B] text-[#D4AF37] border border-[#D4AF37]'
                           : prod.isDigital
-                          ? 'bg-[#1E3A8A] text-[#93C5FD] border border-[#3B82F6]'
+                          ? 'bg-[#222] text-[#F85800] border border-[#F85800]/60'
                           : 'bg-[#252525] text-[#8C8C8C] border border-[#333]'
                       }`}
                     >
@@ -173,7 +172,7 @@ export const StorePage: React.FC<StorePageProps> = ({ navigate }) => {
                     </span>
                     <span
                       className={`text-2xl font-display font-bold ${
-                        prod.isFounders ? 'text-[#C8B088]' : prod.isDigital ? 'text-[#60A5FA]' : 'text-[#F5F3EF]'
+                        prod.isFounders ? 'text-[#D4AF37]' : 'text-[#F5F3EF]'
                       }`}
                     >
                       ${prod.price.toFixed(2)}
@@ -197,8 +196,8 @@ export const StorePage: React.FC<StorePageProps> = ({ navigate }) => {
 
                     {/* Foil Medallion Stamp if Founder's */}
                     {prod.isFounders && (
-                      <div className="absolute top-2 right-2 scale-75 drop-shadow-lg pointer-events-none">
-                        <FoundersEmbossedBadge size={44} />
+                      <div className="absolute top-2 right-2 px-2 py-0.5 bg-[#1F1912]/95 border border-[#D4AF37] text-[10px] font-sans font-bold text-[#D4AF37] uppercase tracking-wider shadow pointer-events-none">
+                        ★ 1 of 500
                       </div>
                     )}
                   </div>

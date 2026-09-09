@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { PageRoute } from '../types';
-import { CutTheCrapHorizontalLogo, CutTheCrapStackedLogo, StarWingsInsignia, FoundersEmbossedBadge } from '../components/BrandLogos';
+import { CutTheCrapHorizontalLogo, CutTheCrapStackedLogo, StarWingsInsignia } from '../components/BrandLogos';
 import { RealisticBookCover } from '../components/RealisticBookCover';
 import { FlagshipCutTheCrapBanner, FoundersEditionBanner } from '../components/OfficialBrandBanners';
 import { BrandAssetShowcaseModal } from '../components/BrandAssetShowcaseModal';
@@ -361,39 +361,36 @@ export const CutTheCrapPage: React.FC<CutTheCrapPageProps> = ({ navigate }) => {
           {/* 3-Card Row + Disabled Audiobook Slot per Spec Section 11 */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
             {/* Card 1: Founder's Edition Hardcover */}
-            <div className="founders-edition border-2 p-6 flex flex-col justify-between shadow-xl relative">
-              <div className="absolute top-3 right-3 bg-[#2A1D0B] border border-[#C8B088] px-2 py-0.5 text-[10px] font-sans font-bold text-[#C8B088] uppercase tracking-wider">
+            <div className="bg-[#1F1912] border-2 border-[#8C6F42] hover:border-[#D4AF37] p-6 flex flex-col justify-between shadow-xl relative transition-colors duration-200">
+              <div className="absolute -top-3 right-4 bg-[#D4AF37] text-[#141414] text-[10px] font-sans font-bold uppercase tracking-wider px-2.5 py-0.5 shadow">
                 Limited &bull; Signed
               </div>
               <div>
-                <div className="flex items-center justify-between mb-3">
-                  <div className="text-xs uppercase font-sans font-bold text-[#C8B088] tracking-widest">
-                    Collector's Release
-                  </div>
-                  <FoundersEmbossedBadge size={48} />
+                <div className="text-xs uppercase font-sans font-bold text-[#D4AF37] tracking-widest mb-2">
+                  Collector's Release
                 </div>
-                <h3 className="font-display text-2xl text-[#C8B088] mb-1">
+                <h3 className="font-display text-2xl text-[#F5F3EF] mb-1">
                   Founder's Edition
                 </h3>
-                <p className="text-xs text-[#D0B890] mb-4">Hardcover Volume &bull; Strict 1-Time Run</p>
-                <div className="text-3xl font-display font-bold text-[#F5F3EF] mb-4">
+                <p className="text-xs text-[#C8B088] mb-4">Hardcover Volume &bull; Strict 1-Time Run</p>
+                <div className="text-3xl font-display font-bold text-[#D4AF37] mb-4">
                   $49.00
                 </div>
-                <ul className="text-xs text-[#C8B088]/90 space-y-2 mb-6">
+                <ul className="text-xs text-[#D1CFC7] space-y-2 mb-6">
                   <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#F85800] shrink-0" />
+                    <Check className="w-4 h-4 text-[#D4AF37] shrink-0" />
                     <span>Signed and numbered by Lucas</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#F85800] shrink-0" />
+                    <Check className="w-4 h-4 text-[#D4AF37] shrink-0" />
                     <span>Limited founding release run</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#F85800] shrink-0" />
+                    <Check className="w-4 h-4 text-[#D4AF37] shrink-0" />
                     <span>Once gone: SOLD OUT forever</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#F85800] shrink-0" />
+                    <Check className="w-4 h-4 text-[#D4AF37] shrink-0" />
                     <span>Includes instant eBook access</span>
                   </li>
                 </ul>
