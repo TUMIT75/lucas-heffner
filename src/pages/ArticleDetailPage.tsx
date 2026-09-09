@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PageRoute, Article } from '../types';
 import { ARTICLES_DATA } from '../data/siteData';
 import { PhotoPlaceholder } from '../components/BrandLogos';
-import { ArrowLeft, Clock, Calendar, ArrowRight, Share2, Bookmark } from 'lucide-react';
+import { ArrowLeft, Clock, Calendar, ArrowRight, Share2, Bookmark, Check } from 'lucide-react';
 
 interface ArticleDetailPageProps {
   navigate: (route: PageRoute) => void;
@@ -13,7 +13,19 @@ export const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
   navigate,
   article = ARTICLES_DATA[0],
 }) => {
+  const [copied, setCopied] = useState(false);
   const relatedArticles = ARTICLES_DATA.filter((a) => a.id !== article.id).slice(0, 2);
+
+  const handleCopyLink = () => {
+    try {
+      navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 3000);
+    } catch {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 3000);
+    }
+  };
 
   return (
     <div className="w-full bg-[#141414] text-[#F5F3EF]">
@@ -56,10 +68,20 @@ export const ArticleDetailPage: React.FC<ArticleDetailPageProps> = ({
             </span>
             <div className="flex items-center gap-4">
               <button
-                onClick={() => alert('Article link copied to clipboard')}
-                className="hover:text-[#F85800] transition-colors flex items-center gap-1"
+                onClick={handleCopyLink}
+                className="hover:text-[#F85800] transition-colors flex items-center gap-1.5 px-2.5 py-1 bg-[#1E1E1E] border border-[#333] text-xs"
               >
-                <Share2 className="w-4 h-4" /> Share
+                {copied ? (
+                  <>
+                    <Check className="w-3.5 h-3.5 text-[#4CAF50]" />
+                    <span className="text-[#4CAF50] font-bold">Link Copied!</span>
+                  </>
+                ) : (
+                  <>
+                    <Share2 className="w-3.5 h-3.5" />
+                    <span>Share Article</span>
+                  </>
+                )}
               </button>
             </div>
           </div>

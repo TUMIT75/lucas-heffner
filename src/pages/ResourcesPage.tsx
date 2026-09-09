@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { PageRoute } from '../types';
-import { Wrench, FileDown, Calculator, BookOpen, ArrowRight, Check } from 'lucide-react';
+import { Wrench, FileDown, Calculator, BookOpen, ArrowRight, Check, CheckCircle2 } from 'lucide-react';
+import { downloadTextFile, HABIT_MATRIX_CONTENT, STUDY_GUIDE_CONTENT } from '../utils/downloadHelper';
 
 interface ResourcesPageProps {
   navigate: (route: PageRoute) => void;
@@ -10,9 +11,23 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({ navigate }) => {
   // Simple interactive energy balance calculator demonstration for readers
   const [weight, setWeight] = useState<number>(185);
   const [activityMultiplier, setActivityMultiplier] = useState<number>(14);
+  const [downloadSuccess, setDownloadSuccess] = useState<string | null>(null);
+
   const estimatedMaintenance = Math.round(weight * activityMultiplier);
   const targetDeficit = estimatedMaintenance - 450;
   const recommendedProtein = Math.round(weight * 0.85);
+
+  const handleDownloadWorksheet = () => {
+    downloadTextFile('Cut_The_Crap_Daily_Habit_Matrix.txt', HABIT_MATRIX_CONTENT);
+    setDownloadSuccess('Cut_The_Crap_Daily_Habit_Matrix.txt downloaded successfully!');
+    setTimeout(() => setDownloadSuccess(null), 4000);
+  };
+
+  const handleDownloadSyllabus = () => {
+    downloadTextFile('Cut_The_Crap_6Week_Study_Syllabus.txt', STUDY_GUIDE_CONTENT);
+    setDownloadSuccess('Cut_The_Crap_6Week_Study_Syllabus.txt downloaded successfully!');
+    setTimeout(() => setDownloadSuccess(null), 4000);
+  };
 
   return (
     <div className="w-full bg-[#141414] text-[#F5F3EF]">
@@ -77,7 +92,7 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({ navigate }) => {
             </div>
             <div className="pt-6">
               <button
-                onClick={() => alert('Download simulated: Cut_The_Crap_Habit_Matrix.pdf')}
+                onClick={handleDownloadWorksheet}
                 className="w-full py-3.5 bg-[#262626] hover:bg-[#333] text-[#F5F3EF] border border-[#3A3A3A] font-sans font-bold text-xs uppercase tracking-[0.1em] transition-colors flex items-center justify-center gap-2"
               >
                 <span>Download PDF Worksheets</span>
@@ -104,7 +119,7 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({ navigate }) => {
             </div>
             <div className="pt-6">
               <button
-                onClick={() => alert('Download simulated: CTC_Study_Syllabus_6Weeks.pdf')}
+                onClick={handleDownloadSyllabus}
                 className="w-full py-3.5 bg-[#262626] hover:bg-[#333] text-[#F5F3EF] border border-[#3A3A3A] font-sans font-bold text-xs uppercase tracking-[0.1em] transition-colors flex items-center justify-center gap-2"
               >
                 <span>Download Study Guide</span>
@@ -113,6 +128,13 @@ export const ResourcesPage: React.FC<ResourcesPageProps> = ({ navigate }) => {
             </div>
           </div>
         </div>
+
+        {downloadSuccess && (
+          <div className="mt-8 p-4 bg-[#1A2E1A] border border-[#4CAF50] text-[#A5D6A7] text-sm flex items-center gap-3 rounded-none">
+            <CheckCircle2 className="w-5 h-5 text-[#4CAF50] shrink-0" />
+            <span>{downloadSuccess}</span>
+          </div>
+        )}
       </section>
 
       {/* Interactive Tool: Simple Caloric Baseline & Protein Estimator */}

@@ -1,16 +1,28 @@
 import React, { useState } from 'react';
 import { PageRoute } from '../types';
-import { Shield, Users, ArrowLeft, Check, CheckCircle2, MessageSquare, Clock } from 'lucide-react';
+import { Shield, Users, ArrowLeft, Check, CheckCircle2, MessageSquare, Plus, X } from 'lucide-react';
 
 interface FindBattleBuddyPageProps {
   navigate: (route: PageRoute) => void;
 }
 
+interface Buddy {
+  id: string;
+  callsign: string;
+  location: string;
+  goal: string;
+  frequency: string;
+  bio: string;
+  badges: string[];
+}
+
 export const FindBattleBuddyPage: React.FC<FindBattleBuddyPageProps> = ({ navigate }) => {
   const [selectedGoal, setSelectedGoal] = useState<string>('All');
   const [requestedMatches, setRequestedMatches] = useState<string[]>([]);
+  const [isAddingProfile, setIsAddingProfile] = useState(false);
+  const [submittedAlert, setSubmittedAlert] = useState<string | null>(null);
 
-  const sampleBuddies = [
+  const [buddies, setBuddies] = useState<Buddy[]>([
     {
       id: 'buddy-1',
       callsign: 'Derek M.',
@@ -47,7 +59,15 @@ export const FindBattleBuddyPage: React.FC<FindBattleBuddyPageProps> = ({ naviga
       bio: 'Rebuilding health after corporate burnout. Prioritizing sleep, protein leverage, and leaving diet dogmatism behind.',
       badges: ['Nutrition Coach Track', 'Tech Exec'],
     },
-  ];
+  ]);
+
+  // Form state
+  const [newCallsign, setNewCallsign] = useState('');
+  const [newLocation, setNewLocation] = useState('');
+  const [newGoal, setNewGoal] = useState('Fat Loss & Energy Balance');
+  const [newFrequency, setNewFrequency] = useState('Daily text pulse');
+  const [newBio, setNewBio] = useState('');
+  const [newBadge, setNewBadge] = useState('New Reader');
 
   const handleRequestMatch = (id: string) => {
     if (!requestedMatches.includes(id)) {
@@ -55,16 +75,41 @@ export const FindBattleBuddyPage: React.FC<FindBattleBuddyPageProps> = ({ naviga
     }
   };
 
+  const handleAddProfile = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newCallsign || !newBio) return;
+
+    const newBuddy: Buddy = {
+      id: `buddy-${Date.now()}`,
+      callsign: newCallsign,
+      location: newLocation || 'Remote Reader',
+      goal: newGoal,
+      frequency: newFrequency,
+      bio: newBio,
+      badges: [newBadge, 'Active Reader'],
+    };
+
+    setBuddies([newBuddy, ...buddies]);
+    setIsAddingProfile(false);
+    setSubmittedAlert(`Your listing as "${newCallsign}" is now live in the directory!`);
+    setTimeout(() => setSubmittedAlert(null), 5000);
+
+    // Reset form
+    setNewCallsign('');
+    setNewLocation('');
+    setNewBio('');
+  };
+
   const filteredBuddies =
     selectedGoal === 'All'
-      ? sampleBuddies
-      : sampleBuddies.filter((b) => b.goal.toLowerCase().includes(selectedGoal.toLowerCase()));
+      ? buddies
+      : buddies.filter((b) => b.goal.toLowerCase().includes(selectedGoal.toLowerCase()));
 
   return (
     <div className="w-full bg-[#141414] text-[#F5F3EF]">
       {/* Header */}
-      <section className="py-20 lg:py-28 px-6 sm:px-8 border-b border-[#222]">
-        <div className="max-w-[1280px] mx-auto max-w-4xl space-y-6">
+      <section className="py-16 lg:py-24 px-6 sm:px-8 border-b border-[#222]">
+        <div className="max-w-[1280px] mx-auto space-y-6">
           <button
             onClick={() => navigate('/community')}
             className="text-xs uppercase tracking-wider font-sans font-bold text-[#8C8C8C] hover:text-[#F85800] flex items-center gap-1.5 mb-2"
@@ -75,18 +120,133 @@ export const FindBattleBuddyPage: React.FC<FindBattleBuddyPageProps> = ({ naviga
           <h1 className="text-h1 text-[#F5F3EF]">
             Find Your Battle Buddy
           </h1>
-          <p className="text-[19px] sm:text-[23px] text-[#D1CFC7] leading-relaxed font-medium">
-            In the military, a battle buddy watches your back, shares the burden, and refuses to let you abandon the mission. We apply that same non-negotiable peer discipline to your health and habits.
+          <p className="text-[19px] sm:text-[23px] text-[#D1CFC7] max-w-3xl leading-relaxed font-medium">
+            In high-stakes environments, a battle buddy watches your back, shares the burden, and refuses to let you abandon the mission. We apply that same peer discipline to your habits and nutritional adherence.
           </p>
+
+          <div className="pt-2 flex flex-wrap gap-4">
+            <button
+              onClick={() => setIsAddingProfile(true)}
+              className="px-5 py-3 bg-[#F85800] hover:bg-[#E05000] text-[#141414] font-bold text-xs uppercase tracking-wider flex items-center gap-2"
+            >
+              <Plus className="w-4 h-4" /> Post Your Accountability Profile
+            </button>
+          </div>
         </div>
       </section>
 
       {/* Directory & Filter Controls */}
-      <section className="py-16 sm:py-24 px-6 sm:px-8">
-        <div className="max-w-[1280px] mx-auto space-y-10">
+      <section className="py-14 sm:py-20 px-6 sm:px-8">
+        <div className="max-w-[1280px] mx-auto space-y-8">
+          {submittedAlert && (
+            <div className="p-4 bg-[#1A2E1A] border border-[#4CAF50] text-[#A5D6A7] text-sm flex items-center gap-3">
+              <CheckCircle2 className="w-5 h-5 text-[#4CAF50] shrink-0" />
+              <span>{submittedAlert}</span>
+            </div>
+          )}
+
+          {/* Add Profile Modal Form */}
+          {isAddingProfile && (
+            <div className="bg-[#1C1C1C] border-2 border-[#F85800] p-6 sm:p-8 space-y-6 animate-in fade-in">
+              <div className="flex items-center justify-between border-b border-[#2A2A2A] pb-4">
+                <div className="flex items-center gap-2 text-sm font-bold uppercase text-[#F85800] tracking-wider">
+                  <Shield className="w-4 h-4" /> Register As an Active Battle Buddy
+                </div>
+                <button
+                  onClick={() => setIsAddingProfile(false)}
+                  className="p-1 text-[#888] hover:text-[#FFF]"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <form onSubmit={handleAddProfile} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs uppercase font-bold text-[#888] mb-1">Your Name / Callsign</label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. Jordan T."
+                      value={newCallsign}
+                      onChange={(e) => setNewCallsign(e.target.value)}
+                      className="w-full px-3 py-2 bg-[#121212] border border-[#333] text-sm text-[#F5F3EF] focus:outline-none focus:border-[#F85800]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs uppercase font-bold text-[#888] mb-1">Location / Timezone</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Denver, CO (Mountain)"
+                      value={newLocation}
+                      onChange={(e) => setNewLocation(e.target.value)}
+                      className="w-full px-3 py-2 bg-[#121212] border border-[#333] text-sm text-[#F5F3EF] focus:outline-none focus:border-[#F85800]"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs uppercase font-bold text-[#888] mb-1">Primary Target Goal</label>
+                    <select
+                      value={newGoal}
+                      onChange={(e) => setNewGoal(e.target.value)}
+                      className="w-full px-3 py-2 bg-[#121212] border border-[#333] text-sm text-[#F5F3EF] focus:outline-none focus:border-[#F85800]"
+                    >
+                      <option value="Fat Loss & Energy Balance">Fat Loss &amp; Energy Balance</option>
+                      <option value="Habit Consistency">Habit Consistency</option>
+                      <option value="Strength & Progressive Overload">Strength &amp; Progressive Overload</option>
+                      <option value="Post-Burnout Re-entry">Post-Burnout Re-entry</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-xs uppercase font-bold text-[#888] mb-1">Check-in Cadence</label>
+                    <select
+                      value={newFrequency}
+                      onChange={(e) => setNewFrequency(e.target.value)}
+                      className="w-full px-3 py-2 bg-[#121212] border border-[#333] text-sm text-[#F5F3EF] focus:outline-none focus:border-[#F85800]"
+                    >
+                      <option value="Daily text pulse">Daily text pulse</option>
+                      <option value="3x weekly sync">3x weekly sync</option>
+                      <option value="Weekly 15-min phone call">Weekly 15-min phone call</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs uppercase font-bold text-[#888] mb-1">Accountability Bio &amp; Goals</label>
+                  <textarea
+                    rows={3}
+                    required
+                    placeholder="Briefly state your current adherence target and what you expect from your partner..."
+                    value={newBio}
+                    onChange={(e) => setNewBio(e.target.value)}
+                    className="w-full px-3 py-2 bg-[#121212] border border-[#333] text-sm text-[#F5F3EF] focus:outline-none focus:border-[#F85800]"
+                  />
+                </div>
+
+                <div className="flex gap-3 pt-2">
+                  <button
+                    type="submit"
+                    className="px-6 py-2.5 bg-[#F85800] hover:bg-[#E05000] text-[#141414] font-bold text-xs uppercase tracking-wider"
+                  >
+                    Publish My Listing
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setIsAddingProfile(false)}
+                    className="px-4 py-2.5 bg-[#262626] hover:bg-[#333] text-[#F5F3EF] text-xs uppercase font-semibold"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          )}
+
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-[#2A2A2A] pb-6">
             <div>
-              <h2 className="text-h3 text-[#F5F3EF]">Active Reader Partner Listings</h2>
+              <h2 className="text-h3 text-[#F5F3EF]">Active Reader Partner Listings ({filteredBuddies.length})</h2>
               <p className="text-xs text-[#8C8C8C] mt-1">
                 Directly connect with readers pursuing identical habit targets.
               </p>

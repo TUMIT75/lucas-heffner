@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { PageRoute } from '../types';
 import { useCart } from '../context/CartContext';
-import { ShieldCheck, Lock, CheckCircle2, ArrowRight, Download, CreditCard, Truck } from 'lucide-react';
+import { ShieldCheck, Lock, CheckCircle2, ArrowRight, Download, CreditCard, Truck, Check } from 'lucide-react';
+import { downloadTextFile, HABIT_MATRIX_CONTENT, STUDY_GUIDE_CONTENT } from '../utils/downloadHelper';
 
 interface CheckoutPageProps {
   navigate: (route: PageRoute) => void;
@@ -64,24 +65,24 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ navigate }) => {
           {/* Digital Fulfillment Simulator */}
           <div className="p-6 bg-[#141414] border border-[#333] text-left space-y-3">
             <span className="text-xs uppercase font-bold text-[#C8B088] tracking-wider block">
-              Digital Deliverables Included
+              Digital Deliverables Included With Your Order
             </span>
             <div className="flex items-center justify-between text-xs text-[#F5F3EF] border-t border-[#222] pt-3">
-              <span>Cut the Crap — Complete Habit Matrix (PDF)</span>
+              <span>Cut the Crap — Complete Habit Matrix (Printable Scorecard)</span>
               <button
-                onClick={() => alert('Download initiated: Cut_The_Crap_Habit_Matrix.pdf')}
-                className="text-[#F85800] font-bold hover:underline flex items-center gap-1"
+                onClick={() => downloadTextFile('Cut_The_Crap_Habit_Matrix.txt', HABIT_MATRIX_CONTENT)}
+                className="text-[#F85800] font-bold hover:underline flex items-center gap-1.5 px-2 py-1 bg-[#1E1E1E] border border-[#333]"
               >
-                <Download className="w-3.5 h-3.5" /> Download
+                <Download className="w-3.5 h-3.5" /> Download (.TXT)
               </button>
             </div>
             <div className="flex items-center justify-between text-xs text-[#F5F3EF] border-t border-[#222] pt-3">
-              <span>Cut the Crap — Digital Edition Early Preview (.epub)</span>
+              <span>Cut the Crap — 6-Week Squad Study Guide</span>
               <button
-                onClick={() => alert('Download initiated: Cut_The_Crap_Early_Access.epub')}
-                className="text-[#F85800] font-bold hover:underline flex items-center gap-1"
+                onClick={() => downloadTextFile('Cut_The_Crap_Squad_Study_Guide.txt', STUDY_GUIDE_CONTENT)}
+                className="text-[#F85800] font-bold hover:underline flex items-center gap-1.5 px-2 py-1 bg-[#1E1E1E] border border-[#333]"
               >
-                <Download className="w-3.5 h-3.5" /> Download
+                <Download className="w-3.5 h-3.5" /> Download (.TXT)
               </button>
             </div>
           </div>
