@@ -30,10 +30,16 @@ import { Compass, Sparkles } from 'lucide-react';
 
 function AppContent() {
   const [currentRoute, setCurrentRoute] = useState<PageRoute>(() => {
-    // Read initial route from window hash if present, e.g. #/books -> /books
-    const hash = window.location.hash.replace('#', '');
-    if (hash && hash.startsWith('/')) {
-      return hash as PageRoute;
+    // If the URL contains an old hash like #/books, migrate it cleanly to a pathname
+    if (window.location.hash) {
+      const cleaned = window.location.hash.replace(/^#\/?/, '/');
+      if (cleaned && cleaned.startsWith('/')) {
+        return cleaned as PageRoute;
+      }
+    }
+    const path = window.location.pathname;
+    if (path && path.startsWith('/') && path !== '/') {
+      return path as PageRoute;
     }
     return '/';
   });
@@ -42,24 +48,30 @@ function AppContent() {
   const [showDevNavigator, setShowDevNavigator] = useState(false);
   const { itemCount } = useCart();
 
-  // Keep window hash synchronized for bookmarking and back-forward navigation
+  // Clean HTML5 History navigation without /#
   const navigate = (route: PageRoute) => {
     setCurrentRoute(route);
-    window.location.hash = route;
+    if (window.location.pathname !== route || window.location.hash) {
+      window.history.pushState(null, '', route);
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // Strip any lingering hash on mount and replace with normal clean route
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.replace('#', '');
-      if (hash && hash.startsWith('/')) {
-        setCurrentRoute(hash as PageRoute);
-      } else if (!hash) {
-        setCurrentRoute('/');
-      }
+    if (window.location.hash) {
+      window.history.replaceState(null, '', currentRoute);
+    }
+  }, [currentRoute]);
+
+  // Support browser Back and Forward buttons via popstate
+  useEffect(() => {
+    const handlePopState = () => {
+      const path = (window.location.pathname as PageRoute) || '/';
+      setCurrentRoute(path);
     };
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
   const renderPage = () => {
