@@ -3,6 +3,14 @@
  * Every image uses referrerPolicy="no-referrer" to ensure reliable display across browsers.
  */
 
+export const CLIENT_BRAND_ASSETS = {
+  horizontalLogo: '/assets/IMG_4131.png',
+  stackedLogo: '/assets/IMG_4130.png',
+  flagshipBanner: '/assets/IMG_4132.png',
+  foundersPlaque: '/assets/IMG_4133.png',
+  foundersBanner: '/assets/IMG_4134.png',
+};
+
 export const IMAGE_ASSETS = {
   // Author portraits & lifestyle
   author: {

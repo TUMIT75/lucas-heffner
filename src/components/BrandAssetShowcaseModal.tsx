@@ -10,8 +10,9 @@ import {
 import {
   FlagshipCutTheCrapBanner,
   FoundersEditionBanner,
-  BrandedQrCode,
+  FoundersPlaqueHeader,
 } from './OfficialBrandBanners';
+import { CLIENT_BRAND_ASSETS } from '../data/imageAssets';
 import { X, Check, Copy, Download, ExternalLink, Sparkles, Shield, QrCode, Image as ImageIcon } from 'lucide-react';
 
 interface BrandAssetShowcaseModalProps {
@@ -90,22 +91,33 @@ export const BrandAssetShowcaseModal: React.FC<BrandAssetShowcaseModalProps> = (
           {/* 1. Flagship Landscape Banner (IMG_4132.png) */}
           {(activeTab === 'all' || activeTab === 'banners') && (
             <div className="space-y-3">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-wrap items-center justify-between gap-2">
                 <div>
                   <span className="text-[10px] font-mono text-[#F85800] uppercase font-bold tracking-wider">
-                    ASSET #1 &bull; IMG_4132.PNG
+                    CLIENT ASSET #1 &bull; /assets/IMG_4132.png
                   </span>
                   <h4 className="text-lg font-display font-bold text-[#F5F3EF]">
                     Flagship Black Landscape Banner &amp; 3D Hardcover Mockup
                   </h4>
                 </div>
-                <button
-                  onClick={() => handleCopy('https://lucasheffner.com/cutthecrap', 'banner-url')}
-                  className="px-3 py-1.5 bg-[#222] hover:bg-[#333] text-xs font-mono text-[#C8B088] flex items-center gap-1.5"
-                >
-                  {copiedKey === 'banner-url' ? <Check className="w-3.5 h-3.5 text-green-400" /> : <Copy className="w-3.5 h-3.5" />}
-                  <span>Copy Book URL</span>
-                </button>
+                <div className="flex items-center gap-2">
+                  <a
+                    href={CLIENT_BRAND_ASSETS.flagshipBanner}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3 py-1.5 bg-[#222] hover:bg-[#333] text-xs font-mono text-[#F85800] flex items-center gap-1.5 border border-[#333]"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" />
+                    <span>Open PNG</span>
+                  </a>
+                  <button
+                    onClick={() => handleCopy('https://lucasheffner.com/cutthecrap', 'banner-url')}
+                    className="px-3 py-1.5 bg-[#222] hover:bg-[#333] text-xs font-mono text-[#C8B088] flex items-center gap-1.5 border border-[#333]"
+                  >
+                    {copiedKey === 'banner-url' ? <Check className="w-3.5 h-3.5 text-green-400" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>Copy URL</span>
+                  </button>
+                </div>
               </div>
               <FlagshipCutTheCrapBanner navigate={navigate} />
             </div>
@@ -114,18 +126,29 @@ export const BrandAssetShowcaseModal: React.FC<BrandAssetShowcaseModalProps> = (
           {/* 2. Founder's Edition Leather Banner (IMG_4134.png) */}
           {(activeTab === 'all' || activeTab === 'banners') && (
             <div className="space-y-3">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-wrap items-center justify-between gap-2">
                 <div>
                   <span className="text-[10px] font-mono text-[#D4AF37] uppercase font-bold tracking-wider">
-                    ASSET #2 &bull; IMG_4134.PNG
+                    CLIENT ASSET #2 &bull; /assets/IMG_4134.png
                   </span>
                   <h4 className="text-lg font-display font-bold text-[#F5F3EF]">
                     Founder&apos;s Edition Leather Preorder Banner (Numbered &amp; Signed)
                   </h4>
                 </div>
-                <span className="text-xs font-sans font-bold px-2 py-0.5 bg-[#7A5826]/30 text-[#D4AF37] border border-[#7A5826]">
-                  Collector Release
-                </span>
+                <div className="flex items-center gap-2">
+                  <a
+                    href={CLIENT_BRAND_ASSETS.foundersBanner}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3 py-1.5 bg-[#222] hover:bg-[#333] text-xs font-mono text-[#D4AF37] flex items-center gap-1.5 border border-[#7A5826]"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" />
+                    <span>Open PNG</span>
+                  </a>
+                  <span className="text-xs font-sans font-bold px-2 py-1 bg-[#7A5826]/30 text-[#D4AF37] border border-[#7A5826]">
+                    500 Collector Copies
+                  </span>
+                </div>
               </div>
               <FoundersEditionBanner navigate={navigate} />
             </div>
@@ -134,17 +157,26 @@ export const BrandAssetShowcaseModal: React.FC<BrandAssetShowcaseModalProps> = (
           {/* 3. Founder's Edition Embossed Badge (IMG_4133.png) */}
           {(activeTab === 'all' || activeTab === 'logos') && (
             <div className="space-y-3">
-              <div>
-                <span className="text-[10px] font-mono text-[#D4AF37] uppercase font-bold tracking-wider">
-                  ASSET #3 &bull; IMG_4133.PNG
-                </span>
-                <h4 className="text-lg font-display font-bold text-[#F5F3EF]">
-                  Debossed Leather &amp; Metallic Gold Founder&apos;s Edition Badge
-                </h4>
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                  <span className="text-[10px] font-mono text-[#D4AF37] uppercase font-bold tracking-wider">
+                    CLIENT ASSET #3 &bull; /assets/IMG_4133.png
+                  </span>
+                  <h4 className="text-lg font-display font-bold text-[#F5F3EF]">
+                    Debossed Leather &amp; Metallic Gold Founder&apos;s Edition Plaque
+                  </h4>
+                </div>
+                <a
+                  href={CLIENT_BRAND_ASSETS.foundersPlaque}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-1.5 bg-[#222] hover:bg-[#333] text-xs font-mono text-[#D4AF37] flex items-center gap-1.5 border border-[#7A5826]"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  <span>Open PNG</span>
+                </a>
               </div>
-              <div className="flex justify-center p-6 bg-[#0B0B0B] border border-[#222]">
-                <FoundersEmbossedBadge size="lg" />
-              </div>
+              <FoundersPlaqueHeader />
             </div>
           )}
 
@@ -153,13 +185,24 @@ export const BrandAssetShowcaseModal: React.FC<BrandAssetShowcaseModalProps> = (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Horizontal Logo */}
               <div className="space-y-3">
-                <div>
-                  <span className="text-[10px] font-mono text-[#F85800] uppercase font-bold tracking-wider">
-                    ASSET #4 &bull; IMG_4131.PNG
-                  </span>
-                  <h4 className="text-base font-display font-bold text-[#F5F3EF]">
-                    Horizontal Stencil Distressed Wordmark
-                  </h4>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <span className="text-[10px] font-mono text-[#F85800] uppercase font-bold tracking-wider">
+                      CLIENT ASSET #4 &bull; /assets/IMG_4131.png
+                    </span>
+                    <h4 className="text-base font-display font-bold text-[#F5F3EF]">
+                      Horizontal Stencil Distressed Wordmark
+                    </h4>
+                  </div>
+                  <a
+                    href={CLIENT_BRAND_ASSETS.horizontalLogo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-1 text-[#8C8C8C] hover:text-white"
+                    title="Open IMG_4131.png"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
                 </div>
                 <div className="p-8 bg-black border border-[#2B2B2B] flex items-center justify-center min-h-[160px]">
                   <CutTheCrapHorizontalLogo size="lg" />
@@ -169,19 +212,30 @@ export const BrandAssetShowcaseModal: React.FC<BrandAssetShowcaseModalProps> = (
                   className="w-full py-2 bg-[#1C1C1C] hover:bg-[#262626] text-xs font-mono text-[#8C8C8C] flex items-center justify-center gap-1.5"
                 >
                   {copiedKey === 'copy-hz' ? <Check className="w-3.5 h-3.5 text-green-400" /> : <Copy className="w-3.5 h-3.5" />}
-                  <span>Copy Horizontal Component</span>
+                  <span>Copy Component</span>
                 </button>
               </div>
 
               {/* Stacked Logo */}
               <div className="space-y-3">
-                <div>
-                  <span className="text-[10px] font-mono text-[#F85800] uppercase font-bold tracking-wider">
-                    ASSET #5 &bull; IMG_4130.PNG
-                  </span>
-                  <h4 className="text-base font-display font-bold text-[#F5F3EF]">
-                    Stacked Stencil Distressed Wordmark
-                  </h4>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <span className="text-[10px] font-mono text-[#F85800] uppercase font-bold tracking-wider">
+                      CLIENT ASSET #5 &bull; /assets/IMG_4130.png
+                    </span>
+                    <h4 className="text-base font-display font-bold text-[#F5F3EF]">
+                      Stacked Stencil Distressed Wordmark
+                    </h4>
+                  </div>
+                  <a
+                    href={CLIENT_BRAND_ASSETS.stackedLogo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-1 text-[#8C8C8C] hover:text-white"
+                    title="Open IMG_4130.png"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
                 </div>
                 <div className="p-8 bg-black border border-[#2B2B2B] flex items-center justify-center min-h-[160px]">
                   <CutTheCrapStackedLogo size="md" />
@@ -191,7 +245,7 @@ export const BrandAssetShowcaseModal: React.FC<BrandAssetShowcaseModalProps> = (
                   className="w-full py-2 bg-[#1C1C1C] hover:bg-[#262626] text-xs font-mono text-[#8C8C8C] flex items-center justify-center gap-1.5"
                 >
                   {copiedKey === 'copy-st' ? <Check className="w-3.5 h-3.5 text-green-400" /> : <Copy className="w-3.5 h-3.5" />}
-                  <span>Copy Stacked Component</span>
+                  <span>Copy Component</span>
                 </button>
               </div>
             </div>

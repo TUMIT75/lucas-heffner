@@ -166,7 +166,15 @@ export const CutTheCrapHorizontalLogo: React.FC<{
   theme?: 'dark' | 'light';
   size?: 'sm' | 'md' | 'lg' | 'xl';
 }> = ({ className = '', theme = 'dark', size = 'md' }) => {
+  const [imgError, setImgError] = React.useState(false);
   const isLight = theme === 'light';
+
+  const heightClasses = {
+    sm: 'h-6 sm:h-7',
+    md: 'h-8 sm:h-9',
+    lg: 'h-12 sm:h-14',
+    xl: 'h-16 sm:h-20',
+  }[size];
 
   const sizeClasses = {
     sm: 'text-xl tracking-wider',
@@ -174,6 +182,18 @@ export const CutTheCrapHorizontalLogo: React.FC<{
     lg: 'text-4xl lg:text-5xl tracking-widest',
     xl: 'text-5xl lg:text-6xl tracking-widest',
   }[size];
+
+  if (!imgError) {
+    return (
+      <img
+        src="/assets/IMG_4131.png"
+        alt="Cut The Crap"
+        onError={() => setImgError(true)}
+        className={`w-auto object-contain select-none ${heightClasses} ${className}`}
+        referrerPolicy="no-referrer"
+      />
+    );
+  }
 
   return (
     <div className={`inline-flex items-center gap-2 sm:gap-2.5 font-display select-none ${className}`}>
@@ -225,13 +245,32 @@ export const CutTheCrapStackedLogo: React.FC<{
   theme?: 'dark' | 'light';
   size?: 'sm' | 'md' | 'lg';
 }> = ({ className = '', theme = 'dark', size = 'md' }) => {
+  const [imgError, setImgError] = React.useState(false);
   const isLight = theme === 'light';
+
+  const widthClasses = {
+    sm: 'w-24 sm:w-28',
+    md: 'w-36 sm:w-44',
+    lg: 'w-52 sm:w-64',
+  }[size];
 
   const scale = {
     sm: { cut: 'text-2xl', the: 'text-[9px]', crap: 'text-4xl' },
     md: { cut: 'text-4xl sm:text-5xl', the: 'text-[11px] sm:text-xs', crap: 'text-6xl sm:text-7xl' },
     lg: { cut: 'text-5xl sm:text-6xl', the: 'text-xs sm:text-sm', crap: 'text-7xl sm:text-8xl' },
   }[size];
+
+  if (!imgError) {
+    return (
+      <img
+        src="/assets/IMG_4130.png"
+        alt="Cut The Crap"
+        onError={() => setImgError(true)}
+        className={`h-auto object-contain select-none ${widthClasses} ${className}`}
+        referrerPolicy="no-referrer"
+      />
+    );
+  }
 
   return (
     <div className={`flex flex-col items-center text-center font-display select-none ${className}`}>

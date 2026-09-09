@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { PageRoute } from '../types';
 import { CutTheCrapHorizontalLogo, CutTheCrapStackedLogo, StarWingsInsignia } from '../components/BrandLogos';
 import { RealisticBookCover } from '../components/RealisticBookCover';
-import { FlagshipCutTheCrapBanner, FoundersEditionBanner } from '../components/OfficialBrandBanners';
+import {
+  FlagshipCutTheCrapBanner,
+  FoundersEditionBanner,
+  FoundersPlaqueHeader,
+} from '../components/OfficialBrandBanners';
 import { BrandAssetShowcaseModal } from '../components/BrandAssetShowcaseModal';
 import { IMAGE_ASSETS } from '../data/imageAssets';
 import { PillarRow } from '../components/PillarRow';
@@ -154,13 +158,6 @@ export const CutTheCrapPage: React.FC<CutTheCrapPageProps> = ({ navigate }) => {
       <section className="bg-[#181818] py-12 px-6 sm:px-8 border-b border-[#262626]">
         <div className="max-w-[1280px] mx-auto">
           <PillarRow theme="dark" showSubtitles={false} />
-        </div>
-      </section>
-
-      {/* Official Cut The Crap Flagship Banner Section (IMG_4132) */}
-      <section className="bg-[#0D0D0D] py-14 px-6 sm:px-8 border-b border-[#222]">
-        <div className="max-w-[1280px] mx-auto">
-          <FlagshipCutTheCrapBanner navigate={navigate} />
         </div>
       </section>
 
@@ -344,8 +341,9 @@ export const CutTheCrapPage: React.FC<CutTheCrapPageProps> = ({ navigate }) => {
             </p>
           </div>
 
-          {/* Official Founder's Edition Banner Presentation (IMG_4134) */}
-          <div className="mb-6">
+          {/* Official Founder's Edition Bronze Plaque (IMG_4133) & Banner (IMG_4134) */}
+          <div className="mb-8 space-y-6">
+            <FoundersPlaqueHeader />
             <FoundersEditionBanner
               onSelectHardcover={() =>
                 handleAddToCart(
@@ -358,60 +356,9 @@ export const CutTheCrapPage: React.FC<CutTheCrapPageProps> = ({ navigate }) => {
             />
           </div>
 
-          {/* 3-Card Row + Disabled Audiobook Slot per Spec Section 11 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch">
-            {/* Card 1: Founder's Edition Hardcover */}
-            <div className="bg-[#1F1912] border-2 border-[#8C6F42] hover:border-[#D4AF37] p-6 flex flex-col justify-between shadow-xl relative transition-colors duration-200">
-              <div className="absolute -top-3 right-4 bg-[#D4AF37] text-[#141414] text-[10px] font-sans font-bold uppercase tracking-wider px-2.5 py-0.5 shadow">
-                Limited &bull; Signed
-              </div>
-              <div>
-                <div className="text-xs uppercase font-sans font-bold text-[#D4AF37] tracking-widest mb-2">
-                  Collector's Release
-                </div>
-                <h3 className="font-display text-2xl text-[#F5F3EF] mb-1">
-                  Founder's Edition
-                </h3>
-                <p className="text-xs text-[#C8B088] mb-4">Hardcover Volume &bull; Strict 1-Time Run</p>
-                <div className="text-3xl font-display font-bold text-[#D4AF37] mb-4">
-                  $49.00
-                </div>
-                <ul className="text-xs text-[#D1CFC7] space-y-2 mb-6">
-                  <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#D4AF37] shrink-0" />
-                    <span>Signed and numbered by Lucas</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#D4AF37] shrink-0" />
-                    <span>Limited founding release run</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#D4AF37] shrink-0" />
-                    <span>Once gone: SOLD OUT forever</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#D4AF37] shrink-0" />
-                    <span>Includes instant eBook access</span>
-                  </li>
-                </ul>
-              </div>
-              <button
-                onClick={() =>
-                  handleAddToCart(
-                    'founders-hardcover',
-                    'CUT THE CRAP',
-                    "Founder's Edition Hardcover (Signed & Numbered)",
-                    49.0
-                  )
-                }
-                className="w-full py-3.5 bg-[#F85800] hover:bg-[#E05000] text-[#141414] font-sans font-bold text-xs uppercase tracking-[0.1em] transition-colors flex items-center justify-center gap-2"
-              >
-                <ShoppingBag className="w-4 h-4" />
-                <span>Preorder Founder's</span>
-              </button>
-            </div>
-
-            {/* Card 2: Paperback Standard Print Edition */}
+          {/* 3 Formats Grid: Paperback, Digital, Audiobook */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+            {/* Format 1: Paperback Standard Print Edition */}
             <div className="bg-[#1C1C1C] border border-[#2B2B2B] p-6 flex flex-col justify-between card-hover">
               <div>
                 <div className="text-xs uppercase font-sans font-bold text-[#8C8C8C] tracking-widest mb-1">

@@ -3,6 +3,7 @@ import { PageRoute } from '../types';
 import { useCart } from '../context/CartContext';
 import { RealisticBookCover } from '../components/RealisticBookCover';
 import { FoundersEditionCard } from '../components/FoundersEditionCard';
+import { FoundersEditionBanner } from '../components/OfficialBrandBanners';
 import { IMAGE_ASSETS } from '../data/imageAssets';
 import { ShoppingBag, Check, ArrowRight, BookOpen, Download, ShieldCheck, Sparkles } from 'lucide-react';
 
@@ -120,10 +121,10 @@ export const StorePage: React.FC<StorePageProps> = ({ navigate }) => {
         </div>
       </section>
 
-      {/* Featured Showcase: Founder's Edition Banner (IMG_4134) */}
+      {/* Featured Showcase: Founder's Edition Collector's Volume (IMG_4134) */}
       <section className="pt-12 px-6 sm:px-8 max-w-[1280px] mx-auto">
-        <FoundersEditionCard
-          onAddToCart={() =>
+        <FoundersEditionBanner
+          onSelectHardcover={() =>
             handleAdd({
               id: 'founders-hardcover',
               title: 'CUT THE CRAP',
@@ -142,10 +143,21 @@ export const StorePage: React.FC<StorePageProps> = ({ navigate }) => {
 
       {/* Catalog Grid */}
       <section className="py-16 sm:py-20 px-6 sm:px-8">
-        <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {products.map((prod) => {
-            const isAdded = addedItemId === prod.id;
-            return (
+        <div className="max-w-[1280px] mx-auto">
+          <div className="mb-10 space-y-2">
+            <span className="eyebrow-label text-[#F85800]">EDITIONS &amp; COMPANIONS</span>
+            <h2 className="text-h2 text-[#F5F3EF]">Print, Digital &amp; Field Gear</h2>
+            <p className="text-sm text-[#A3A3A3]">
+              Manufactured and distributed directly by Up Armor Publishing.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {products
+              .filter((prod) => !prod.isFounders)
+              .map((prod) => {
+                const isAdded = addedItemId === prod.id;
+                return (
               <div
                 key={prod.id}
                 className={`p-6 sm:p-8 flex flex-col justify-between border card-hover ${
@@ -262,6 +274,7 @@ export const StorePage: React.FC<StorePageProps> = ({ navigate }) => {
               </div>
             );
           })}
+          </div>
         </div>
       </section>
     </div>

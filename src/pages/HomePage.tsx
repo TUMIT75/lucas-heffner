@@ -168,74 +168,8 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
         </div>
       </section>
 
-      {/* Format Selection Bar: Buy Hardcover / Paperback / PDF */}
-      <section className="bg-[#181818] border-b border-[#262626] py-8 px-6 sm:px-8">
-        <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Format 1: Hardcover Founder's Edition */}
-          <div className="p-6 bg-[#1F1912] border border-[#8C6F42]/60 flex items-center justify-between gap-4">
-            <div className="space-y-1.5">
-              <span className="inline-block text-[11px] uppercase font-sans font-bold text-[#D4AF37] bg-[#D4AF37]/10 px-2.5 py-1 border border-[#D4AF37]/30 tracking-wider">
-                Collector's Edition
-              </span>
-              <h4 className="font-display text-xl text-[#F5F3EF]">Founder's Hardcover</h4>
-              <p className="text-[14px] text-[#C4C2B9] leading-snug">Signed &amp; numbered gold-foil edition</p>
-              <div className="text-base font-bold font-sans text-[#D4AF37] pt-0.5">$49.00</div>
-            </div>
-            <button
-              onClick={() => handleQuickAdd('hardcover')}
-              className="px-5 py-3 bg-[#D4AF37] hover:bg-[#C09B2A] text-[#141414] text-xs font-sans font-bold uppercase tracking-wider whitespace-nowrap transition-colors"
-            >
-              Preorder
-            </button>
-          </div>
-
-          {/* Format 2: Paperback Edition */}
-          <div className="p-6 bg-[#1A1A1A] border border-[#2F2F2F] flex items-center justify-between gap-4">
-            <div className="space-y-1.5">
-              <span className="inline-block text-[11px] uppercase font-sans font-bold text-[#A3A3A3] bg-[#262626] px-2.5 py-1 border border-[#3A3A3A] tracking-wider">
-                Print Edition
-              </span>
-              <h4 className="font-display text-xl text-[#F5F3EF]">Paperback Edition</h4>
-              <p className="text-[14px] text-[#C4C2B9] leading-snug">Standard premium trade print copy</p>
-              <div className="text-base font-bold font-sans text-[#F85800] pt-0.5">$24.99</div>
-            </div>
-            <button
-              onClick={() => handleQuickAdd('paperback')}
-              className="px-5 py-3 bg-[#F85800] hover:bg-[#E05000] text-[#141414] text-xs font-sans font-bold uppercase tracking-wider whitespace-nowrap transition-colors"
-            >
-              Order
-            </button>
-          </div>
-
-          {/* Format 3: Digital PDF & ePub Edition */}
-          <div className="p-6 bg-[#1A1A1A] border border-[#2F2F2F] flex items-center justify-between gap-4">
-            <div className="space-y-1.5">
-              <span className="inline-block text-[11px] uppercase font-sans font-bold text-[#F85800] bg-[#F85800]/10 px-2.5 py-1 border border-[#F85800]/30 tracking-wider">
-                Instant Digital
-              </span>
-              <h4 className="font-display text-xl text-[#F5F3EF]">PDF &amp; ePub Edition</h4>
-              <p className="text-[14px] text-[#C4C2B9] leading-snug">Immediate download + printable matrix</p>
-              <div className="text-base font-bold font-sans text-[#F5F3EF] pt-0.5">$14.99</div>
-            </div>
-            <button
-              onClick={() => handleQuickAdd('pdf')}
-              className="px-5 py-3 bg-[#262626] hover:bg-[#333] text-[#F5F3EF] border border-[#444] text-xs font-sans font-bold uppercase tracking-wider whitespace-nowrap transition-colors"
-            >
-              Buy PDF
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Official Cut The Crap Flagship Banner Presentation (IMG_4132) */}
-      <section className="bg-[#0B0B0B] py-12 lg:py-16 px-6 sm:px-8 border-b border-[#222]">
-        <div className="max-w-[1280px] mx-auto">
-          <FlagshipCutTheCrapBanner navigate={navigate} />
-        </div>
-      </section>
-
       {/* 4 Pillars Section with Authentic Imagery */}
-      <section className="bg-[#141414] py-20 lg:py-28 px-6 sm:px-8 border-b border-[#262626]">
+      <section className="bg-[#181818] py-20 lg:py-28 px-6 sm:px-8 border-b border-[#262626]">
         <div className="max-w-[1280px] mx-auto space-y-12">
           <div className="text-center max-w-2xl mx-auto space-y-3">
             <span className="eyebrow-label text-[#F85800]">CORE PILLARS</span>
@@ -414,9 +348,9 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
             </p>
           </div>
 
-          {/* Scoped Founder's Card Showcase - Full Width per IMG_4134 */}
+          {/* Flagship Cut The Crap Presentation (IMG_4132) */}
           <div className="w-full">
-            <FoundersEditionCard />
+            <FlagshipCutTheCrapBanner navigate={navigate} />
           </div>
 
           {/* Book Highlights & Table of Contents Excerpt */}
