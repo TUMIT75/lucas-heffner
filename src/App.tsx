@@ -24,6 +24,7 @@ import { ContactPage } from './pages/ContactPage';
 import { StyleGuidePage } from './pages/StyleGuidePage';
 import { SitemapPage } from './pages/SitemapPage';
 import { LegalPage } from './pages/LegalPage';
+import { BookReaderPage } from './pages/BookReaderPage';
 import { ARTICLES_DATA } from './data/siteData';
 import { Compass, Sparkles } from 'lucide-react';
 
@@ -65,6 +66,8 @@ function AppContent() {
     switch (currentRoute) {
       case '/':
         return <HomePage navigate={navigate} />;
+      case '/read-book':
+        return <BookReaderPage navigate={navigate} />;
       case '/about':
         return <AboutPage navigate={navigate} />;
       case '/books':

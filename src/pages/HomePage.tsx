@@ -1,11 +1,24 @@
 import React, { useState } from 'react';
 import { PageRoute } from '../types';
-import { CutTheCrapHorizontalLogo, CutTheCrapStackedLogo, PhotoPlaceholder } from '../components/BrandLogos';
-import { PillarRow } from '../components/PillarRow';
+import { CutTheCrapHorizontalLogo, CutTheCrapStackedLogo } from '../components/BrandLogos';
+import { RealisticBookCover } from '../components/RealisticBookCover';
 import { FoundersEditionCard } from '../components/FoundersEditionCard';
 import { ARTICLES_DATA } from '../data/siteData';
+import { IMAGE_ASSETS } from '../data/imageAssets';
 import { useCart } from '../context/CartContext';
-import { ArrowRight, BookOpen, Wrench, Users, CheckCircle2, ChevronRight } from 'lucide-react';
+import {
+  ArrowRight,
+  BookOpen,
+  Wrench,
+  Users,
+  CheckCircle2,
+  Download,
+  ShoppingBag,
+  Sparkles,
+  Shield,
+  Clock,
+  ChevronRight,
+} from 'lucide-react';
 
 interface HomePageProps {
   navigate: (route: PageRoute) => void;
@@ -13,7 +26,6 @@ interface HomePageProps {
 
 export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
   const { addToCart } = useCart();
-  // Launch status test toggle per brief Section 2: "Primary CTA changes by launch status: Learn More -> Preorder -> Order Now."
   const [launchStatus, setLaunchStatus] = useState<'learn-more' | 'preorder' | 'order-now'>('preorder');
 
   const getPrimaryCta = () => {
@@ -29,15 +41,47 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
 
   const primaryCta = getPrimaryCta();
 
+  const handleQuickAdd = (edition: 'hardcover' | 'paperback' | 'pdf') => {
+    if (edition === 'hardcover') {
+      addToCart({
+        id: 'founders-hardcover',
+        title: 'CUT THE CRAP',
+        edition: "Founder's Edition Hardcover",
+        price: 49.0,
+        isFoundersEdition: true,
+        isDigital: false,
+      });
+    } else if (edition === 'paperback') {
+      addToCart({
+        id: 'paperback-edition',
+        title: 'CUT THE CRAP',
+        edition: 'Paperback Edition',
+        price: 24.99,
+        isFoundersEdition: false,
+        isDigital: false,
+      });
+    } else {
+      addToCart({
+        id: 'ebook-edition',
+        title: 'CUT THE CRAP',
+        edition: 'Digital PDF & ePub Edition',
+        price: 14.99,
+        isFoundersEdition: false,
+        isDigital: true,
+      });
+    }
+    navigate('/cart');
+  };
+
   return (
-    <div className="w-full">
-      {/* Launch Status Simulation Bar (For client testing per brief) */}
+    <div className="w-full bg-[#141414] text-[#F5F3EF]">
+      {/* Interactive Launch Status Toggle per brief */}
       <div className="bg-[#181818] border-b border-[#2A2A2A] px-4 py-2 text-xs flex flex-wrap items-center justify-between gap-2">
         <span className="text-[#8C8C8C] font-mono">
           Interactive State Switcher (Brief Section 2):
         </span>
         <div className="flex items-center gap-2">
-          <span className="text-[#A3A3A3] text-[11px] uppercase tracking-wider">CTA Lifecycle State:</span>
+          <span className="text-[#A3A3A3] text-[11px] uppercase tracking-wider">CTA State:</span>
           {(['learn-more', 'preorder', 'order-now'] as const).map((st) => (
             <button
               key={st}
@@ -54,18 +98,29 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
         </div>
       </div>
 
-      {/* Hero Section — Full-Bleed Dark per spec */}
+      {/* Hero Section with Realistic Book Cover & Author Credentials */}
       <section className="relative bg-[#141414] text-[#F5F3EF] pt-16 pb-24 lg:pt-24 lg:pb-32 px-6 sm:px-8 border-b border-[#222] overflow-hidden">
-        <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        {/* Subtle geometric background grid */}
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#F85800_1px,transparent_1px)] [background-size:24px_24px]" />
+
+        <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
           <div className="lg:col-span-7 space-y-6">
-            {/* Author Credential Eyebrow */}
-            <div className="space-y-1">
-              <span className="eyebrow-label text-[#C8B088] tracking-[0.16em]">
-                LUCAS HEFFNER
-              </span>
-              <p className="text-xs sm:text-sm font-sans uppercase tracking-wider text-[#A3A3A3]">
-                Author &bull; Certified Nutrition Coach &bull; Veteran &bull; Entrepreneur
-              </p>
+            {/* Author Credential Eyebrow with Headshot */}
+            <div className="flex items-center gap-3">
+              <img
+                src={IMAGE_ASSETS.author.heroPortrait}
+                alt="Lucas Heffner - Author & Veteran"
+                referrerPolicy="no-referrer"
+                className="w-12 h-12 object-cover border border-[#F85800]/60 shadow"
+              />
+              <div>
+                <span className="eyebrow-label text-[#C8B088] tracking-[0.16em] block">
+                  LUCAS HEFFNER
+                </span>
+                <p className="text-xs font-sans uppercase tracking-wider text-[#A3A3A3]">
+                  Author &bull; Certified Nutrition Coach &bull; Veteran &bull; Entrepreneur
+                </p>
+              </div>
             </div>
 
             {/* CUT THE CRAP Headline */}
@@ -79,102 +134,243 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
             </div>
 
             {/* Verbatim Subheadline */}
-            <p className="text-[18px] sm:text-[20px] text-[#D1CFC7] leading-relaxed max-w-xl font-medium">
+            <p className="text-[18px] sm:text-[21px] text-[#D1CFC7] leading-relaxed max-w-xl font-medium">
               "A practical approach to losing weight, building habits that last, and finally getting off the diet roller coaster."
             </p>
 
-            {/* CTAs */}
-            <div className="pt-4 flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
+            {/* Action Buttons: Read Book, Buy Physical, Buy PDF */}
+            <div className="pt-2 flex flex-col sm:flex-row gap-3 items-stretch sm:items-center flex-wrap">
+              <button
+                onClick={() => {
+                  navigate('/read-book');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="px-7 py-4 bg-[#F85800] hover:bg-[#E05000] text-[#141414] font-sans font-bold text-sm uppercase tracking-[0.08em] transition-colors flex items-center justify-center gap-2 shadow-xl"
+              >
+                <BookOpen className="w-4 h-4" />
+                <span>Read Free Sample</span>
+              </button>
+
               <button
                 onClick={() => {
                   navigate(primaryCta.route);
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="px-8 py-4 bg-[#F85800] hover:bg-[#E05000] text-[#141414] font-sans font-bold text-[15px] uppercase tracking-[0.08em] transition-colors flex items-center justify-center gap-2 shadow-lg"
+                className="px-7 py-4 bg-[#1E1E1E] hover:bg-[#282828] text-[#F5F3EF] border border-[#3A3A3A] font-sans font-bold text-sm uppercase tracking-[0.08em] transition-colors flex items-center justify-center gap-2"
               >
+                <ShoppingBag className="w-4 h-4 text-[#F85800]" />
                 <span>{primaryCta.text}</span>
-                <ArrowRight className="w-4 h-4" />
               </button>
 
               <button
-                onClick={() => {
-                  navigate('/toolkit');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className="px-8 py-4 bg-[#1E1E1E] hover:bg-[#282828] text-[#F5F3EF] border border-[#3A3A3A] font-sans font-semibold text-[15px] uppercase tracking-[0.08em] transition-colors flex items-center justify-center gap-2"
+                onClick={() => handleQuickAdd('pdf')}
+                className="px-5 py-4 bg-transparent hover:bg-[#1E1E1E] text-[#C8B088] border border-[#C8B088]/40 font-sans font-semibold text-xs uppercase tracking-[0.08em] transition-colors flex items-center justify-center gap-1.5"
               >
-                <span>Explore the Toolbox</span>
-                <Wrench className="w-4 h-4 text-[#F85800]" />
+                <Download className="w-4 h-4 text-[#C8B088]" />
+                <span>Instant PDF ($14.99)</span>
               </button>
             </div>
 
-            <div className="pt-4 border-t border-[#222] flex items-center gap-4 text-xs text-[#8C8C8C]">
+            {/* Edition Badges & Publishing Standards */}
+            <div className="pt-4 border-t border-[#222] flex flex-wrap items-center gap-4 text-xs text-[#8C8C8C]">
               <span className="flex items-center gap-1.5 text-[#C8B088]">
                 <CheckCircle2 className="w-4 h-4 text-[#F85800]" />
-                Ingram &amp; Up Armor Publishing Standard
+                Available in Hardcover &bull; Paperback &bull; Digital PDF / EPUB
               </span>
               <span className="hidden sm:inline text-[#444]">&bull;</span>
-              <span className="hidden sm:inline">Signed Founder's Edition Allocated</span>
+              <span className="text-[#AAA]">First Edition Print Run</span>
             </div>
           </div>
 
-          {/* Right Hero Visual: Book Representation */}
-          <div className="lg:col-span-5 flex justify-center">
-            <div className="w-full max-w-md bg-[#1E1E1E] border border-[#2F2F2F] p-6 sm:p-8 relative">
-              <div className="absolute top-4 right-4 bg-[#F85800] text-[#141414] text-[11px] font-sans font-bold uppercase tracking-widest px-2.5 py-0.5">
-                First Book Release
-              </div>
-              <div className="w-full aspect-3/4 bg-[#111] border border-[#333] flex flex-col justify-between p-6 text-center relative overflow-hidden shadow-2xl">
-                <div className="text-[11px] font-sans uppercase font-bold tracking-[0.2em] text-[#C8B088]">
-                  UP ARMOR PUBLISHING
-                </div>
-                <div className="my-auto py-6">
-                  <CutTheCrapHorizontalLogo size="md" theme="dark" />
-                  <p className="text-xs text-[#F85800] font-sans font-semibold uppercase tracking-wider mt-3">
-                    Lose the Fat. Keep the Freedom.
-                  </p>
-                </div>
-                <div className="border-t border-[#2A2A2A] pt-4">
-                  <span className="text-[12px] font-sans text-[#A3A3A3] uppercase tracking-wider">
-                    LUCAS HEFFNER, MBA, NASM-CNC
-                  </span>
-                </div>
-              </div>
+          {/* Right Hero Visual: 3D Realistic Book Cover Presentation */}
+          <div className="lg:col-span-5 flex flex-col items-center justify-center">
+            <div className="relative">
+              <RealisticBookCover edition="hardcover" size="lg" />
+
+              {/* Floating Quick Read Pill */}
+              <button
+                onClick={() => navigate('/read-book')}
+                className="mt-6 w-full py-3 bg-[#1C1C1C] hover:bg-[#252525] border border-[#3A3A3A] text-xs font-sans font-bold uppercase tracking-wider text-[#F85800] flex items-center justify-center gap-2 transition-colors shadow-lg"
+              >
+                <BookOpen className="w-4 h-4" />
+                <span>Open Interactive In-Browser Reader &rarr;</span>
+              </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 4 Pillars Strip (IMG_4132 reproduction) */}
-      <section className="bg-[#1A1A1A] py-16 px-6 sm:px-8 border-b border-[#262626]">
-        <div className="max-w-[1280px] mx-auto space-y-8">
-          <div className="text-center max-w-2xl mx-auto">
+      {/* Format Selection Bar: Buy Hardcover / Paperback / PDF */}
+      <section className="bg-[#181818] border-b border-[#262626] py-8 px-6 sm:px-8">
+        <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Format 1: Hardcover Founder's Edition */}
+          <div className="p-6 bg-[#211A11] border border-[#C8B088]/60 flex items-center justify-between gap-4">
+            <div className="space-y-1">
+              <span className="text-[10px] uppercase font-mono font-bold text-[#C8B088] bg-[#C8B088]/15 px-2 py-0.5 border border-[#C8B088]/30">
+                Collector's Edition
+              </span>
+              <h4 className="font-display text-lg text-[#F5F3EF]">Founder's Hardcover</h4>
+              <p className="text-xs text-[#A3A3A3]">Signed &amp; numbered gold-foil edition</p>
+              <div className="text-sm font-bold text-[#C8B088] pt-1">$49.00</div>
+            </div>
+            <button
+              onClick={() => handleQuickAdd('hardcover')}
+              className="px-4 py-2.5 bg-[#C8B088] hover:bg-[#B8A078] text-[#141414] text-xs font-sans font-bold uppercase tracking-wider whitespace-nowrap"
+            >
+              Preorder
+            </button>
+          </div>
+
+          {/* Format 2: Paperback Edition */}
+          <div className="p-6 bg-[#1A1A1A] border border-[#2F2F2F] flex items-center justify-between gap-4">
+            <div className="space-y-1">
+              <span className="text-[10px] uppercase font-mono font-bold text-[#8C8C8C] bg-[#262626] px-2 py-0.5 border border-[#3A3A3A]">
+                Print Edition
+              </span>
+              <h4 className="font-display text-lg text-[#F5F3EF]">Paperback Edition</h4>
+              <p className="text-xs text-[#A3A3A3]">Standard premium trade print copy</p>
+              <div className="text-sm font-bold text-[#F85800] pt-1">$24.99</div>
+            </div>
+            <button
+              onClick={() => handleQuickAdd('paperback')}
+              className="px-4 py-2.5 bg-[#F85800] hover:bg-[#E05000] text-[#141414] text-xs font-sans font-bold uppercase tracking-wider whitespace-nowrap"
+            >
+              Order
+            </button>
+          </div>
+
+          {/* Format 3: Digital PDF & ePub Edition */}
+          <div className="p-6 bg-[#1A1A1A] border border-[#2F2F2F] flex items-center justify-between gap-4">
+            <div className="space-y-1">
+              <span className="text-[10px] uppercase font-mono font-bold text-[#60A5FA] bg-[#1E293B] px-2 py-0.5 border border-[#3B82F6]/40">
+                Instant Digital
+              </span>
+              <h4 className="font-display text-lg text-[#F5F3EF]">PDF &amp; ePub Edition</h4>
+              <p className="text-xs text-[#A3A3A3]">Immediate download + printable matrix</p>
+              <div className="text-sm font-bold text-[#60A5FA] pt-1">$14.99</div>
+            </div>
+            <button
+              onClick={() => handleQuickAdd('pdf')}
+              className="px-4 py-2.5 bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-xs font-sans font-bold uppercase tracking-wider whitespace-nowrap"
+            >
+              Buy PDF
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* 4 Pillars Section with Authentic Imagery */}
+      <section className="bg-[#141414] py-20 lg:py-28 px-6 sm:px-8 border-b border-[#262626]">
+        <div className="max-w-[1280px] mx-auto space-y-12">
+          <div className="text-center max-w-2xl mx-auto space-y-3">
             <span className="eyebrow-label text-[#F85800]">CORE PILLARS</span>
-            <h2 className="text-h3 text-[#F5F3EF] mt-1">The 4 Non-Negotiable Foundations</h2>
-            <p className="text-sm text-[#A3A3A3] mt-2">
-              Sustainable fat loss is an engineering discipline anchored across physical, behavioral, and spiritual resilience.
+            <h2 className="text-h2 text-[#F5F3EF]">The 4 Non-Negotiable Foundations</h2>
+            <p className="text-[16px] text-[#A3A3A3] leading-relaxed">
+              Sustainable fat loss is an engineering discipline anchored across physical training, metabolic nutrition, spiritual faith, and behavioral discipline.
             </p>
           </div>
-          <PillarRow theme="dark" showSubtitles={true} />
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                title: 'Training',
+                sub: 'Physical Strength & Muscle Retention',
+                desc: 'Mechanical resistance stimulus to protect metabolic rate and functional capability.',
+                img: IMAGE_ASSETS.pillars.training,
+              },
+              {
+                title: 'Nutrition',
+                sub: 'Energy Balance & Protein Leverage',
+                desc: 'Thermodynamics without gimmick diets, detoxes, or artificial food restrictions.',
+                img: IMAGE_ASSETS.pillars.nutrition,
+              },
+              {
+                title: 'Faith',
+                sub: 'Higher Purpose & Inner Conviction',
+                desc: 'Anchoring your physical transformation to something greater than superficial vanity.',
+                img: IMAGE_ASSETS.pillars.faith,
+              },
+              {
+                title: 'Discipline',
+                sub: 'Habit Systems & Friction Control',
+                desc: 'Replacing emotional motivation with ruthless architectural systems that survive bad days.',
+                img: IMAGE_ASSETS.pillars.discipline,
+              },
+            ].map((pillar) => (
+              <div
+                key={pillar.title}
+                className="relative bg-[#1C1C1C] border border-[#2B2B2B] overflow-hidden group card-hover flex flex-col justify-between"
+              >
+                <div className="h-44 w-full relative overflow-hidden">
+                  <img
+                    src={pillar.img}
+                    alt={pillar.title}
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-70 group-hover:opacity-90"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1C1C1C] via-transparent to-black/40" />
+                  <div className="absolute top-4 left-4">
+                    <span className="px-2.5 py-1 bg-[#141414]/90 border border-[#F85800] text-[#F85800] font-mono text-[11px] uppercase font-bold tracking-wider">
+                      {pillar.title}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="p-6 space-y-2">
+                  <h3 className="font-display text-xl text-[#F5F3EF]">
+                    {pillar.title}
+                  </h3>
+                  <p className="text-xs uppercase font-sans font-semibold text-[#C8B088]">
+                    {pillar.sub}
+                  </p>
+                  <p className="text-xs text-[#A3A3A3] leading-relaxed pt-2">
+                    {pillar.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Transformation / Author Story — Off-White Background per Spec Section 11 */}
+      {/* Author Transformation Credibility Section with Authentic Photography */}
       <section className="bg-[#F5F3EF] text-[#141414] py-24 sm:py-32 px-6 sm:px-8 border-b border-[#E5E0D8]">
         <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
-          {/* Photos column */}
+          {/* Author Photos column */}
           <div className="lg:col-span-5 space-y-6">
-            <PhotoPlaceholder
-              description="Lucas Heffner — 140+ lb Transformation (~44% body fat down to ~13%)"
-              aspectRatio="aspect-4/5"
-            />
-            <div className="p-4 bg-white border border-[#E0DBD0] text-xs text-[#555] space-y-1">
-              <p className="font-semibold text-[#141414] uppercase tracking-wider">
-                Transformation Credibility Note
-              </p>
-              <p>
-                Photos support credibility—they are not an infomercial sales pitch. Every principle in the book stems from living the failure first.
-              </p>
+            <div className="relative border-2 border-[#141414] shadow-2xl overflow-hidden group">
+              <img
+                src={IMAGE_ASSETS.author.heroPortrait}
+                alt="Lucas Heffner Transformation"
+                referrerPolicy="no-referrer"
+                className="w-full aspect-4/5 object-cover"
+              />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/70 to-transparent p-6 text-white space-y-1">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#F85800]">
+                  REAL PHYSICAL TRANSFORMATION
+                </span>
+                <p className="font-display text-xl text-white">
+                  Over 140 Pounds Fat Lost &bull; 44% to ~13% Body Fat
+                </p>
+                <p className="text-xs text-[#DDD]">
+                  Maintained sustainably for a decade while running companies and raising a family.
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-3 gap-3 text-center">
+              <div className="p-3 bg-white border border-[#DDD] shadow-sm">
+                <div className="font-display text-2xl text-[#F85800] font-black">140+</div>
+                <div className="text-[10px] uppercase font-bold text-[#666]">Lbs Lost</div>
+              </div>
+              <div className="p-3 bg-white border border-[#DDD] shadow-sm">
+                <div className="font-display text-2xl text-[#141414] font-black">13%</div>
+                <div className="text-[10px] uppercase font-bold text-[#666]">Body Fat Scan</div>
+              </div>
+              <div className="p-3 bg-white border border-[#DDD] shadow-sm">
+                <div className="font-display text-2xl text-[#141414] font-black">10+ Yrs</div>
+                <div className="text-[10px] uppercase font-bold text-[#666]">Sustained</div>
+              </div>
             </div>
           </div>
 
@@ -187,22 +383,19 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
               </h2>
             </div>
 
-            {/* Asymmetric Pull Quote breaking grid on desktop */}
+            {/* Asymmetric Pull Quote */}
             <div className="editorial-pullquote p-6 sm:p-8 bg-white border-l-4 border-[#F85800] shadow-sm text-[#141414]">
-              <p className="relative z-10">
-                I know what it's like to struggle with weight, lose it, gain it back, and wonder why doing everything 'right' still doesn't seem to work.
+              <p className="relative z-10 text-[20px] sm:text-[22px] leading-relaxed">
+                "I know what it's like to struggle with weight, lose it, gain it back, and wonder why doing everything 'right' still doesn't seem to work. Eventually, I stopped looking for another diet and started learning how nutrition actually works."
               </p>
             </div>
 
             <div className="space-y-4 text-[17px] leading-relaxed text-[#333]">
               <p>
-                Eventually, I stopped looking for another diet and started learning how nutrition actually works.
+                As a U.S. Army Engineer officer, I knew operational discipline. But nutrition remained a frustrating puzzle. I swung between rigid extreme diets (keto, starvation macros, 6-day gym exhaustion) and inevitable burnout.
               </p>
-              <p className="font-semibold text-[#141414] text-[18px]">
-                I lost more than 140 pounds and learned how to keep it off without giving up the foods and life I enjoy.
-              </p>
-              <p className="text-[19px] text-[#141414] font-medium pt-2">
-                "Cut the Crap is the book I wish someone had handed me years ago."
+              <p>
+                Real transformation happened only when I treated my body as an engineering system: balancing the thermodynamic energy equation, leveraging protein for natural hunger suppression, and removing friction from daily life.
               </p>
             </div>
 
@@ -212,7 +405,7 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
                   navigate('/about');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="px-6 py-3.5 bg-[#141414] hover:bg-[#2A2A2A] text-[#F5F3EF] font-sans font-bold text-xs uppercase tracking-[0.1em] transition-colors flex items-center gap-2"
+                className="px-6 py-3.5 bg-[#141414] hover:bg-[#252525] text-[#F5F3EF] font-sans font-bold text-xs uppercase tracking-[0.1em] transition-colors flex items-center gap-2"
               >
                 <span>Read Lucas's Full Story</span>
                 <ArrowRight className="w-4 h-4 text-[#F85800]" />
@@ -220,206 +413,244 @@ export const HomePage: React.FC<HomePageProps> = ({ navigate }) => {
 
               <button
                 onClick={() => {
-                  navigate('/cutthecrap');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className="px-6 py-3.5 bg-[#F85800] hover:bg-[#E05000] text-[#141414] font-sans font-bold text-xs uppercase tracking-[0.1em] transition-colors"
-              >
-                Explore Cut the Crap
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Book Section: Cut the Crap & Founder's Edition */}
-      <section className="bg-[#141414] text-[#F5F3EF] py-24 sm:py-32 px-6 sm:px-8 border-b border-[#222]">
-        <div className="max-w-[1280px] mx-auto space-y-16">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
-            <div className="lg:col-span-8 space-y-3">
-              <span className="eyebrow-label text-[#F85800]">FEATURED WORK &bull; DEBUT RELEASE</span>
-              <h2 className="text-h2 text-[#F5F3EF]">
-                CUT THE CRAP &mdash; Lose the Fat. Keep the Freedom.
-              </h2>
-              <p className="text-[18px] text-[#A3A3A3] leading-relaxed max-w-3xl">
-                "No detoxes. No forbidden-food lists. No pretending you need to live on chicken and broccoli for the rest of your life. Cut the Crap teaches the fundamentals that actually matter and shows you how to build them into a life you can keep living."
-              </p>
-            </div>
-
-            <div className="lg:col-span-4 flex lg:justify-end">
-              <button
-                onClick={() => {
-                  navigate('/cutthecrap');
+                  navigate('/read-book');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
                 className="px-6 py-3.5 bg-[#F85800] hover:bg-[#E05000] text-[#141414] font-sans font-bold text-xs uppercase tracking-[0.1em] transition-colors flex items-center gap-2"
               >
-                <span>Explore Cut the Crap</span>
-                <ArrowRight className="w-4 h-4" />
+                <BookOpen className="w-4 h-4" />
+                <span>Read Chapter 1 Free</span>
               </button>
             </div>
-          </div>
-
-          {/* Full Founder's Edition Interactive Module */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-2 text-xs font-semibold text-[#C8B088] uppercase tracking-wider">
-              <span className="w-2 h-2 rounded-full bg-[#F85800]" />
-              Signature Preorder Spotlight (IMG_4134 Composition)
-            </div>
-            <FoundersEditionCard
-              onAddToCart={() => {
-                addToCart({
-                  id: 'founders-hardcover',
-                  title: 'CUT THE CRAP',
-                  edition: "Founder's Edition Hardcover (Signed & Numbered)",
-                  price: 49.0,
-                  isFoundersEdition: true,
-                  isDigital: false,
-                });
-              }}
-            />
           </div>
         </div>
       </section>
 
-      {/* Toolbox Section per Brief Section 2 */}
-      <section className="bg-[#1E1E1E] text-[#F5F3EF] py-24 px-6 sm:px-8 border-b border-[#2A2A2A]">
-        <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-7 space-y-6">
-            <span className="eyebrow-label text-[#F85800]">PRACTICAL IMPLEMENTATION</span>
-            <h2 className="text-h2 text-[#F5F3EF]">
-              Don't Just Read the Book. Use It.
+      {/* Featured Book Showcase: Cut the Crap Flagship Overview */}
+      <section className="bg-[#141414] py-24 sm:py-32 px-6 sm:px-8 border-b border-[#222]">
+        <div className="max-w-[1280px] mx-auto space-y-16">
+          <div className="text-center max-w-3xl mx-auto space-y-4">
+            <span className="eyebrow-label text-[#F85800]">FIRST BOOK RELEASE</span>
+            <h2 className="text-h1 text-[#F5F3EF]">
+              Cut the Crap: The Flagship Guide
             </h2>
-            <p className="text-[18px] text-[#A3A3A3] leading-relaxed max-w-xl">
-              "The Cut the Crap Toolbox brings together the tools, products, resources, and recommendations referenced throughout the book."
+            <p className="text-[18px] sm:text-[20px] text-[#D1CFC7] leading-relaxed">
+              No detoxes, no forbidden-food lists, and no pretending you need to live on boiled chicken and broccoli.
             </p>
-            <p className="text-sm text-[#8C8C8C]">
-              From digital scales and dynamic energy burn calculators to kitchen tools and zero-fluff hydration protocols, every item has been vetted in the field.
-            </p>
-            <div className="pt-2">
-              <button
-                onClick={() => {
-                  navigate('/toolkit');
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }}
-                className="px-8 py-4 bg-[#F85800] hover:bg-[#E05000] text-[#141414] font-sans font-bold text-xs uppercase tracking-[0.1em] transition-colors flex items-center gap-2"
-              >
-                <span>Open the Toolbox</span>
-                <Wrench className="w-4 h-4" />
-              </button>
-            </div>
           </div>
 
-          <div className="lg:col-span-5 grid grid-cols-2 gap-4">
-            <div className="p-5 bg-[#141414] border border-[#2B2B2B]">
-              <span className="text-xs text-[#F85800] font-bold uppercase tracking-wider block mb-1">01 &bull; Nutrition</span>
-              <h4 className="font-display text-base text-[#F5F3EF]">Precision Tools</h4>
-              <p className="text-xs text-[#888] mt-1">Calibrated digital scales &amp; high-protein essentials.</p>
-            </div>
-            <div className="p-5 bg-[#141414] border border-[#2B2B2B]">
-              <span className="text-xs text-[#F85800] font-bold uppercase tracking-wider block mb-1">02 &bull; Kitchen</span>
-              <h4 className="font-display text-base text-[#F5F3EF]">Friction Cutters</h4>
-              <p className="text-xs text-[#888] mt-1">Air fryers &amp; speed-prep accessories.</p>
-            </div>
-            <div className="p-5 bg-[#141414] border border-[#2B2B2B]">
-              <span className="text-xs text-[#F85800] font-bold uppercase tracking-wider block mb-1">03 &bull; Tracking</span>
-              <h4 className="font-display text-base text-[#F5F3EF]">Data Engines</h4>
-              <p className="text-xs text-[#888] mt-1">Trend smoothing &amp; adaptive calorie tracking.</p>
-            </div>
-            <div className="p-5 bg-[#141414] border border-[#2B2B2B]">
-              <span className="text-xs text-[#F85800] font-bold uppercase tracking-wider block mb-1">04 &bull; Training</span>
-              <h4 className="font-display text-base text-[#F5F3EF]">Readiness Gear</h4>
-              <p className="text-xs text-[#888] mt-1">Travel resistance packs &amp; recovery protocols.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Community Section per Brief Section 2 */}
-      <section className="bg-[#141414] text-[#F5F3EF] py-24 px-6 sm:px-8 border-b border-[#222]">
-        <div className="max-w-[1280px] mx-auto text-center space-y-6 max-w-3xl">
-          <span className="eyebrow-label text-[#F85800]">ACCOUNTABILITY ECOSYSTEM</span>
-          <h2 className="text-h2 text-[#F5F3EF]">
-            Find Your Battle Buddy.
-          </h2>
-          <p className="text-[18px] sm:text-[20px] text-[#A3A3A3] leading-relaxed">
-            "Change is easier when you aren't doing it alone. Join the Cut the Crap Community to share your progress, your Click Moment, your wins, your setbacks, and what you're learning along the way."
-          </p>
-          <div className="pt-4 flex flex-wrap justify-center gap-4">
-            <button
-              onClick={() => {
-                navigate('/community');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              className="px-8 py-4 bg-[#F85800] hover:bg-[#E05000] text-[#141414] font-sans font-bold text-xs uppercase tracking-[0.1em] transition-colors flex items-center gap-2"
-            >
-              <span>Join the Community</span>
-              <Users className="w-4 h-4" />
-            </button>
-            <button
-              onClick={() => {
-                navigate('/shareyourclickmoment');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              className="px-6 py-4 bg-[#1E1E1E] hover:bg-[#252525] text-[#C8B088] border border-[#333] font-sans font-semibold text-xs uppercase tracking-[0.1em] transition-colors"
-            >
-              Share Your Click Moment
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Latest Articles Hub per Brief Section 2 */}
-      <section className="bg-[#181818] text-[#F5F3EF] py-24 px-6 sm:px-8 border-b border-[#262626]">
-        <div className="max-w-[1280px] mx-auto space-y-12">
-          <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Scoped Founder's Card */}
             <div>
-              <span className="eyebrow-label text-[#F85800]">FIELD NOTES &bull; PERSPECTIVES</span>
-              <h2 className="text-h2 text-[#F5F3EF] mt-1">Latest Articles</h2>
+              <FoundersEditionCard />
+            </div>
+
+            {/* Book Highlights & Table of Contents Excerpt */}
+            <div className="space-y-8 bg-[#1A1A1A] border border-[#2B2B2B] p-8 sm:p-10">
+              <div className="space-y-2">
+                <span className="text-xs font-mono uppercase font-bold text-[#F85800] tracking-wider block">
+                  INSIDE THE BOOK
+                </span>
+                <h3 className="font-display text-2xl text-[#F5F3EF]">
+                  What You'll Master in 18 Chapters
+                </h3>
+              </div>
+
+              <div className="space-y-4 text-sm text-[#A3A3A3]">
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#F85800] shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-[#F5F3EF] block">The First Law of Thermodynamics Demystified</strong>
+                    How energy balance actually dictates weight change without obsessive counting forever.
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#F85800] shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-[#F5F3EF] block">The Protein Leverage Strategy</strong>
+                    Using the thermic effect of food and peptide satiety hormones to kill uncontrollable cravings.
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#F85800] shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-[#F5F3EF] block">The Minimum Viable Day Protocol</strong>
+                    A non-negotiable floor that protects your momentum during vacations, illnesses, and busy work weeks.
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-[#F85800] shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-[#F5F3EF] block">Social Autonomy Framework</strong>
+                    Enjoying real dinners, pizza with your children, and holiday gatherings without blowing up your progress.
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-[#2A2A2A] flex flex-col sm:flex-row gap-4">
+                <button
+                  onClick={() => {
+                    navigate('/read-book');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className="px-6 py-3.5 bg-[#F85800] hover:bg-[#E05000] text-[#141414] font-sans font-bold text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
+                >
+                  <BookOpen className="w-4 h-4" />
+                  <span>Start Reading Online</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    navigate('/cutthecrap');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className="px-6 py-3.5 bg-[#252525] hover:bg-[#333] text-[#F5F3EF] font-sans font-bold text-xs uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
+                >
+                  <span>Book Details &amp; FAQs</span>
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Real Toolbox Preview with Authentic Gear Photos */}
+      <section className="bg-[#181818] py-20 lg:py-28 px-6 sm:px-8 border-b border-[#222]">
+        <div className="max-w-[1280px] mx-auto space-y-12">
+          <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
+            <div className="space-y-3 max-w-xl">
+              <span className="eyebrow-label text-[#F85800]">COMPANION RESOURCE</span>
+              <h2 className="text-h2 text-[#F5F3EF]">Cut the Crap Toolbox</h2>
+              <p className="text-sm text-[#A3A3A3] leading-relaxed">
+                The battle-tested kitchen devices, nutrition trackers, training tools, and learning materials Lucas personally recommends.
+              </p>
+            </div>
+            <button
+              onClick={() => {
+                navigate('/toolkit');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="px-6 py-3 bg-[#252525] hover:bg-[#333] text-[#F5F3EF] hover:text-[#F85800] border border-[#3A3A3A] font-sans font-bold text-xs uppercase tracking-wider transition-colors flex items-center gap-2"
+            >
+              <span>Explore All Tools</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                title: 'Precision Digital Food Scale',
+                cat: 'Kitchen Tools',
+                img: IMAGE_ASSETS.toolbox.foodScale,
+                quote: 'Weighing food for two weeks permanently recalibrates your eye for portion reality.',
+              },
+              {
+                title: 'Dual-Zone Convection Air Fryer',
+                cat: 'Kitchen Tools',
+                img: IMAGE_ASSETS.toolbox.airFryer,
+                quote: 'Cuts chicken and vegetable meal prep to 12 minutes. Removes cooking friction completely.',
+              },
+              {
+                title: '100% Pure Whey Isolate',
+                cat: 'Nutrition & Food',
+                img: IMAGE_ASSETS.toolbox.proteinPowder,
+                quote: 'Hitting 0.8g protein per pound is the cornerstone of satiety and muscle preservation.',
+              },
+            ].map((item, idx) => (
+              <div
+                key={idx}
+                className="bg-[#1C1C1C] border border-[#2B2B2B] card-hover p-6 flex flex-col justify-between"
+              >
+                <div className="space-y-4">
+                  <div className="h-40 w-full overflow-hidden border border-[#333]">
+                    <img
+                      src={item.img}
+                      alt={item.title}
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <span className="text-[10px] uppercase font-bold text-[#F85800] tracking-wider block">
+                    {item.cat}
+                  </span>
+                  <h4 className="font-display text-lg text-[#F5F3EF]">{item.title}</h4>
+                  <p className="text-xs text-[#CCC] italic">"{item.quote}"</p>
+                </div>
+                <div className="pt-4 mt-4 border-t border-[#2A2A2A]">
+                  <button
+                    onClick={() => navigate('/toolkit')}
+                    className="text-xs uppercase font-bold text-[#C8B088] hover:text-[#F85800] flex items-center gap-1"
+                  >
+                    View in Toolbox &rarr;
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Latest Articles & Writings */}
+      <section className="py-20 lg:py-28 px-6 sm:px-8 border-b border-[#222]">
+        <div className="max-w-[1280px] mx-auto space-y-12">
+          <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-6">
+            <div className="space-y-2">
+              <span className="eyebrow-label text-[#F85800]">FIELD NOTES</span>
+              <h2 className="text-h2 text-[#F5F3EF]">Latest Articles &amp; Essays</h2>
             </div>
             <button
               onClick={() => {
                 navigate('/articles');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="text-xs uppercase font-sans font-bold tracking-wider text-[#F85800] hover:text-[#E05000] flex items-center gap-1"
+              className="text-xs font-sans font-bold uppercase tracking-wider text-[#F85800] hover:text-[#E05000] flex items-center gap-1.5"
             >
               <span>View All Articles</span>
-              <ChevronRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4" />
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {ARTICLES_DATA.slice(0, 3).map((article) => (
-              <article
-                key={article.id}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {ARTICLES_DATA.slice(0, 2).map((art) => (
+              <div
+                key={art.id}
                 onClick={() => {
                   navigate('/article-detail');
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className="bg-[#1E1E1E] border border-[#2B2B2B] card-hover p-6 sm:p-8 flex flex-col justify-between cursor-pointer group"
+                className="bg-[#1A1A1A] border border-[#2B2B2B] card-hover p-8 cursor-pointer group flex flex-col justify-between"
               >
-                <div>
-                  <div className="flex items-center justify-between text-xs text-[#777] mb-3">
-                    <span className="text-[#F85800] uppercase font-bold tracking-wider">
-                      {article.category}
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-xs text-[#8C8C8C]">
+                    <span className="text-[#F85800] uppercase font-bold tracking-wider text-[11px]">
+                      {art.category}
                     </span>
-                    <span>{article.readTime}</span>
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-3.5 h-3.5" />
+                      {art.readTime}
+                    </span>
                   </div>
-                  <h3 className="font-display text-xl text-[#F5F3EF] group-hover:text-[#F85800] transition-colors mb-3">
-                    {article.title}
+                  <h3 className="font-display text-2xl text-[#F5F3EF] group-hover:text-[#F85800] transition-colors">
+                    {art.title}
                   </h3>
-                  <p className="text-sm text-[#A3A3A3] leading-relaxed line-clamp-3 mb-6">
-                    {article.excerpt}
+                  <p className="text-sm text-[#A3A3A3] leading-relaxed">
+                    {art.excerpt}
                   </p>
                 </div>
-                <div className="pt-4 border-t border-[#2A2A2A] flex items-center justify-between text-xs text-[#8C8C8C]">
-                  <span>{article.date}</span>
-                  <span className="text-[#F85800] font-semibold group-hover:translate-x-1 transition-transform">
-                    Read Article &rarr;
+                <div className="pt-6 mt-6 border-t border-[#282828] flex items-center justify-between text-xs">
+                  <span className="text-[#C8B088] uppercase font-semibold">
+                    By {art.author}
+                  </span>
+                  <span className="text-[#F85800] font-bold group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                    Read Essay &rarr;
                   </span>
                 </div>
-              </article>
+              </div>
             ))}
           </div>
         </div>

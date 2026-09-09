@@ -1,7 +1,7 @@
 import React from 'react';
 import { PageRoute } from '../types';
-import { PhotoPlaceholder } from '../components/BrandLogos';
-import { Shield, Award, Building, BookOpen, Compass, Dumbbell, ArrowRight } from 'lucide-react';
+import { IMAGE_ASSETS } from '../data/imageAssets';
+import { Shield, Award, Building, BookOpen, Compass, Dumbbell, ArrowRight, CheckCircle2 } from 'lucide-react';
 
 interface AboutPageProps {
   navigate: (route: PageRoute) => void;
@@ -90,13 +90,35 @@ export const AboutPage: React.FC<AboutPageProps> = ({ navigate }) => {
       <section className="bg-[#F5F3EF] text-[#141414] py-24 sm:py-32 px-6 sm:px-8 border-b border-[#E5E0D8]">
         <div className="max-w-[1280px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           <div className="lg:col-span-5 space-y-4">
-            <PhotoPlaceholder
-              description="Lucas Heffner — 44% body fat to 13% body fat transformation"
-              aspectRatio="aspect-4/5"
-            />
-            <p className="text-xs text-[#666] italic text-center">
-              Real body fat scan verification &bull; Over 140 pounds sustained fat loss
-            </p>
+            <div className="relative border-2 border-[#141414] shadow-xl overflow-hidden">
+              <img
+                src={IMAGE_ASSETS.author.heroPortrait}
+                alt="Lucas Heffner - Author and Veteran"
+                referrerPolicy="no-referrer"
+                className="w-full aspect-4/5 object-cover"
+              />
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-5 text-white">
+                <span className="text-[10px] uppercase font-mono font-bold tracking-widest text-[#F85800] block">
+                  VERIFIED TRANSFORMATION
+                </span>
+                <p className="font-display text-lg text-white">Over 140 lbs Fat Lost Sustained</p>
+                <p className="text-xs text-white/80">From ~44% body fat down to 13% DEXA scanned</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-3 gap-2 text-center text-xs">
+              <div className="p-2.5 bg-white border border-[#DDD]">
+                <div className="font-display text-lg text-[#F85800]">140+</div>
+                <div className="text-[9px] uppercase font-bold text-[#666]">Lbs Lost</div>
+              </div>
+              <div className="p-2.5 bg-white border border-[#DDD]">
+                <div className="font-display text-lg text-[#141414]">13%</div>
+                <div className="text-[9px] uppercase font-bold text-[#666]">DEXA Scan</div>
+              </div>
+              <div className="p-2.5 bg-white border border-[#DDD]">
+                <div className="font-display text-lg text-[#141414]">10 Yrs</div>
+                <div className="text-[9px] uppercase font-bold text-[#666]">Maintained</div>
+              </div>
+            </div>
           </div>
 
           <div className="lg:col-span-7 space-y-6">
@@ -126,6 +148,68 @@ export const AboutPage: React.FC<AboutPageProps> = ({ navigate }) => {
         </div>
       </section>
 
+      {/* Author Life & Ethos Photography Strip */}
+      <section className="bg-[#181818] border-b border-[#262626] py-16 px-6 sm:px-8">
+        <div className="max-w-[1280px] mx-auto space-y-8">
+          <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
+            <div>
+              <span className="eyebrow-label text-[#F85800]">LIFE &bull; WORK &bull; ETHOS</span>
+              <h3 className="font-display text-2xl text-[#F5F3EF]">Behind the Pages</h3>
+            </div>
+            <p className="text-xs text-[#8C8C8C] max-w-md">
+              From Army operational engineering to building companies and authoring Cut the Crap.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="space-y-3 bg-[#141414] border border-[#2B2B2B] p-4">
+              <div className="h-56 overflow-hidden">
+                <img
+                  src={IMAGE_ASSETS.author.writingDesk}
+                  alt="Writing desk and manuscript preparation"
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h4 className="font-display text-base text-[#F5F3EF]">The Writing Process</h4>
+              <p className="text-xs text-[#8C8C8C]">
+                Drafting manuscripts with rigorous citations, removing jargon, and refining actionable habit checklists.
+              </p>
+            </div>
+
+            <div className="space-y-3 bg-[#141414] border border-[#2B2B2B] p-4">
+              <div className="h-56 overflow-hidden">
+                <img
+                  src={IMAGE_ASSETS.author.veteranEngineer}
+                  alt="Lucas Heffner military engineering discipline"
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h4 className="font-display text-base text-[#F5F3EF]">Military Engineering</h4>
+              <p className="text-xs text-[#8C8C8C]">
+                Operational planning in high-friction environments where discipline must replace motivation.
+              </p>
+            </div>
+
+            <div className="space-y-3 bg-[#141414] border border-[#2B2B2B] p-4">
+              <div className="h-56 overflow-hidden">
+                <img
+                  src={IMAGE_ASSETS.author.speakingEvent}
+                  alt="Lucas Heffner keynote speech"
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h4 className="font-display text-base text-[#F5F3EF]">Speaking &amp; Mentorship</h4>
+              <p className="text-xs text-[#8C8C8C]">
+                Delivering candid keynotes to business leaders and veterans on sustainable high-performance habits.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Why I Write & Up Armor Publishing Mission */}
       <section className="py-24 sm:py-32 px-6 sm:px-8 border-b border-[#222]">
         <div className="max-w-[1280px] mx-auto max-w-3xl text-center space-y-8">
@@ -139,25 +223,26 @@ export const AboutPage: React.FC<AboutPageProps> = ({ navigate }) => {
           <p className="text-[17px] text-[#A3A3A3] leading-relaxed">
             The modern publishing landscape is choked with 300-page books that could have been a blog post, padded with corporate jargon or unverifiable guru theories. Our commitment is direct, battle-tested knowledge engineered for real people who work, lead, and live in the real world.
           </p>
-          <div className="pt-4 flex justify-center gap-4">
+          <div className="pt-4 flex flex-wrap justify-center gap-4">
+            <button
+              onClick={() => {
+                navigate('/read-book');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="px-8 py-4 bg-[#F85800] hover:bg-[#E05000] text-[#141414] font-sans font-bold text-xs uppercase tracking-[0.1em] transition-colors flex items-center gap-2"
+            >
+              <BookOpen className="w-4 h-4" />
+              <span>Read Free Book Sample</span>
+            </button>
             <button
               onClick={() => {
                 navigate('/books');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="px-8 py-4 bg-[#F85800] hover:bg-[#E05000] text-[#141414] font-sans font-bold text-xs uppercase tracking-[0.1em] transition-colors flex items-center gap-2"
+              className="px-8 py-4 bg-[#1E1E1E] hover:bg-[#2A2A2A] text-[#F5F3EF] border border-[#333] font-sans font-semibold text-xs uppercase tracking-[0.1em] transition-colors flex items-center gap-2"
             >
-              <span>Explore the Books</span>
+              <span>Explore All Books</span>
               <ArrowRight className="w-4 h-4" />
-            </button>
-            <button
-              onClick={() => {
-                navigate('/contact');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }}
-              className="px-8 py-4 bg-[#1E1E1E] hover:bg-[#2A2A2A] text-[#F5F3EF] border border-[#333] font-sans font-semibold text-xs uppercase tracking-[0.1em] transition-colors"
-            >
-              Contact Lucas
             </button>
           </div>
         </div>

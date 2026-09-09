@@ -38,6 +38,7 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, navigate, cartCoun
 
   const navItems: { label: string; route: PageRoute }[] = [
     { label: 'Books', route: '/books' },
+    { label: 'Read Sample', route: '/read-book' },
     { label: 'Cut the Crap', route: '/cutthecrap' },
     { label: 'Toolbox', route: '/toolkit' },
     { label: 'Community', route: '/community' },
@@ -46,7 +47,6 @@ export const Header: React.FC<HeaderProps> = ({ currentRoute, navigate, cartCoun
     { label: 'Store', route: '/store' },
     { label: 'About', route: '/about' },
     { label: 'Contact', route: '/contact' },
-    { label: 'Style Guide', route: '/style-guide' },
   ];
 
   return (

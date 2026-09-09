@@ -63,6 +63,7 @@ export interface CartItem {
 
 export type PageRoute =
   | '/'
+  | '/read-book'
   | '/style-guide'
   | '/about'
   | '/books'

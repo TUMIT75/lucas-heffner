@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { PageRoute } from '../types';
 import { useCart } from '../context/CartContext';
-import { ShoppingBag, Check, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
+import { RealisticBookCover } from '../components/RealisticBookCover';
+import { IMAGE_ASSETS } from '../data/imageAssets';
+import { ShoppingBag, Check, ArrowRight, BookOpen, Download, ShieldCheck, Sparkles } from 'lucide-react';
 
 interface StorePageProps {
   navigate: (route: PageRoute) => void;
@@ -21,6 +23,8 @@ export const StorePage: React.FC<StorePageProps> = ({ navigate }) => {
       badge: "Founder's Edition",
       isFounders: true,
       isDigital: false,
+      image: IMAGE_ASSETS.books.bookStack,
+      bookEdition: 'hardcover' as const,
     },
     {
       id: 'paperback-edition',
@@ -31,16 +35,20 @@ export const StorePage: React.FC<StorePageProps> = ({ navigate }) => {
       badge: 'Print Edition',
       isFounders: false,
       isDigital: false,
+      image: IMAGE_ASSETS.books.openBookReading,
+      bookEdition: 'paperback' as const,
     },
     {
       id: 'ebook-edition',
       title: 'CUT THE CRAP',
-      edition: 'eBook Digital Edition',
+      edition: 'Instant PDF & ePub Edition',
       price: 14.99,
-      description: 'Instant DRM-free download in EPUB and Kindle formats. Full hyperlinks to Toolbox items.',
-      badge: 'Instant Digital',
+      description: 'Instant DRM-free high-resolution PDF and ePub for Kindle & Apple Books. Complete worksheets included.',
+      badge: 'Instant Download',
       isFounders: false,
       isDigital: true,
+      image: IMAGE_ASSETS.books.digitalTabletReader,
+      bookEdition: 'ebook' as const,
     },
     {
       id: 'habit-journal',
@@ -51,6 +59,7 @@ export const StorePage: React.FC<StorePageProps> = ({ navigate }) => {
       badge: 'Official Companion',
       isFounders: false,
       isDigital: false,
+      image: IMAGE_ASSETS.author.writingDesk,
     },
     {
       id: 'up-armor-tee',
@@ -61,6 +70,7 @@ export const StorePage: React.FC<StorePageProps> = ({ navigate }) => {
       badge: 'Gear',
       isFounders: false,
       isDigital: false,
+      image: IMAGE_ASSETS.author.aboutPortrait,
     },
   ];
 
@@ -87,8 +97,25 @@ export const StorePage: React.FC<StorePageProps> = ({ navigate }) => {
             Books &amp; Field Gear
           </h1>
           <p className="text-[19px] sm:text-[23px] text-[#D1CFC7] max-w-3xl leading-relaxed font-medium">
-            Direct from Up Armor Publishing. Guaranteed authentic first-edition printings, signed copies, and battle-tested habit companions.
+            Direct from Up Armor Publishing. Guaranteed authentic first-edition printings, signed copies, instant digital downloads, and habit companions.
           </p>
+          <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-sans text-[#A3A3A3]">
+            <button
+              onClick={() => {
+                navigate('/read-book');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="px-4 py-2 bg-[#F85800] hover:bg-[#E05000] text-[#141414] font-bold uppercase tracking-wider flex items-center gap-2 transition-colors shadow"
+            >
+              <BookOpen className="w-4 h-4" />
+              <span>Read Free Sample Chapters Online</span>
+            </button>
+            <span className="text-[#666]">&bull;</span>
+            <span className="flex items-center gap-1.5 text-[#60A5FA]">
+              <Download className="w-3.5 h-3.5" />
+              Instant PDF downloads immediately accessible after checkout
+            </span>
+          </div>
         </div>
       </section>
 
@@ -100,18 +127,23 @@ export const StorePage: React.FC<StorePageProps> = ({ navigate }) => {
             return (
               <div
                 key={prod.id}
-                className={`p-8 flex flex-col justify-between border card-hover ${
+                className={`p-6 sm:p-8 flex flex-col justify-between border card-hover ${
                   prod.isFounders
                     ? 'founders-edition border-2 shadow-xl'
+                    : prod.isDigital
+                    ? 'bg-[#1C1C1C] border-[#2563EB]/50 shadow-lg'
                     : 'bg-[#1C1C1C] border-[#2B2B2B]'
                 }`}
               >
                 <div>
-                  <div className="flex items-center justify-between gap-2 mb-3">
+                  {/* Top Badge & Price */}
+                  <div className="flex items-center justify-between gap-2 mb-4">
                     <span
-                      className={`text-[10px] font-sans font-bold uppercase tracking-widest px-2 py-0.5 ${
+                      className={`text-[10px] font-sans font-bold uppercase tracking-widest px-2.5 py-1 ${
                         prod.isFounders
                           ? 'bg-[#2A1D0B] text-[#C8B088] border border-[#C8B088]'
+                          : prod.isDigital
+                          ? 'bg-[#1E3A8A] text-[#93C5FD] border border-[#3B82F6]'
                           : 'bg-[#252525] text-[#8C8C8C] border border-[#333]'
                       }`}
                     >
@@ -119,11 +151,27 @@ export const StorePage: React.FC<StorePageProps> = ({ navigate }) => {
                     </span>
                     <span
                       className={`text-2xl font-display font-bold ${
-                        prod.isFounders ? 'text-[#C8B088]' : 'text-[#F5F3EF]'
+                        prod.isFounders ? 'text-[#C8B088]' : prod.isDigital ? 'text-[#60A5FA]' : 'text-[#F5F3EF]'
                       }`}
                     >
                       ${prod.price.toFixed(2)}
                     </span>
+                  </div>
+
+                  {/* Product Visual */}
+                  <div className="w-full h-48 mb-6 bg-[#141414] border border-[#2B2B2B] overflow-hidden flex items-center justify-center relative group">
+                    {prod.bookEdition ? (
+                      <div className="scale-75 transition-transform duration-300 group-hover:scale-80">
+                        <RealisticBookCover edition={prod.bookEdition} size="sm" />
+                      </div>
+                    ) : (
+                      <img
+                        src={prod.image}
+                        alt={prod.title}
+                        referrerPolicy="no-referrer"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90"
+                      />
+                    )}
                   </div>
 
                   <h3
@@ -133,7 +181,7 @@ export const StorePage: React.FC<StorePageProps> = ({ navigate }) => {
                   >
                     {prod.title}
                   </h3>
-                  <p className="text-xs uppercase font-sans font-semibold text-[#8C8C8C] mb-4">
+                  <p className="text-xs uppercase font-sans font-semibold text-[#8C8C8C] mb-3">
                     {prod.edition}
                   </p>
 
@@ -142,13 +190,15 @@ export const StorePage: React.FC<StorePageProps> = ({ navigate }) => {
                   </p>
                 </div>
 
-                <div className="pt-6 border-t border-[#2A2A2A]">
+                <div className="pt-4 border-t border-[#2A2A2A] space-y-2">
                   <button
                     type="button"
                     onClick={() => handleAdd(prod)}
-                    className={`w-full py-3.5 font-sans font-bold text-xs uppercase tracking-[0.1em] transition-colors flex items-center justify-center gap-2 ${
+                    className={`w-full py-3.5 font-sans font-bold text-xs uppercase tracking-[0.1em] transition-colors flex items-center justify-center gap-2 shadow ${
                       isAdded
                         ? 'bg-[#2E7D32] text-white'
+                        : prod.isDigital
+                        ? 'bg-[#2563EB] hover:bg-[#1D4ED8] text-white'
                         : 'bg-[#F85800] hover:bg-[#E05000] text-[#141414]'
                     }`}
                   >
@@ -159,11 +209,27 @@ export const StorePage: React.FC<StorePageProps> = ({ navigate }) => {
                       </>
                     ) : (
                       <>
-                        <ShoppingBag className="w-4 h-4" />
-                        <span>Add to Cart &bull; ${prod.price.toFixed(2)}</span>
+                        {prod.isDigital ? <Download className="w-4 h-4" /> : <ShoppingBag className="w-4 h-4" />}
+                        <span>
+                          {prod.isDigital ? 'Buy Instant PDF' : 'Add to Cart'} &bull; ${prod.price.toFixed(2)}
+                        </span>
                       </>
                     )}
                   </button>
+
+                  {prod.bookEdition && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        navigate('/read-book');
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                      }}
+                      className="w-full py-2 bg-[#141414] hover:bg-[#222] border border-[#333] text-[11px] font-sans font-bold uppercase tracking-wider text-[#A3A3A3] hover:text-[#F5F3EF] flex items-center justify-center gap-1.5 transition-colors"
+                    >
+                      <BookOpen className="w-3.5 h-3.5 text-[#F85800]" />
+                      <span>Read Free Sample Excerpt</span>
+                    </button>
+                  )}
                 </div>
               </div>
             );

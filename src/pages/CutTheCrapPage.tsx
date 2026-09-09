@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { PageRoute } from '../types';
-import { CutTheCrapHorizontalLogo, CutTheCrapStackedLogo, PhotoPlaceholder, StarWingsInsignia } from '../components/BrandLogos';
+import { CutTheCrapHorizontalLogo, CutTheCrapStackedLogo, StarWingsInsignia } from '../components/BrandLogos';
+import { RealisticBookCover } from '../components/RealisticBookCover';
+import { IMAGE_ASSETS } from '../data/imageAssets';
 import { PillarRow } from '../components/PillarRow';
 import { FoundersEditionCard } from '../components/FoundersEditionCard';
 import { FaqAccordion } from '../components/FaqAccordion';
@@ -16,6 +18,7 @@ import {
   Smartphone,
   Wrench,
   Users,
+  Download,
 } from 'lucide-react';
 
 interface CutTheCrapPageProps {
@@ -93,41 +96,51 @@ export const CutTheCrapPage: React.FC<CutTheCrapPageProps> = ({ navigate }) => {
               A practical approach to sustainable weight loss without the noise, gimmicks, or unnecessary rules.
             </p>
 
-            <div className="pt-4 flex flex-col sm:flex-row gap-4">
+            <div className="pt-4 flex flex-col sm:flex-row gap-3">
+              <button
+                onClick={() => {
+                  navigate('/read-book');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="px-8 py-4 bg-[#F85800] hover:bg-[#E05000] text-[#141414] font-sans font-bold text-[15px] uppercase tracking-[0.08em] transition-colors flex items-center justify-center gap-2 shadow-xl"
+              >
+                <BookOpen className="w-4 h-4" />
+                <span>Read Free Sample</span>
+              </button>
+
               <button
                 onClick={() => {
                   const el = document.getElementById('choose-edition');
                   el?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="px-8 py-4 bg-[#F85800] hover:bg-[#E05000] text-[#141414] font-sans font-bold text-[15px] uppercase tracking-[0.08em] transition-colors flex items-center justify-center gap-2 shadow-xl"
+                className="px-8 py-4 bg-[#1E1E1E] hover:bg-[#282828] text-[#F5F3EF] border border-[#3A3A3A] font-sans font-bold text-[15px] uppercase tracking-[0.08em] transition-colors flex items-center justify-center gap-2"
               >
-                <span>Preorder Cut the Crap</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-
-              <button
-                onClick={() => navigate('/toolkit')}
-                className="px-6 py-4 bg-[#1E1E1E] hover:bg-[#282828] text-[#F5F3EF] border border-[#333] font-sans font-semibold text-[15px] uppercase tracking-[0.08em] transition-colors flex items-center justify-center gap-2"
-              >
-                <span>View Companion Toolbox</span>
-                <Wrench className="w-4 h-4 text-[#F85800]" />
+                <ShoppingBag className="w-4 h-4 text-[#F85800]" />
+                <span>Choose Edition</span>
               </button>
             </div>
 
             <div className="flex items-center gap-6 pt-4 text-xs text-[#8C8C8C]">
-              <span>★ Limited Founder's Hardcover</span>
+              <span>★ Limited Founder's Hardcover ($49)</span>
               <span>&bull;</span>
-              <span>Paperback Edition</span>
+              <span>Paperback ($24.99)</span>
               <span>&bull;</span>
-              <span>DRM-Free eBook</span>
+              <span>Instant PDF ($14.99)</span>
             </div>
           </div>
 
-          <div className="lg:col-span-5 flex justify-center">
-            <PhotoPlaceholder
-              description="Cut the Crap — Official Hardcover and Paperback Print Proof Mockup"
-              aspectRatio="aspect-4/5"
-            />
+          <div className="lg:col-span-5 flex flex-col items-center justify-center">
+            <RealisticBookCover edition="hardcover" size="lg" />
+            <button
+              onClick={() => {
+                navigate('/read-book');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="mt-6 py-2.5 px-5 bg-[#1E1E1E] hover:bg-[#282828] border border-[#333] text-xs font-sans font-bold uppercase tracking-wider text-[#F85800] flex items-center gap-2 transition-colors"
+            >
+              <BookOpen className="w-3.5 h-3.5" />
+              <span>Read Chapters 1 - 4 Online &rarr;</span>
+            </button>
           </div>
         </div>
       </section>
@@ -275,11 +288,35 @@ export const CutTheCrapPage: React.FC<CutTheCrapPageProps> = ({ navigate }) => {
             </p>
           </div>
 
-          <div className="lg:col-span-6">
-            <PhotoPlaceholder
-              description="Lucas Heffner Before/After Photos — Verifying 140+ lb Sustained Transformation"
-              aspectRatio="aspect-16/10"
-            />
+          <div className="lg:col-span-6 space-y-4">
+            <div className="relative border border-[#333] overflow-hidden shadow-2xl">
+              <img
+                src={IMAGE_ASSETS.pillars.training}
+                alt="Disciplined training and physical transformation"
+                referrerPolicy="no-referrer"
+                className="w-full aspect-16/10 object-cover"
+              />
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-5">
+                <span className="text-[10px] uppercase font-mono font-bold text-[#F85800] tracking-widest block">
+                  PHYSICAL DISCIPLINE IN ACTION
+                </span>
+                <p className="font-display text-lg text-white">44% down to 13% Body Fat &bull; 140+ Lbs Sustained</p>
+              </div>
+            </div>
+            <div className="grid grid-cols-3 gap-3 text-center text-xs">
+              <div className="p-3 bg-[#1A1A1A] border border-[#2B2B2B]">
+                <div className="font-display text-xl text-[#F85800]">140+ lbs</div>
+                <div className="text-[10px] text-[#888] uppercase">Weight Lost</div>
+              </div>
+              <div className="p-3 bg-[#1A1A1A] border border-[#2B2B2B]">
+                <div className="font-display text-xl text-white">13%</div>
+                <div className="text-[10px] text-[#888] uppercase">DEXA Scan</div>
+              </div>
+              <div className="p-3 bg-[#1A1A1A] border border-[#2B2B2B]">
+                <div className="font-display text-xl text-[#C8B088]">10+ Yrs</div>
+                <div className="text-[10px] text-[#888] uppercase">Maintained</div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -387,43 +424,58 @@ export const CutTheCrapPage: React.FC<CutTheCrapPageProps> = ({ navigate }) => {
               </button>
             </div>
 
-            {/* Card 3: eBook Digital Edition */}
-            <div className="bg-[#1C1C1C] border border-[#2B2B2B] p-6 flex flex-col justify-between card-hover">
+            {/* Card 3: Digital PDF & ePub Edition */}
+            <div className="bg-[#1C1C1C] border-2 border-[#3B82F6]/60 p-6 flex flex-col justify-between card-hover relative">
+              <div className="absolute -top-3 right-4 bg-[#2563EB] text-white text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 shadow">
+                INSTANT PDF
+              </div>
               <div>
-                <div className="text-xs uppercase font-sans font-bold text-[#8C8C8C] tracking-widest mb-1">
-                  Instant Digital
+                <div className="text-xs uppercase font-sans font-bold text-[#60A5FA] tracking-widest mb-1">
+                  Immediate Digital Access
                 </div>
                 <h3 className="font-display text-2xl text-[#F5F3EF] mb-1">
-                  eBook
+                  PDF &amp; ePub Edition
                 </h3>
-                <p className="text-xs text-[#8C8C8C] mb-4">Digital edition</p>
-                <div className="text-3xl font-display font-bold text-[#F5F3EF] mb-4">
+                <p className="text-xs text-[#8C8C8C] mb-4">Complete 18 chapters + hyperlinked matrix</p>
+                <div className="text-3xl font-display font-bold text-[#60A5FA] mb-4">
                   $14.99
                 </div>
                 <ul className="text-xs text-[#A3A3A3] space-y-2 mb-6">
                   <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#F85800] shrink-0" />
-                    <span>DRM-free EPUB &amp; Kindle files</span>
+                    <Check className="w-4 h-4 text-[#60A5FA] shrink-0" />
+                    <span>Instant high-res PDF download</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#F85800] shrink-0" />
-                    <span>Instant download upon delivery</span>
+                    <Check className="w-4 h-4 text-[#60A5FA] shrink-0" />
+                    <span>DRM-free ePub for Kindle &amp; Apple Books</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-[#F85800] shrink-0" />
-                    <span>Full hyperlinks to Toolbox items</span>
+                    <Check className="w-4 h-4 text-[#60A5FA] shrink-0" />
+                    <span>Printable habit checklists &amp; meal trackers</span>
                   </li>
                 </ul>
               </div>
-              <button
-                onClick={() =>
-                  handleAddToCart('ebook-edition', 'CUT THE CRAP', 'eBook Digital Edition', 14.99, true)
-                }
-                className="w-full py-3.5 bg-[#141414] hover:bg-[#252525] text-[#F5F3EF] border border-[#333] font-sans font-bold text-xs uppercase tracking-[0.1em] transition-colors flex items-center justify-center gap-2"
-              >
-                <Smartphone className="w-4 h-4 text-[#F85800]" />
-                <span>Preorder eBook</span>
-              </button>
+              <div className="space-y-2">
+                <button
+                  onClick={() =>
+                    handleAddToCart('ebook-edition', 'CUT THE CRAP', 'Digital PDF & ePub Edition', 14.99, true)
+                  }
+                  className="w-full py-3.5 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-sans font-bold text-xs uppercase tracking-[0.1em] transition-colors flex items-center justify-center gap-2 shadow"
+                >
+                  <Download className="w-4 h-4" />
+                  <span>Buy Instant PDF ($14.99)</span>
+                </button>
+                <button
+                  onClick={() => {
+                    navigate('/read-book');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className="w-full py-2.5 bg-[#141414] hover:bg-[#222] text-[#AAA] hover:text-white border border-[#333] font-sans font-bold text-[11px] uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5"
+                >
+                  <BookOpen className="w-3.5 h-3.5 text-[#F85800]" />
+                  <span>Read Free Sample First</span>
+                </button>
+              </div>
             </div>
 
             {/* Card 4: Audiobook Slot (Strictly Visually Disabled per Spec Section 11) */}

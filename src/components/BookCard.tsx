@@ -1,7 +1,8 @@
 import React from 'react';
 import { Book, PageRoute } from '../types';
-import { CutTheCrapHorizontalLogo, StarWingsInsignia } from './BrandLogos';
-import { ArrowRight, BookOpen } from 'lucide-react';
+import { CutTheCrapHorizontalLogo } from './BrandLogos';
+import { RealisticBookCover } from './RealisticBookCover';
+import { ArrowRight, BookOpen, Download, ShoppingBag } from 'lucide-react';
 
 interface BookCardProps {
   book: Book;
@@ -32,50 +33,41 @@ export const BookCard: React.FC<BookCardProps> = ({ book, navigate, onStatusChan
 
   return (
     <div className="bg-[#1E1E1E] border border-[#2B2B2B] card-hover flex flex-col justify-between p-6 sm:p-8 relative">
-      {/* Placeholder pill if applicable */}
-      {book.isPlaceholder && (
-        <div className="absolute top-4 right-4 bg-[#2A2A2A] border border-[#444] text-[#C8B088] text-[10px] font-sans font-semibold uppercase tracking-widest px-2 py-0.5">
-          [PLACEHOLDER]
+      {/* Flagship tag */}
+      {isCutTheCrap && (
+        <div className="absolute top-4 right-4 bg-[#F85800] text-[#141414] text-[10px] font-sans font-bold uppercase tracking-widest px-2.5 py-0.5 shadow">
+          FLAGSHIP
         </div>
       )}
 
       <div>
-        {/* Cover Artwork / Stylized Title Mockup */}
-        <div className="w-full aspect-3/4 bg-[#141414] border border-[#333] mb-6 flex flex-col items-center justify-center p-6 text-center relative overflow-hidden group">
-          {/* Subtle background radial pattern */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#1A1A1A] to-[#0E0E0E] opacity-90" />
-
-          <div className="relative z-10 flex flex-col items-center">
-            {isCutTheCrap ? (
-              <>
-                <span className="text-[10px] font-sans font-bold uppercase tracking-[0.2em] text-[#C8B088] mb-2">
+        {/* Cover Artwork / 3D Book Display */}
+        <div className="w-full aspect-3/4 bg-[#141414] border border-[#333] mb-6 flex items-center justify-center p-4 relative overflow-hidden group">
+          {isCutTheCrap ? (
+            <div className="scale-90 transition-transform duration-300 group-hover:scale-95">
+              <RealisticBookCover edition="hardcover" size="sm" />
+            </div>
+          ) : (
+            <div className="w-[180px] h-[260px] bg-gradient-to-br from-[#1E252B] via-[#151A1E] to-[#0D1013] border border-[#485563] p-5 flex flex-col justify-between shadow-2xl relative">
+              <div className="space-y-1">
+                <span className="text-[9px] font-sans uppercase font-bold tracking-[0.2em] text-[#8EA3B8]">
                   UP ARMOR PUBLISHING
                 </span>
-                <CutTheCrapHorizontalLogo size="sm" theme="dark" className="my-2" />
-                <span className="text-xs text-[#F85800] font-sans font-medium uppercase tracking-wider mt-1">
-                  LOSE THE FAT. KEEP THE FREEDOM.
-                </span>
-                <div className="w-8 h-[1px] bg-[#C8B088] my-4" />
-                <span className="text-[11px] font-sans text-[#A3A3A3] uppercase tracking-widest">
-                  LUCAS HEFFNER, MBA, NASM-CNC
-                </span>
-              </>
-            ) : (
-              <>
-                <BookOpen className="w-10 h-10 text-[#5E7488] mb-3 stroke-[1.25]" />
-                <h4 className="font-display text-xl text-[#F5F3EF] tracking-wider mb-1">
+                <div className="w-6 h-[2px] bg-[#5E7488] my-1" />
+              </div>
+              <div>
+                <h4 className="font-display text-lg text-white font-bold leading-tight">
                   {book.title}
                 </h4>
-                <p className="text-xs text-[#A3A3A3] font-sans max-w-[200px] mb-3">
+                <p className="text-[10px] text-[#A3B3C2] mt-1 line-clamp-2">
                   {book.subtitle}
                 </p>
-                <div className="w-6 h-[1px] bg-[#444] my-2" />
-                <span className="text-[10px] font-sans uppercase tracking-widest text-[#8C8C8C]">
-                  By Lucas Heffner
-                </span>
-              </>
-            )}
-          </div>
+              </div>
+              <div className="border-t border-white/10 pt-2 text-[9px] font-sans text-[#8EA3B8] uppercase">
+                Lucas Heffner
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Status Badge */}
@@ -113,18 +105,30 @@ export const BookCard: React.FC<BookCardProps> = ({ book, navigate, onStatusChan
           </div>
         </div>
 
-        {/* CTA Button */}
+        {/* Action Buttons */}
         {isCutTheCrap ? (
-          <button
-            onClick={() => {
-              navigate('/cutthecrap');
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            className="w-full py-3 bg-[#F85800] hover:bg-[#E05000] text-[#141414] font-sans font-bold text-xs uppercase tracking-[0.1em] flex items-center justify-center gap-2 transition-colors"
-          >
-            <span>Explore Cut the Crap</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
+          <div className="space-y-2">
+            <button
+              onClick={() => {
+                navigate('/read-book');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="w-full py-3 bg-[#F85800] hover:bg-[#E05000] text-[#141414] font-sans font-bold text-xs uppercase tracking-[0.1em] flex items-center justify-center gap-2 transition-colors shadow"
+            >
+              <BookOpen className="w-4 h-4" />
+              <span>Read Sample Chapters</span>
+            </button>
+            <button
+              onClick={() => {
+                navigate('/cutthecrap');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="w-full py-2.5 bg-[#252525] hover:bg-[#333] text-[#F5F3EF] font-sans font-bold text-xs uppercase tracking-[0.1em] flex items-center justify-center gap-2 transition-colors border border-[#3A3A3A]"
+            >
+              <span>Order Physical / Digital</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
         ) : (
           <button
             onClick={() => {
@@ -133,15 +137,15 @@ export const BookCard: React.FC<BookCardProps> = ({ book, navigate, onStatusChan
             }}
             className="w-full py-3 bg-[#2A2A2A] hover:bg-[#333] text-[#F5F3EF] font-sans font-semibold text-xs uppercase tracking-[0.1em] flex items-center justify-center gap-2 transition-colors border border-[#444]"
           >
-            <span>Register for Updates</span>
+            <span>Notify Me Upon Release</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         )}
 
-        {/* Owner status switcher demonstration per brief Section 4 */}
+        {/* Owner status switcher */}
         {onStatusChange && (
           <div className="mt-4 pt-3 border-t border-[#252525] flex items-center justify-between text-[11px] text-[#777]">
-            <span>Mockup Status:</span>
+            <span>Status Preview:</span>
             <select
               value={book.status}
               onChange={(e) => onStatusChange(book.id, e.target.value as Book['status'])}

@@ -1,11 +1,27 @@
 import React, { useState } from 'react';
-import { PageRoute, ToolboxCategory } from '../types';
+import { PageRoute, ToolboxCategory, ToolboxItem } from '../types';
 import { TOOLBOX_ITEMS } from '../data/siteData';
+import { IMAGE_ASSETS } from '../data/imageAssets';
 import { ExternalLink, ShieldAlert, CheckCircle2, Wrench } from 'lucide-react';
 
 interface ToolboxPageProps {
   navigate: (route: PageRoute) => void;
 }
+
+const getToolboxImage = (name: string, category: string): string => {
+  const n = name.toLowerCase();
+  if (n.includes('scale') && n.includes('food')) return IMAGE_ASSETS.toolbox.foodScale;
+  if (n.includes('air fryer')) return IMAGE_ASSETS.toolbox.airFryer;
+  if (n.includes('whey') || n.includes('protein')) return IMAGE_ASSETS.toolbox.proteinPowder;
+  if (n.includes('macrofactor') || n.includes('app') || n.includes('track')) return IMAGE_ASSETS.toolbox.trackingApp;
+  if (n.includes('renpho') || n.includes('smart') || n.includes('body fat')) return IMAGE_ASSETS.toolbox.smartScale;
+  if (n.includes('band') || n.includes('resistance')) return IMAGE_ASSETS.toolbox.resistanceBands;
+  if (n.includes('electrolyte') || n.includes('lmnt')) return IMAGE_ASSETS.toolbox.electrolytes;
+  if (n.includes('sleep') || n.includes('book')) return IMAGE_ASSETS.toolbox.sleepScience;
+  if (category === 'Kitchen Tools') return IMAGE_ASSETS.toolbox.foodScale;
+  if (category === 'Nutrition & Food') return IMAGE_ASSETS.toolbox.proteinPowder;
+  return IMAGE_ASSETS.toolbox.smartScale;
+};
 
 export const ToolboxPage: React.FC<ToolboxPageProps> = ({ navigate }) => {
   const [activeCategory, setActiveCategory] = useState<'All' | ToolboxCategory>('All');
@@ -116,6 +132,16 @@ export const ToolboxPage: React.FC<ToolboxPageProps> = ({ navigate }) => {
                           {item.priceEstimate}
                         </span>
                       )}
+                    </div>
+
+                    {/* Product Photo */}
+                    <div className="w-full h-44 mb-4 bg-[#141414] border border-[#2B2B2B] overflow-hidden group">
+                      <img
+                        src={getToolboxImage(item.name, item.category)}
+                        alt={item.name}
+                        referrerPolicy="no-referrer"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 opacity-90 hover:opacity-100"
+                      />
                     </div>
 
                     {/* Title */}
